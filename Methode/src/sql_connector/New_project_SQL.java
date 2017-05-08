@@ -54,8 +54,7 @@ public class New_project_SQL {
 	public static  void createProject(String r) {
 		Connection conn = null;
 		Statement stmt = null;
-		String query = " insert into projekte (Projekt_name)"
-		        + " values (?)"; 
+		String query = " insert into projekte (Projekt_name)" + " values (?)"; 
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();

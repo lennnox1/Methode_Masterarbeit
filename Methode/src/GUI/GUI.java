@@ -18,14 +18,21 @@ import javax.swing.table.TableColumnModel;
 
 import Data.Auspraegungen;
 import Data.Kriterien;
+import Data.Projekte;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
+import sql_connector.list_projectsSQL;
 
 import java.awt.Color;
 import java.awt.Container;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JSpinner;
+import javax.swing.JList;
+import javax.swing.JComboBox;
 
 public class GUI extends JFrame {
 
@@ -37,6 +44,7 @@ public class GUI extends JFrame {
 	private JTextField  txtProjekt;
 	private JLabel lblName;
 	private JButton btnOk;
+	private JComboBox saved_Projects; 
 
 
 
@@ -210,7 +218,18 @@ public class GUI extends JFrame {
 		contentPane.add(btnOk);
 		btnOk.setVisible(false);
 	
-	
+		ArrayList<Projekte> Projectsarray= list_projectsSQL.giveProjects();
+		Object[] Project_data = new Object[Projectsarray.size()] ;
+		int ind2 = 0;
+		for (Projekte ap1 : Projectsarray)
+		{
+			Project_data[ind2]=ap1.Projekt_name;
+			
+			++ind2;
+		}
+		saved_Projects = new JComboBox(Project_data);
+		saved_Projects.setBounds(236, 45, 86, 20);
+		contentPane.add(saved_Projects);
 		
 	
 	}
