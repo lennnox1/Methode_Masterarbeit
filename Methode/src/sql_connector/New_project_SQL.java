@@ -51,10 +51,9 @@ public class New_project_SQL {
 	
 	
 	
-	public static  String createProject(String r) {
+	public static  void createProject(String r) {
 		Connection conn = null;
 		Statement stmt = null;
-		String Test= null;
 		String query = " insert into projekte (Projekt_name)"
 		        + " values (?)"; 
 		try {
@@ -73,7 +72,7 @@ public class New_project_SQL {
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 			
 		}
-		return Test;
+	
 		
 	}
 	
