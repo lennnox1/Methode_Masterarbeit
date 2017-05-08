@@ -20,6 +20,7 @@ import Data.Auspraegungen;
 import Data.Kriterien;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
+import sql_connector.New_project_SQL;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -36,6 +37,7 @@ public class GUI extends JFrame {
 	private JTextField  txtProjekt;
 	private JLabel lblName;
 	private JButton btnOk;
+
 
 
 	/**
@@ -68,6 +70,24 @@ public class GUI extends JFrame {
 		JButton btnNeuesProjekt = new JButton("Neues Projekt");
 		btnNeuesProjekt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (lblName.isVisible()){
+					lblName.setVisible(false);
+				}
+				else{
+					lblName.setVisible(true);
+				}
+				if (txtProjekt.isVisible()){
+					txtProjekt.setVisible(false);
+				}
+				else{
+					txtProjekt.setVisible(true);
+				}
+				if (btnOk.isVisible()){
+					btnOk.setVisible(false);
+				}
+				else{
+					btnOk.setVisible(true);
+				}
 			}
 		});
 		btnNeuesProjekt.setBounds(10, 11, 122, 23);
@@ -168,7 +188,7 @@ public class GUI extends JFrame {
 		
 		
 		txtProjekt = new JTextField();
-		txtProjekt.setBounds(46, 45, 86, 20);
+		txtProjekt.setBounds(55, 45, 86, 20);
 		contentPane.add(txtProjekt);
 		txtProjekt.setColumns(10);
 		txtProjekt.setVisible(false);
@@ -178,9 +198,20 @@ public class GUI extends JFrame {
 		contentPane.add(lblName);
 		lblName.setVisible(false);
 		
+	
 		btnOk = new JButton("Ok");
-		btnOk.setBounds(151, 45, 46, 23);
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			System.out.println(txtProjekt.getText());
+			New_project_SQL.createProject(txtProjekt.getText());
+			}
+		});
+		btnOk.setBounds(151, 41, 59, 23);
 		contentPane.add(btnOk);
 		btnOk.setVisible(false);
+	
+	
+		
+	
 	}
 }
