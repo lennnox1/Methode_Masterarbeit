@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.mysql.jdbc.PreparedStatement;
+
 public class New_project_SQL {
 
 	protected static Connection get_connection() throws SQLException {
@@ -17,7 +19,7 @@ public class New_project_SQL {
 		return conn;
 	}
 	
-	public static  String createProject(String r) {
+	/*public static  String createProject(String r) {
 		Connection conn = null;
 		Statement stmt = null;
 		String Test= null;
@@ -45,11 +47,35 @@ public class New_project_SQL {
 		}
 		return Test;
 		
+	}*/
+	
+	
+	
+	public static  String createProject(String r) {
+		Connection conn = null;
+		Statement stmt = null;
+		String Test= null;
+		String query = " insert into projekte (Projekt_name)"
+		        + " values (?)"; 
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    conn = get_connection();
+			
+			 java.sql.PreparedStatement preparedStmt = conn.prepareStatement(query);
+		     preparedStmt.setString (1, r);
+		     preparedStmt.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+		return Test;
+		
 	}
-	
-	
-	
-	
 	
 	
 	
