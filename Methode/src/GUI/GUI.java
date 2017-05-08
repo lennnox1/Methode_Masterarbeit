@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -14,15 +15,22 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
 
+import Data.Auspraegungen;
 import Data.Kriterien;
+import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 
 import java.awt.Color;
+import java.awt.Container;
 
 public class GUI extends JFrame {
 
 	private JPanel contentPane;
 	private JTable Krit_tab;
+	private JTable Ausp_tab;
+	private JScrollPane Ausp_scroll;
+	private JScrollPane Krit_scroll;
+
 
 	/**
 	 * Launch the application.
@@ -70,11 +78,17 @@ public class GUI extends JFrame {
 		JButton btnKatalogAnzeign = new JButton("Katalog anzeigen");
 		btnKatalogAnzeign.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (Krit_tab.isVisible()){
-					Krit_tab.setVisible(false);
+				if (Krit_scroll.isVisible()){
+					Krit_scroll.setVisible(false);
 				}
 				else{
-					Krit_tab.setVisible(true);
+					Krit_scroll.setVisible(true);
+				}
+				if (Ausp_scroll.isVisible()){
+					Ausp_scroll.setVisible(false);
+				}
+				else{
+					Ausp_scroll.setVisible(true);
 				}
 			}
 		});
@@ -108,12 +122,44 @@ public class GUI extends JFrame {
 			++ind;
 		}
 		
+	
 		
+		
+		
+		
+		Krit_scroll = new JScrollPane();	
 		Krit_tab = new JTable(data, columnNames);
-		Krit_tab.setBorder(new LineBorder(new Color(0, 0, 0)));
-		Krit_tab.setBounds(128, 123, 250, 137);
-		contentPane.add(Krit_tab);
-		Krit_tab.setVisible(false);
+		Krit_scroll.setBounds(10, 71, 250, 137);
+		Krit_scroll.setViewportView(Krit_tab);
+		contentPane.add(Krit_scroll);
+		Krit_scroll.setVisible(false);
 		
+		
+	
+		
+		String[] columnNames1 = {"Ahg",
+                "Ausprägung"
+               };
+
+		ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungen();
+		Object[][] data1 = new Object[Ausparray.size()][2] ;
+		int ind1 = 0;
+		for (Auspraegungen ap : Ausparray)
+		{
+			data1[ind1][0]=ap.Auspr_Nr;
+			data1[ind1][1]=ap.Auspr_Beschreibung;
+			++ind1;
+		}
+		
+
+		
+		
+		
+		Ausp_scroll = new JScrollPane();	
+		Ausp_tab = new JTable(data1, columnNames1);
+		Ausp_scroll.setBounds(261, 71, 110, 128);
+		Ausp_scroll.setViewportView(Ausp_tab);
+		contentPane.add(Ausp_scroll);
+		Ausp_scroll.setVisible(false);
 	}
 }
