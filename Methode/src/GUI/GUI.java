@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 
 import Data.Auspraegungen;
 import Data.Kriterien;
@@ -130,6 +131,7 @@ public class GUI extends JFrame {
 		Krit_scroll = new JScrollPane();	
 		Krit_tab = new JTable(data, columnNames);
 		Krit_scroll.setBounds(10, 71, 250, 137);
+		Krit_tab.getColumnModel().getColumn(0).setMaxWidth(40);
 		Krit_scroll.setViewportView(Krit_tab);
 		contentPane.add(Krit_scroll);
 		Krit_scroll.setVisible(false);
