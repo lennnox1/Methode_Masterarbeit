@@ -23,6 +23,8 @@ import sql_connector.Krit_SQL;
 
 import java.awt.Color;
 import java.awt.Container;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 public class GUI extends JFrame {
 
@@ -31,6 +33,9 @@ public class GUI extends JFrame {
 	private JTable Ausp_tab;
 	private JScrollPane Ausp_scroll;
 	private JScrollPane Krit_scroll;
+	private JTextField  txtProjekt;
+	private JLabel lblName;
+	private JButton btnOk;
 
 
 	/**
@@ -99,18 +104,6 @@ public class GUI extends JFrame {
 		String[] columnNames = {"Kh",
                 "Kriterium"
                };
-	/*	Object[][] data = {
-			    {"Kathy", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};*/
 		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
 		
 
@@ -154,6 +147,9 @@ public class GUI extends JFrame {
 		}
 		
 
+	
+	
+		
 		
 		
 		
@@ -163,5 +159,28 @@ public class GUI extends JFrame {
 		Ausp_scroll.setViewportView(Ausp_tab);
 		contentPane.add(Ausp_scroll);
 		Ausp_scroll.setVisible(false);
+		
+		
+		
+		
+		
+		
+		
+		
+		txtProjekt = new JTextField();
+		txtProjekt.setBounds(46, 45, 86, 20);
+		contentPane.add(txtProjekt);
+		txtProjekt.setColumns(10);
+		txtProjekt.setVisible(false);
+		
+		lblName = new JLabel("Name:");
+		lblName.setBounds(10, 45, 46, 14);
+		contentPane.add(lblName);
+		lblName.setVisible(false);
+		
+		btnOk = new JButton("Ok");
+		btnOk.setBounds(151, 45, 46, 23);
+		contentPane.add(btnOk);
+		btnOk.setVisible(false);
 	}
 }
