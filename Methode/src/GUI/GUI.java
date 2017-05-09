@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,9 +36,11 @@ import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JSpinner;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 
 public class GUI extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTable Krit_tab;
 	private JTable Ausp_tab;
@@ -48,8 +52,9 @@ public class GUI extends JFrame {
 	private JComboBox saved_Projects; 
 	private JTextField txtMon_Nr;
 	private JTextField textField_1;
-
-
+	private JRadioButton rdbtnAusp_1;
+	private JRadioButton[] jrbColor = new JRadioButton[20];
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -252,5 +257,25 @@ public class GUI extends JFrame {
 		textField_1.setBounds(242, 219, 86, 20);
 		contentPane.add(textField_1);
 		
-	}
+		
+	
+		
+		
+		int n=1;
+		JRadioButton rdbtnAusp_1 = new JRadioButton(Ausp_SQL.giveAusp(n));
+		rdbtnAusp_1.setBounds(10, 71, 250, 137);
+		contentPane.add(rdbtnAusp_1);
+		
+		JButton btnNext = new JButton("Next");
+		btnNext.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int t=1;
+				System.out.println(t);
+				++t;
+			}
+		});
+		btnNext.setBounds(345, 218, 89, 23);
+		contentPane.add(btnNext);
+		
+	}		
 }

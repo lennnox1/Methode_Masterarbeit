@@ -53,37 +53,32 @@ public class Ausp_SQL {
 		conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		return conn;
 	}
-
-	public static  String giveKrit(int r) {
-			Connection conn = null;
-			Statement stmt = null;
-			ResultSet rs = null;
-			String Krit_Beschreibung = "unbekannt";
-			try {
-	//			new com.mysql.jdbc.Driver();
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-	// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
-				conn = get_connection();
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT * FROM kriterien   WHERE Krit_id = " + r);
-				///rs = stmt.executeQuery("SELECT * FROM kriterien  ");
-				while (rs.next()) {
-					String Krit_id = rs.getString("Krit_id");
-					String Krit_nr = rs.getString("Krit_Nr");
-					//String Krit_Ausp_anzahl = rs.getString("Krit_Ausp_anzahl");
-					Krit_Beschreibung = rs.getString("Krit_Beschreibung");
-				//	System.out.println("ID: " + Krit_id + ", Krit_Nr: " + Krit_nr
-					//		+ ", Anzahl Ausprägungen: " + Krit_Ausp_anzahl+" Beschreibung: "+ Krit_Beschreibung);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-				try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-				
+	public static  String giveAusp(int r) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String Ausp_Beschreibung = "unbekannt";
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM Auspraegungen   WHERE Auspr_id = " + r);
+			while (rs.next()) {
+				//String Krit_id = rs.getString("Krit_id");
+				//String Krit_nr = rs.getString("Krit_Nr");
+				Ausp_Beschreibung = rs.getString("Auspr_Beschreibung");
+		
 			}
-			return Krit_Beschreibung;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 			
 		}
+		return Ausp_Beschreibung;
+		
+	}
+
 }
