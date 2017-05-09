@@ -2,6 +2,7 @@ package sql_connector;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +15,7 @@ import Data.Kriterien;
 import Data.Projekte;
 
 public class list_projectsSQL {
-	
+	public static PreparedStatement preStmt_Mont_Nr;
 	
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;
@@ -54,7 +55,38 @@ public class list_projectsSQL {
 		return Projectsarray;
 		
 	}
+	public static  int giveMontage_Nr(String r) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		int Mont_Nr=0;
+		String query1= "SELECT Anz_Montageop FROM projekte   WHERE Projekt_name =?";
+		try {
 
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    conn = get_connection();
+		    
+		    preStmt_Mont_Nr = conn.prepareStatement(query1);
+		    preStmt_Mont_Nr.setString(1, r);
+		    preStmt_Mont_Nr.execute();
+		     rs = preStmt_Mont_Nr.executeQuery();
+		    while (rs.next()) {
+
+		    	Mont_Nr = rs.getInt("Anz_Montageop");
+				
+		    				  }
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+		return Mont_Nr;
+		
+	}
 	
 		
 }

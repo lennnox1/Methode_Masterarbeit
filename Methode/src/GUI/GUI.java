@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.Caret;
 
 import Data.Auspraegungen;
 import Data.Kriterien;
@@ -45,6 +46,8 @@ public class GUI extends JFrame {
 	private JLabel lblName;
 	private JButton btnOk;
 	private JComboBox saved_Projects; 
+	private JTextField txtMon_Nr;
+	private JTextField textField_1;
 
 
 
@@ -104,6 +107,7 @@ public class GUI extends JFrame {
 		JButton button = new JButton("Projekt laden");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textField_1.setText(String.valueOf(list_projectsSQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString())));
 			}
 		});
 		button.setBounds(141, 11, 122, 23);
@@ -212,6 +216,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			System.out.println(txtProjekt.getText());
 			New_project_SQL.createProject(txtProjekt.getText());
+	
 			}
 		});
 		btnOk.setBounds(151, 41, 59, 23);
@@ -228,9 +233,26 @@ public class GUI extends JFrame {
 			++ind2;
 		}
 		saved_Projects = new JComboBox(Project_data);
-		saved_Projects.setBounds(236, 45, 86, 20);
+		saved_Projects.setBounds(324, 45, 86, 20);
 		contentPane.add(saved_Projects);
 		
-	
+		txtMon_Nr = new JTextField();
+		txtMon_Nr.setBounds(10, 219, 86, 20);
+		contentPane.add(txtMon_Nr);
+		txtMon_Nr.setColumns(10);
+		
+		JButton btnOk_1 = new JButton("ok");
+		btnOk_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				New_project_SQL.set_Montage_Nr(Integer.valueOf(txtMon_Nr.getText()),txtProjekt.getText());
+			}
+		});
+		btnOk_1.setBounds(117, 219, 89, 23);
+		contentPane.add(btnOk_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(242, 219, 86, 20);
+		contentPane.add(textField_1);
+		
 	}
 }
