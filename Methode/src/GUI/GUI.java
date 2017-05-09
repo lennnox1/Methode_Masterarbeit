@@ -192,7 +192,7 @@ public class GUI extends JFrame {
 		contentPane.add(Ausp_scroll);
 		Ausp_scroll.setVisible(false);
 		
-		
+		//////
 		
 		
 		
