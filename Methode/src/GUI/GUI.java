@@ -193,8 +193,7 @@ public class GUI extends JFrame {
 		Ausp_scroll.setVisible(false);
 	
 		
-		
-		/////
+	
 		
 		
 		
@@ -215,7 +214,7 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			System.out.println(txtProjekt.getText());
 			New_project_SQL.createProject(txtProjekt.getText());
-	
+			saved_Projects.addItem(txtProjekt.getText());
 			}
 		});
 		btnOk.setBounds(151, 41, 59, 23);
