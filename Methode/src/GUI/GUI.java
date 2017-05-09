@@ -162,7 +162,7 @@ public class GUI extends JFrame {
 		Krit_scroll.setVisible(false);
 		
 		
-	////////////////////
+	
 		
 		String[] columnNames1 = {"Ahg",
                 "Ausprägung"
