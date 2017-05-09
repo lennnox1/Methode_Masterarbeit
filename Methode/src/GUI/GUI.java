@@ -53,8 +53,9 @@ public class GUI extends JFrame {
 	private JTextField txtMon_Nr;
 	private JTextField textField_1;
 	private JRadioButton rdbtnAusp_1;
-	private JRadioButton[] jrbColor = new JRadioButton[20];
+	
 	private JPanel panel;
+	private JPanel panel_1;
 
 	/**
 	 * Launch the application.
@@ -141,9 +142,8 @@ public class GUI extends JFrame {
 		String[] columnNames = {"Kh",
                 "Kriterium"
                };
-		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
 		
-
+		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
 		Object[][] data = new Object[Kritarray.size()][2] ;
 		int ind = 0;
 		for (Kriterien kr : Kritarray)
@@ -220,6 +220,11 @@ public class GUI extends JFrame {
 			System.out.println(txtProjekt.getText());
 			New_project_SQL.createProject(txtProjekt.getText());
 			saved_Projects.addItem(txtProjekt.getText());
+			GUIKriterium gui2 = new GUIKriterium();
+			contentPane.add(gui2);
+			setContentPane(gui2);
+			 
+			
 			}
 		});
 		btnOk.setBounds(151, 41, 59, 23);
@@ -261,10 +266,7 @@ public class GUI extends JFrame {
 	
 		
 		
-		int n=1;
-		JRadioButton rdbtnAusp_1 = new JRadioButton(Ausp_SQL.giveAusp(n));
-		rdbtnAusp_1.setBounds(10, 71, 250, 137);
-		contentPane.add(rdbtnAusp_1);
+
 		
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
@@ -276,6 +278,7 @@ public class GUI extends JFrame {
 		});
 		btnNext.setBounds(345, 218, 89, 23);
 		contentPane.add(btnNext);
+		
 		
 	}		
 }

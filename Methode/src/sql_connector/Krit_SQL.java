@@ -54,7 +54,8 @@ public class Krit_SQL {
 		return conn;
 	}
 
-	public static  String giveKrit(int r) {
+	public static  Kriterien giveKrit(int r) {
+		    Kriterien retKrit= null;
 			Connection conn = null;
 			Statement stmt = null;
 			ResultSet rs = null;
@@ -68,12 +69,11 @@ public class Krit_SQL {
 				rs = stmt.executeQuery("SELECT * FROM kriterien   WHERE Krit_id = " + r);
 				///rs = stmt.executeQuery("SELECT * FROM kriterien  ");
 				while (rs.next()) {
-					String Krit_id = rs.getString("Krit_id");
-					String Krit_nr = rs.getString("Krit_Nr");
-					//String Krit_Ausp_anzahl = rs.getString("Krit_Ausp_anzahl");
-					Krit_Beschreibung = rs.getString("Krit_Beschreibung");
-				//	System.out.println("ID: " + Krit_id + ", Krit_Nr: " + Krit_nr
-					//		+ ", Anzahl Ausprägungen: " + Krit_Ausp_anzahl+" Beschreibung: "+ Krit_Beschreibung);
+					retKrit = new Kriterien();
+					retKrit.Krit_id = rs.getInt("Krit_id");
+					retKrit.Krit_Nr = rs.getString("Krit_Nr");
+					retKrit.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
+					
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -83,7 +83,7 @@ public class Krit_SQL {
 				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 				
 			}
-			return Krit_Beschreibung;
+			return retKrit;
 			
 		}
 }
