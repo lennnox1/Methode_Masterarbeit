@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -25,7 +27,11 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import Data.Kriterien;
+import sql_connector.Krit_SQL;
+
 public class MultiLineTable {
+	int ind=0;
   public static void main(String[] args) {
     try {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -39,10 +45,10 @@ public class MultiLineTable {
         SwingConstants.LEFT, SwingConstants.CENTER);
 
     TableColumnModel tcm = tbl.getColumnModel();
-    tcm.getColumn(0).setPreferredWidth(75);
-    tcm.getColumn(0).setMinWidth(75);
-    tcm.getColumn(1).setPreferredWidth(150);
-    tcm.getColumn(1).setMinWidth(150);
+    tcm.getColumn(0).setPreferredWidth(25);
+    tcm.getColumn(0).setMinWidth(25);
+    tcm.getColumn(1).setPreferredWidth(400);
+    tcm.getColumn(1).setMinWidth(400);
 
     // Install the multi-line renderer
     tcm.getColumn(0).setCellRenderer(multiLineRenderer);
@@ -55,7 +61,7 @@ public class MultiLineTable {
     StripedTableCellRenderer.installInTable(tbl, Color.lightGray,
         Color.white, null, null);
 
-    tbl.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+    tbl.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
     tbl.setPreferredScrollableViewportSize(tbl.getPreferredSize());
 
     JScrollPane sp = new JScrollPane(tbl);
@@ -71,7 +77,7 @@ public class MultiLineTable {
 }
 
 class MultiLineTableModel extends AbstractTableModel {
-  protected String[] columnNames = { "Flight", "Crew" };
+  protected String[] columnNames = { "Kh", "Kriterium" };
 
   // Implementation of TableModel interface
   public int getRowCount() {
@@ -93,8 +99,22 @@ class MultiLineTableModel extends AbstractTableModel {
   public String getColumnName(int column) {
     return columnNames[column];
   }
-
-  protected Object[][] data = new Object[][] {
+  ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
+	Object[][] data= new Object[Kritarray.size()][2];{
+  int i=0;
+	//for (Kriterien kr : Kritarray)
+	for (Kriterien kr: Kritarray){
+		data[i][0]=kr.Krit_Nr;
+		//data[i][1]=kr.Krit_Beschreibung;
+		//data[i][1]=new String[] { "Neil Armstrong", "Buzz Aldrin",
+        //"Michael Collins" } ;
+		data[i][1]=new String[] { "adsjklsdjahhjdkask","jhasdsfsdkjadsdafsadfhskjdfjshkddsjsdfadfsas" } ;
+		++i;
+		
+		
+	}}
+	
+	/* protected Object[][] data = new Object[][] {
       {
           "Apollo 11",
           new String[] { "Neil Armstrong", "Buzz Aldrin",
@@ -118,10 +138,14 @@ class MultiLineTableModel extends AbstractTableModel {
       {
           "Apollo 17",
           new String[] { "Eugene Cernan", "Harrison Schmitt",
-              "Ron Evans" } } };
+              "Ron Evans" } } };*/
 }
 
 class MultiLineCellRenderer extends JPanel implements TableCellRenderer {
+	
+	
+
+	
   public MultiLineCellRenderer(int horizontalAlignment, int verticalAlignment) {
     this.horizontalAlignment = horizontalAlignment;
     this.verticalAlignment = verticalAlignment;
