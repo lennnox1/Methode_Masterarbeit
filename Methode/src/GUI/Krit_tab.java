@@ -1,4 +1,4 @@
-package Test;
+package GUI;
 
 import javax.swing.border.*;
 import javax.swing.event.*;
@@ -12,10 +12,10 @@ import javax.swing.*;
 import java.util.*;
 import java.awt.*;
    
-public class JTextAreaTableExample extends JFrame {
+public class Krit_tab extends JFrame {
   
-  public JTextAreaTableExample() {
-    super( "JTextAreaTableExample Example" );
+  public Krit_tab() {
+  
    
     DefaultTableModel dtm = new DefaultTableModel() {
        // make first cell uneditable
@@ -52,11 +52,11 @@ public class JTextAreaTableExample extends JFrame {
     tcm.getColumn(1).setCellEditor(new TextAreaEditor());  
 
 
-    /*tcm.getColumn(0).setPreferredWidth(25);
-    tcm.getColumn(0).setMinWidth(25);
-    tcm.getColumn(1).setPreferredWidth(400);
-    tcm.getColumn(1).setMinWidth(400);
-    */
+    tcm.getColumn(0).setPreferredWidth(25);
+    tcm.getColumn(0).setMaxWidth(25);
+    /*tcm.getColumn(1).setPreferredWidth(400);
+    tcm.getColumn(1).setMinWidth(400); */
+    
     
     
    
@@ -71,7 +71,7 @@ public class JTextAreaTableExample extends JFrame {
   }
   
   public static void main(String[] args) {
-    JTextAreaTableExample frame = new JTextAreaTableExample();
+    Krit_tab frame = new Krit_tab();
     frame.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
         System.exit(0);

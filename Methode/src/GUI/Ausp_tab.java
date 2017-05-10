@@ -17,7 +17,7 @@ import java.awt.*;
 public class Ausp_tab extends JFrame {
   
   public Ausp_tab() {
-    super( "JTextAreaTableExample Example" );
+ 
    
     DefaultTableModel dtm = new DefaultTableModel() {
        // make first cell uneditable
@@ -82,60 +82,3 @@ public class Ausp_tab extends JFrame {
   }
 }
    
-class TextAreaRenderer extends JScrollPane implements TableCellRenderer
-{
-   JTextArea textarea;
-  
-   public TextAreaRenderer() {
-      textarea = new JTextArea();
-      textarea.setLineWrap(true);
-      textarea.setWrapStyleWord(true);
-      getViewport().add(textarea);
-   }
-  
-   public Component getTableCellRendererComponent(JTable table, Object value,
-                                  boolean isSelected, boolean hasFocus,
-                                  int row, int column)
-   {
-      if (isSelected) {
-         setForeground(table.getSelectionForeground());
-         setBackground(table.getSelectionBackground());
-         textarea.setForeground(table.getSelectionForeground());
-         textarea.setBackground(table.getSelectionBackground());
-      } else {
-         setForeground(table.getForeground());
-         setBackground(table.getBackground());
-         textarea.setForeground(table.getForeground());
-         textarea.setBackground(table.getBackground());
-      }
-  
-      textarea.setText((String) value);
-      textarea.setCaretPosition(0);
-      return this;
-   }
-}
-  
-class TextAreaEditor extends DefaultCellEditor {
-   protected JScrollPane scrollpane;
-   protected JTextArea textarea;
-  
-   public TextAreaEditor() {
-      super(new JCheckBox());
-      scrollpane = new JScrollPane();
-      textarea = new JTextArea(); 
-      textarea.setLineWrap(true);
-      textarea.setWrapStyleWord(true);
-      scrollpane.getViewport().add(textarea);
-   }
-  
-   public Component getTableCellEditorComponent(JTable table, Object value,
-                                   boolean isSelected, int row, int column) {
-      textarea.setText((String) value);
-  
-      return scrollpane;
-   }
-  
-   public Object getCellEditorValue() {
-      return textarea.getText();
-   }
-}

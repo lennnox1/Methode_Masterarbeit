@@ -23,7 +23,7 @@ public class GridBagLayoutExample {
 
         JPanel blackPanel = getPanel ( Color.BLACK );
         addComp ( contentPane, blackPanel, 0, 1, 1, 1
-                            , GridBagConstraints.VERTICAL, 0, 1 ,300,0);
+                            , GridBagConstraints.VERTICAL, 0, 1 ,400,0);
         
         JPanel blackPanel1 = getPanel ( Color.GREEN );
         addComp ( contentPane, blackPanel1, 1, 1, 1, 1
@@ -48,8 +48,28 @@ public class GridBagLayoutExample {
         JPanel grayPanel1 = getPanel ( Color.CYAN );
         addComp ( contentPane, grayPanel1, 0, 0, 5, 1
                             , GridBagConstraints.BOTH, 0.7, 0.3 ,0,0);
+        
+        
+        GridBagConstraints d = new GridBagConstraints();
+        //d.fill = GridBagConstraints.BOTH;
+        d.anchor= GridBagConstraints.EAST;;
+        d.gridx = 0;
+        d.gridy = 0;
+        d.weightx = 0.4;
+        d.weighty = 0;
        
         
+        
+        grayPanel.setLayout(new GridBagLayout ());
+        JButton btn_prev = new JButton("Previous");
+       // d.anchor = GridBagConstraints.EAST;
+        grayPanel.add(btn_prev, d);
+        
+        JButton btn_next = new JButton("Next");
+        d.anchor = GridBagConstraints.EAST;
+        d.gridx = 1;
+        d.gridy = 0;
+        grayPanel.add(btn_next, d);
 
         frame.setContentPane ( contentPane );
         frame.pack ();
