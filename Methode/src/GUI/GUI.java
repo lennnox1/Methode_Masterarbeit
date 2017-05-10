@@ -220,7 +220,9 @@ public class GUI extends JFrame {
 			System.out.println(txtProjekt.getText());
 			New_project_SQL.createProject(txtProjekt.getText());
 			saved_Projects.addItem(txtProjekt.getText());
-			GUIKriterium gui2 = new GUIKriterium();
+			
+
+			GUIKriterium2 gui2 = new GUIKriterium2();
 			contentPane.add(gui2);
 			setContentPane(gui2);
 			 

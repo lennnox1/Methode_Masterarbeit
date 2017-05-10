@@ -1,14 +1,23 @@
 package Test;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import javax.swing.*;
 
-public class GridBagLayoutExample {
+public class GridBagLayoutExample2 {
 
     private final int hGap = 2;
     private final int vGap = 2;
     private GridBagConstraints gbc;
 
-    public GridBagLayoutExample () {
+    /**
+     * @wbp.parser.entryPoint
+     */
+    public GridBagLayoutExample2 () {
         gbc = new GridBagConstraints ();
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;   
         gbc.insets = new Insets( hGap, vGap, hGap, vGap ); 
@@ -48,8 +57,7 @@ public class GridBagLayoutExample {
         JPanel grayPanel1 = getPanel ( Color.CYAN );
         addComp ( contentPane, grayPanel1, 0, 0, 5, 1
                             , GridBagConstraints.BOTH, 0.7, 0.3 ,0,0);
-       
-        
+ 
 
         frame.setContentPane ( contentPane );
         frame.pack ();
@@ -82,12 +90,21 @@ public class GridBagLayoutExample {
 
         return panel;
     }
+    
+    private JButton getButton ( String t) {
+    	JButton button = new JButton();
+    	button.setOpaque ( true );
+    	
+
+        return button;
+    }
 
     public static void main ( String [] args ) {
+    	
         Runnable runnable = new Runnable () {
             @Override
             public void run () {
-                new GridBagLayoutExample ().displayGUI ();
+                new GridBagLayoutExample2().displayGUI ();
             }
         };
         EventQueue.invokeLater ( runnable );
