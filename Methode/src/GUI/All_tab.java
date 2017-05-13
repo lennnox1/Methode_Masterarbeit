@@ -23,7 +23,8 @@ public class All_tab extends JFrame {
        // make first cell uneditable
        public boolean isCellEditable(int row, int column)
        {
-          return !(column == 0);
+         return !(column == 0);
+         // return false;
        }
     };
     
@@ -69,9 +70,9 @@ public class All_tab extends JFrame {
     TableColumnModel tcm = table.getColumnModel();
    
     tcm.getColumn(0).setCellRenderer(new TextAreaRenderer());
-    tcm.getColumn(0).setCellEditor(new TextAreaEditor());
+    //tcm.getColumn(0).setCellEditor(new TextAreaEditor());
     tcm.getColumn(1).setCellRenderer(new TextAreaRenderer());
-    tcm.getColumn(1).setCellEditor(new TextAreaEditor());  
+   // tcm.getColumn(1).setCellEditor(new TextAreaEditor());  
     
 
     /*tcm.getColumn(0).setPreferredWidth(25);
@@ -99,6 +100,7 @@ public class All_tab extends JFrame {
         textarea = new JTextArea();
         textarea.setLineWrap(true);
         textarea.setWrapStyleWord(true);
+        textarea.setEditable(false);
         getViewport().add(textarea);
      }
     
@@ -120,6 +122,7 @@ public class All_tab extends JFrame {
     
         textarea.setText((String) value);
         textarea.setCaretPosition(0);
+        textarea.setEditable(false);
         return this;
      }
   }

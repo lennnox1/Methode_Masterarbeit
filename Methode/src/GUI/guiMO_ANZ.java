@@ -33,14 +33,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.Action;
 import java.awt.event.ActionListener;
 
-public class GUIKriterium extends JPanel {
+public class guiMO_ANZ extends JPanel {
 	private int n=1;
 	public ArrayList<Projekte> Projarray;
     
-	 public GUIKriterium() {
+	 public guiMO_ANZ() {
 		 	
-		//setMont_OP_Panel();
-			 fillPanel(); 
+		setMont_OP_Panel();
+			// fillPanel(); 
 			
 		
 
@@ -126,8 +126,8 @@ public class GUIKriterium extends JPanel {
 			 });
 			 this.add(btnPrev);
 	
-			 	//ArrayList<Projekte> Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
-				/*int test=0;
+			 	ArrayList<Projekte> Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
+				int test=0;
 				for (Projekte kr : Projarray)
 				{
 					test = kr.Anz_Montageop;
@@ -151,7 +151,7 @@ public class GUIKriterium extends JPanel {
 				   	group1.setSelected(rdbtnAusp_2.getModel(), true);
 				   	this.add(rdbtnAusp_2);
 			   	    
-			    }*/
+			    }
 				
 			   	
 			   	 

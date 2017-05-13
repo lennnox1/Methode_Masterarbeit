@@ -77,6 +77,7 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -113,7 +114,11 @@ public class GUI extends JFrame {
 		JButton button = new JButton("Projekt laden");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				textField_1.setText(String.valueOf(list_projectsSQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString())));
+				//textField_1.setText(String.valueOf(list_projectsSQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString())));
+				// test = list_projectsSQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString());
+				GUIKriterium gui1 = new GUIKriterium();
+				contentPane.add(gui1);
+				setContentPane(gui1);
 			}
 		});
 		button.setBounds(141, 11, 122, 23);
@@ -221,10 +226,13 @@ public class GUI extends JFrame {
 			New_project_SQL.createProject(txtProjekt.getText());
 			saved_Projects.addItem(txtProjekt.getText());
 			
-
-			GUIKriterium2 gui2 = new GUIKriterium2();
-			contentPane.add(gui2);
-			setContentPane(gui2);
+			guiMO_ANZ guiMO = new guiMO_ANZ();
+			contentPane.add(guiMO);
+			setContentPane(guiMO);
+			
+			//GUIKriterium gui2 = new GUIKriterium();
+			//contentPane.add(gui2);
+			//setContentPane(gui2);
 			 
 			
 			}
@@ -254,7 +262,7 @@ public class GUI extends JFrame {
 		JButton btnOk_1 = new JButton("ok");
 		btnOk_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				New_project_SQL.set_Montage_Nr(Integer.valueOf(txtMon_Nr.getText()),txtProjekt.getText());
+				//New_project_SQL.set_Montage_Nr(Integer.valueOf(txtMon_Nr.getText()),txtProjekt.getText());
 			}
 		});
 		btnOk_1.setBounds(117, 219, 89, 23);
