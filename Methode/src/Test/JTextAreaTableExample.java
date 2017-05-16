@@ -19,15 +19,28 @@ public class JTextAreaTableExample extends JFrame {
    
     DefaultTableModel dtm = new DefaultTableModel() {
        // make first cell uneditable
+    	
        public boolean isCellEditable(int row, int column)
        {
-          return !(column == 0);
+          //return !(column == 0);
+          return false;
+          
        }
     };
-    
+   
     
      String[] columnNames = { "Kh", "Kriterium" };
     
+     /* ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
+  	Object[][] data= new Object[Kritarray.size()][1];
+    int i=0;
+  	for (Kriterien kr: Kritarray){
+  		data[i][0]=kr.Krit_Nr;
+  		data[i][1]=kr.Krit_Beschreibung;
+  
+  		++i;
+  	
+  	}*/
     ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
   	Object[][] data= new Object[Kritarray.size()][2];
     int i=0;
@@ -38,26 +51,30 @@ public class JTextAreaTableExample extends JFrame {
   		++i;
   	
   	}
-  	
  
+  	
+  	 dtm.setDataVector(data,new Object[]{ "Kh","Kriterium","Ahg","Ausprägung"});
 
+     JTable table = new JTable(dtm);
                       
-    JTable table = new JTable(data,columnNames);
+  
     
     TableColumnModel tcm = table.getColumnModel();
    
     tcm.getColumn(0).setCellRenderer(new TextAreaRenderer());
-    tcm.getColumn(0).setCellEditor(new TextAreaEditor());
+    //tcm.getColumn(0).setCellEditor(new TextAreaEditor());
     tcm.getColumn(1).setCellRenderer(new TextAreaRenderer());
-    tcm.getColumn(1).setCellEditor(new TextAreaEditor());  
-
-
-    /*tcm.getColumn(0).setPreferredWidth(25);
-    tcm.getColumn(0).setMinWidth(25);
-    tcm.getColumn(1).setPreferredWidth(400);
-    tcm.getColumn(1).setMinWidth(400);
-    */
+    //tcm.getColumn(1).setCellEditor(new TextAreaEditor());  
     
+   // tcm.getColumn(0).setPreferredWidth(25);
+    tcm.getColumn(0).setMaxWidth(25);
+   // tcm.getColumn(1).setPreferredWidth(200);
+    tcm.getColumn(1).setMaxWidth(200);
+    //tcm.getColumn(2).setPreferredWidth(30);
+    tcm.getColumn(2).setMaxWidth(30);
+   // tcm.getColumn(3).setPreferredWidth(200);
+    tcm.getColumn(3).setMaxWidth(200);
+
     
    
     
@@ -66,7 +83,7 @@ public class JTextAreaTableExample extends JFrame {
     JScrollPane scroll = new JScrollPane(table);
     getContentPane().add(scroll);
   
-    setSize( 400, 250 );
+    setSize( 455, 250 );
     setVisible(true);
   }
   
@@ -79,7 +96,7 @@ public class JTextAreaTableExample extends JFrame {
     });
   }
 }
-   
+
 class TextAreaRenderer extends JScrollPane implements TableCellRenderer
 {
    JTextArea textarea;

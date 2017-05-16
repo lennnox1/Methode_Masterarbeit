@@ -19,7 +19,7 @@ public class list_projectsSQL {
 	
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;
-		String connectionUrl = "jdbc:mysql://localhost:3306/Kriterienkatalog";
+		String connectionUrl = "jdbc:mysql://localhost:3306/Kriterienkatalog?useSSL=false";
 		String connectionUser = "root";
 		String connectionPassword = "test1";
 		conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);

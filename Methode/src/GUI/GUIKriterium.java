@@ -21,6 +21,7 @@ import Data.Projekte;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
+import sql_connector.list_projectsSQL;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
@@ -38,7 +39,7 @@ public class GUIKriterium extends JPanel {
 	public ArrayList<Projekte> Projarray;
     
 	 public GUIKriterium() {
-		 	
+		 
 		//setMont_OP_Panel();
 			 fillPanel(); 
 			
@@ -46,7 +47,7 @@ public class GUIKriterium extends JPanel {
 
 		}
 
-	protected void setMont_OP_Panel(){
+	/*protected void setMont_OP_Panel(){
 		this.setBounds(100, 100, 450, 300);
 		JLabel mont_OP = new JLabel("Anzahl der Montageoperationen:");
 		this.add(mont_OP);
@@ -65,7 +66,7 @@ public class GUIKriterium extends JPanel {
 		 });
 		this.add(btn_mont_OP);
 	}
-	 
+	 */
 	protected void fillPanel() {
 		this.setBounds(100, 100, 450, 300);
 		 
@@ -94,6 +95,7 @@ public class GUIKriterium extends JPanel {
 		    	 group.add(rdbtnAusp_1);
 		    	
 		    	 rbtnPanel.add(rdbtnAusp_1);
+		    	 //rdbtnAusp_1.addActionListener(l);
 		     }
 		     JRadioButton rdbtnNot_Rel = new JRadioButton("nicht relevant");
 		     rdbtnNot_Rel.addActionListener(new ActionListener() {
@@ -101,6 +103,7 @@ public class GUIKriterium extends JPanel {
 		     	}
 		     });
 		     group.add(rdbtnNot_Rel);
+		     
 	    	 rbtnPanel.add(rdbtnNot_Rel);
 		     JButton btnNext = new JButton("Next");
 			 btnNext.addActionListener(new ActionListener() {
@@ -122,11 +125,13 @@ public class GUIKriterium extends JPanel {
 			 	removeAll();
 		 		fillPanel();
 			 	System.out.println(n);
-			 	};
+			 	}
 			 });
 			 this.add(btnPrev);
 	
-			 	//ArrayList<Projekte> Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
+			
+			 
+			 //ArrayList<Projekte> Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
 				/*int test=0;
 				for (Projekte kr : Projarray)
 				{

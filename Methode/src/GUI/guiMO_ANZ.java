@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
@@ -18,6 +19,7 @@ import javax.swing.SwingConstants;
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
+import Test.GUI_GRIDBAG;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
@@ -26,6 +28,7 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -35,22 +38,26 @@ import java.awt.event.ActionListener;
 
 public class guiMO_ANZ extends JPanel {
 	private int n=1;
+	private int i= 0;
+	private JPanel contPanel;
 	public ArrayList<Projekte> Projarray;
     
-	 public guiMO_ANZ() {
+	 public guiMO_ANZ(JPanel contPanel) {
 		 	
 		setMont_OP_Panel();
 			// fillPanel(); 
 			
-		
+		contPanel =this;
 
 		}
+	 
+	
 
 	protected void setMont_OP_Panel(){
 		this.setBounds(100, 100, 450, 300);
 		JLabel mont_OP = new JLabel("Anzahl der Montageoperationen:");
 		this.add(mont_OP);
-		JTextField txtMon_Nr = new JTextField();
+		JTextField txtMon_Nr = new JTextField("2");
 		txtMon_Nr.setBounds(10, 219, 86, 20);
 		this.add(txtMon_Nr);
 		txtMon_Nr.setColumns(10);
@@ -60,12 +67,87 @@ public class guiMO_ANZ extends JPanel {
 		 		New_project_SQL.set_Montage_Nr(Integer.valueOf(txtMon_Nr.getText()));
 		 		 Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
 		 		removeAll();
-		 		fillPanel();
+		 		montOPNames();
+		 		//fillPanel();
+		 		
+		 		
 		 	}
 		 });
 		this.add(btn_mont_OP);
 	}
 	 
+
+	protected void montOPNames(){
+		
+		this.setBounds(100, 100, 450, 300);
+		//this.setLayout(new GridBagLayout());
+		JLabel lmontOPNames = new JLabel("Name:");
+		JTextArea txtmontOPNames = new JTextArea("test");
+		this.add(lmontOPNames);
+		this.add(txtmontOPNames);
+		JButton btn_mont_OP = new JButton("OK");
+		btn_mont_OP.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 		ArrayList<Projekte> Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
+				int k=0;
+				
+				
+				
+				for (Projekte kr : Projarray)
+				{
+					k = kr.Anz_Montageop;
+				}
+		 		 
+		 		++i;
+	    		System.out.println(i);
+	    		sql_connector.New_project_SQL.set_Montage_Name(txtmontOPNames.getText());
+		 		 
+			    	if(i==k){
+			    		
+			    		//(new GUI_GRIDBAG());
+			    		//test.setVisible(true);
+			    	//contPanel.removeAll();
+			    	//scontPanel.setVisible(false);
+			    	contPanel.setVisible(true);
+			    
+				 		
+			    	}
+			    	
+			    		
+			    	
+			    
+		 		
+		 		
+		 		
+		 		
+		 		//removeAll();
+		 		//montOPNames();
+		 		//fillPanel();
+		 		
+		 	}
+		 });
+		this.add(btn_mont_OP);
+		/*GridBagConstraints gbc = new GridBagConstraints();
+		gbc.insets = new Insets(2,2,2,2);
+		gbc.weightx=1;
+		gbc.weighty=1;
+		
+		
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.WEST;
+		this.add(lmontOPNames, gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.WEST;
+		this.add(txtmontOPNames, gbc);*/
+		
+		//this.setVisible(true);
+		
+	}
+	
+	
+	
 	protected void fillPanel() {
 		this.setBounds(100, 100, 450, 300);
 		 

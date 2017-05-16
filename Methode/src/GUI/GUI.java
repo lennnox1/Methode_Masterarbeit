@@ -22,6 +22,7 @@ import javax.swing.text.Caret;
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
+import gUITable.TableRendererPanel;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
@@ -49,14 +50,14 @@ public class GUI extends JFrame {
 	private JTextField  txtProjekt;
 	private JLabel lblName;
 	private JButton btnOk;
-	private JComboBox saved_Projects; 
+	public JComboBox saved_Projects; 
 	private JTextField txtMon_Nr;
 	private JTextField textField_1;
 	private JRadioButton rdbtnAusp_1;
 	
 	private JPanel panel;
 	private JPanel panel_1;
-
+	public ArrayList<Projekte> Projarray;
 	/**
 	 * Launch the application.
 	 */
@@ -77,6 +78,9 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		
+		 
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -116,7 +120,10 @@ public class GUI extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//textField_1.setText(String.valueOf(list_projectsSQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString())));
 				// test = list_projectsSQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString());
+				Projarray = New_project_SQL.giveMontage_Nr(saved_Projects.getSelectedItem().toString());
 				GUIKriterium gui1 = new GUIKriterium();
+			
+				
 				contentPane.add(gui1);
 				setContentPane(gui1);
 			}
@@ -127,6 +134,19 @@ public class GUI extends JFrame {
 		JButton btnKatalogAnzeign = new JButton("Katalog anzeigen");
 		btnKatalogAnzeign.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TableRendererPanel katalog = new TableRendererPanel();
+				//contentPane.add(katalog);
+				setContentPane(katalog);
+				
+			
+				if (katalog.isVisible()){
+					katalog.setVisible(false);
+				}
+				else{
+					katalog.setVisible(true);
+				}
+				
+				/*
 				if (Krit_scroll.isVisible()){
 					Krit_scroll.setVisible(false);
 				}
@@ -138,7 +158,7 @@ public class GUI extends JFrame {
 				}
 				else{
 					Ausp_scroll.setVisible(true);
-				}
+				}*/
 			}
 		});
 		btnKatalogAnzeign.setBounds(273, 11, 137, 23);
@@ -165,9 +185,11 @@ public class GUI extends JFrame {
 		
 		Krit_scroll = new JScrollPane();	
 		Krit_tab = new JTable(data, columnNames);
+		
 		Krit_scroll.setBounds(10, 71, 250, 137);
 		Krit_tab.getColumnModel().getColumn(0).setMaxWidth(40);
 		Krit_scroll.setViewportView(Krit_tab);
+		
 		contentPane.add(Krit_scroll);
 		Krit_scroll.setVisible(false);
 		
@@ -201,7 +223,7 @@ public class GUI extends JFrame {
 		Ausp_scroll.setViewportView(Ausp_tab);
 		contentPane.add(Ausp_scroll);
 		Ausp_scroll.setVisible(false);
-	
+		
 		
 	
 		
@@ -226,7 +248,7 @@ public class GUI extends JFrame {
 			New_project_SQL.createProject(txtProjekt.getText());
 			saved_Projects.addItem(txtProjekt.getText());
 			
-			guiMO_ANZ guiMO = new guiMO_ANZ();
+			guiMO_ANZ guiMO = new guiMO_ANZ(contentPane);
 			contentPane.add(guiMO);
 			setContentPane(guiMO);
 			

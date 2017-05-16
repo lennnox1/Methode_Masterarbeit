@@ -14,10 +14,11 @@ import java.sql.PreparedStatement;
 
 public class New_project_SQL {
 	public static PreparedStatement preStmt_Mont_Nr;
+	public static PreparedStatement preStmt_Mont_Name;
 	
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;
-		String connectionUrl = "jdbc:mysql://localhost:3306/Kriterienkatalog";
+		String connectionUrl = "jdbc:mysql://localhost:3306/Kriterienkatalog?useSSL=false";
 		String connectionUser = "root";
 		String connectionPassword = "test1";
 		conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
@@ -61,7 +62,7 @@ public class New_project_SQL {
 			Connection conn = null;
 			Statement stmt = null;
 		
-			String query1= "update kriterienkatalog.projekte  set Anz_Montageop = ? where idProjekte=?";
+			String query1= "update  kriterienkatalog.projekte  set Anz_Montageop = ? where idProjekte=?";
 			
 			try {
 
@@ -152,5 +153,76 @@ public class New_project_SQL {
 			return Projectsarray;
 	
 		}
+		
+		
+		public static  ArrayList<Projekte> giveMontage_Nr(String r) {
+			Connection conn = null;
+			Statement stmt = null;
+			ResultSet rs = null;
+			ArrayList<Projekte> Projectsarray= new ArrayList<Projekte>();
+			String query1= "SELECT * FROM projekte   WHERE Projekt_name =?";
+			try {
+
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+			    conn = get_connection();
+			    
+			    preStmt_Mont_Nr = conn.prepareStatement(query1);
+			    preStmt_Mont_Nr.setString(1, r);
+			    preStmt_Mont_Nr.execute();
+			     rs = preStmt_Mont_Nr.executeQuery();
+			    while (rs.next()) {
+
+			    	Projekte Projektobj= new Projekte();
+					Projektobj.idProjekte = rs.getInt("idProjekte");
+					Projektobj.Projekt_name = rs.getString("Projekt_name");
+					Projektobj.Anz_Montageop= rs.getInt("Anz_Montageop");
+					Projectsarray.add(Projektobj);
+					
+			    				  }
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+				try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+				
+			}
+			return Projectsarray;
+			
+		}
 	
+		
+		
+		
+		
+		public static  String set_Montage_Name(String t) {
+			Connection conn = null;
+			Statement stmt = null;
+		
+			//String query1= "update kriterienkatalog.mont_op  set montOP_name = ? where idProjekte=?";
+			String query1= "insert kriterienkatalog.mont_op  (montOP_name,idProjekte) values(?,?)";
+			try {
+
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+			    conn = get_connection();
+			   
+			    preStmt_Mont_Name = conn.prepareStatement(query1);
+			    preStmt_Mont_Name.setString(1,t);
+			    preStmt_Mont_Name.setInt(2,get_lastID());
+			    preStmt_Mont_Name.execute();
+			   
+			    
+			    
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+				try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+				
+			}
+			return t;
+		
+	}
 }
