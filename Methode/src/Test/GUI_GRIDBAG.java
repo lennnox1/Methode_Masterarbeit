@@ -103,6 +103,15 @@ public class GUI_GRIDBAG extends JFrame {
 			rbtnPanel.add(rdbtnAusp_1);
 			//rdbtnAusp_1.addActionListener(l);
 		}
+		JRadioButton rdbtnNot_Rel = new JRadioButton("nicht relevant");
+	     rdbtnNot_Rel.addActionListener(new ActionListener() {
+	     	public void actionPerformed(ActionEvent arg0) {
+	     	}
+	     });
+	     group.add(rdbtnNot_Rel);
+	     rbtnPanel.add(rdbtnNot_Rel);
+		
+		
 		JPanel buttonPanel = new JPanel();
 		JButton btnPrev = new JButton("Previous");
 		btnPrev.addActionListener(new ActionListener() {
@@ -127,9 +136,9 @@ public class GUI_GRIDBAG extends JFrame {
 				/*while(n<100){
 					 progressBar.setValue(n);	
 				}*/
-			
+				//removeAll();
 				 progressBar.setValue(n);
-				//initGUI();
+				initGUI();
 				revalidate();
 				System.out.println(n);
 				
@@ -225,7 +234,7 @@ public class GUI_GRIDBAG extends JFrame {
 
 	public static void main(String[] args) {
 		GUI_GRIDBAG frame = new GUI_GRIDBAG();
-		frame.pack();
+		//frame.pack();
 		frame.setVisible(true);
 		
 	
