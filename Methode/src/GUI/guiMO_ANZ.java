@@ -46,7 +46,7 @@ public class guiMO_ANZ extends JPanel {
 	 public guiMO_ANZ() {
 		 	
 		//setMont_OP_Panel();
-			 fillPanel(); 
+			 //fillPanel(); 
 			
 		//contPanel =this;
 
@@ -150,7 +150,7 @@ public class guiMO_ANZ extends JPanel {
 	
 	
 	
-	protected void fillPanel() {
+/*	protected void fillPanel() {
 		this.setBounds(100, 100, 450, 300);
 		 
 		 JTextPane krit_beschreibung= new JTextPane();
@@ -244,7 +244,7 @@ public class guiMO_ANZ extends JPanel {
 			   	
 			   	 
 			   
-	}
+	}*/
 
 
 	

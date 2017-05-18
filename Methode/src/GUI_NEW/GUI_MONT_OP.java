@@ -21,6 +21,7 @@ import Data.Kriterien;
 import Data.Projekte;
 import GUI.GUI;
 import GUI.guiMO_ANZ;
+import Test.GUIKRIT_JPANEL;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
@@ -98,6 +99,7 @@ public class GUI_MONT_OP extends JPanel {
 					//fillPanel();
 					removeAll();
 					revalidate();
+					//GUIKRIT_JPANEL guiKrit = new GUIKRIT_JPANEL();
 					GUIKRIT guiKrit = new GUIKRIT();
 					guiKrit.setVisible(true);
 		    	}

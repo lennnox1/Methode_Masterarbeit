@@ -174,7 +174,8 @@ public class GUIKRIT extends JFrame {
 		btnNEXT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				++n;
-				++k;
+				System.out.println("n= " + n);
+				//++k;
 				contentPane.setVisible(false);
 				initGUI();
 				System.out.println(n);
@@ -189,14 +190,19 @@ public class GUIKRIT extends JFrame {
 				}
 				//while(nMontOP+1<=Mont_OParray.size()){
 				if(n==Kritarray.size()){
-					++nMontOP;
+					
 					contentPane.setVisible(false);
 					initGUI();
+					
 					n=0;
-					k=0;
+					++nMontOP;
 					//}
 				}
+				
+				System.out.println("n= " + n);
+				
 			}
+			
 		});
 
 

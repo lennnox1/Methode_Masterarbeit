@@ -25,6 +25,7 @@ import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
 import GUI_NEW.GUI_MONT_OP;
+import Test.GUI_MONT_OP_JFRAME;
 import gUITable.TableRendererPanel;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
@@ -254,6 +255,7 @@ public class GUI extends JFrame {
 			//guiMO_ANZ guiMO = new guiMO_ANZ(contentPane);
 			//guiMO_ANZ guiMO = new guiMO_ANZ();
 			GUI_MONT_OP guiMO = new GUI_MONT_OP();
+	
 			contentPane.add(guiMO);
 			setContentPane(guiMO);
 			
