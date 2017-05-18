@@ -7,12 +7,14 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import Data.Auspraegungen;
 import Data.Kriterien;
@@ -31,7 +33,9 @@ public class GUI_MONT_OP extends JPanel {
 	private Auspraegungen retAus;
 	public boolean update=false;
 	public GUI_MONT_OP() {
-
+		
+	
+		
 		setMont_OP_Panel();
 		
 
@@ -78,12 +82,9 @@ public class GUI_MONT_OP extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				Projarray = New_project_SQL.giveAnzMOPZuLastID();
-				int k=0;
+				Projekte test = Projarray.get(0);
+				int k=test.Anz_Montageop;
 				
-				for (Projekte kr : Projarray)
-				{
-					k = kr.Anz_Montageop;
-				}
 				++i;
 				System.out.println("k:"+k);
 				System.out.println("i:"+i);
@@ -94,7 +95,11 @@ public class GUI_MONT_OP extends JPanel {
 					mont_OP_Name.setVisible(false);
 					txtMon_Name.setVisible(false);
 					btn_mont_OP_Name.setVisible(false);
-					fillPanel();
+					//fillPanel();
+					removeAll();
+					revalidate();
+					GUIKRIT guiKrit = new GUIKRIT();
+					guiKrit.setVisible(true);
 		    	}
 
 
@@ -102,7 +107,7 @@ public class GUI_MONT_OP extends JPanel {
 		});
 		
 	}
-	protected void fillPanel() {
+	/*protected void fillPanel() {
 		this.setBounds(100, 100, 450, 300);
 		 
 		 JTextPane krit_beschreibung= new JTextPane();
@@ -201,5 +206,5 @@ public class GUI_MONT_OP extends JPanel {
 				   	this.add(rdbtnAusp_2);
 			   	    
 			    }
-	}
+	}*/
 }

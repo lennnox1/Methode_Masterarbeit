@@ -21,7 +21,7 @@ public class Used_AuspSQL {
 		return conn;
 	}
 	
-	public static  void set_usedAusp(int t) {
+	public static  void set_usedAusp(int t, int x) {
 		Connection conn = null;
 		Statement stmt = null;
 	
@@ -34,7 +34,8 @@ public class Used_AuspSQL {
 		   
 		    preStmt_usedAusp = conn.prepareStatement(query1);
 		   // preStmt_Mont_Name.setString(1,t);
-		    preStmt_usedAusp.setInt(1,Mont_OPSQL.get_lastMontOPID());
+		   // preStmt_usedAusp.setInt(1,Mont_OPSQL.get_lastMontOPID());
+		    preStmt_usedAusp.setInt(1,x);
 		    preStmt_usedAusp.setInt(2,t);
 		    preStmt_usedAusp.execute();
 		   
