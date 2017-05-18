@@ -1,4 +1,4 @@
-package gUITable;
+package Test;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import Data.Kriterien;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 
-public class TableRendererPanel extends JPanel
+public class TablePanel extends JTable
 {
-	public TableRendererPanel()
+	public TablePanel()
 	{
 		
 		DefaultTableModel dtm = new DefaultTableModel() {
@@ -28,11 +28,12 @@ public class TableRendererPanel extends JPanel
 			}
 		};
 		String[] columnNames = { "Kh", "Kriterium","Ahg","Ausprägung"};
-
-		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
+		
+		//ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
+		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKritzuKritID(1);
 		Object[][] data_Krit= new Object[Kritarray.size()][4];
-
-		int i=0;
+		int  i=0;
+		// i=0;
 		for (Kriterien kr: Kritarray){
 
 			data_Krit[i][0]=kr.Krit_Nr;
@@ -43,6 +44,7 @@ public class TableRendererPanel extends JPanel
 			Object[][] data_Ausp1= new Object[Ausparray.size()][1];
 			Object[][] data_Ausp2= new Object[Ausparray.size()][1];
 			int n =  0;
+			 n =  0;
 			for (Auspraegungen ap: Ausparray){
 				
 				data_Ausp1[n][0]=ap.Auspr_Nr;
@@ -66,11 +68,13 @@ public class TableRendererPanel extends JPanel
 		JTable table = new JTable(dtm);
 
 
-		table.setBounds(100,50,700,900);
+		//table.setBounds(100,50,700,900);
 		table.setPreferredScrollableViewportSize(table.getPreferredSize());
-		JScrollPane scroll = new JScrollPane(table);
+		//JScrollPane scroll = new JScrollPane(table);
+		//scroll.setPreferredSize(new Dimension(100, 100));
 		//getContentPane().add(scroll);
-		this.add(scroll);
+		this.add(table);
+		
 	  // table.add(scroll);
 
 
@@ -90,7 +94,7 @@ public class TableRendererPanel extends JPanel
 		// tcm.getColumn(2).setMaxWidth(30);
 		tcm.getColumn(3).setPreferredWidth(200);
 		// tcm.getColumn(3).setMaxWidth(200);
-
+		//table.setRowHeight(80);
 		
 		
 		this.setVisible(false);
@@ -103,9 +107,9 @@ public class TableRendererPanel extends JPanel
 	/* public static void main(String[] args)
     {
        TableRendererPanel frame = new TableRendererPanel();
-        frame.setDefaultCloseOperation( EXIT_ON_CLOSE );
-        frame.pack();
-        frame.setLocationRelativeTo( null );
+        //frame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+        //frame.pack();
+        //frame.setLocationRelativeTo( null );
         frame.setVisible(true);
 
     }*/

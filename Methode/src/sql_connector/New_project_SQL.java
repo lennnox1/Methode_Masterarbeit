@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Data.Auspraegungen;
+import Data.Mont_OP;
 import Data.Projekte;
 
 import java.sql.PreparedStatement;
@@ -71,7 +72,7 @@ public class New_project_SQL {
 			   
 			    preStmt_Mont_Nr = conn.prepareStatement(query1);
 			    preStmt_Mont_Nr.setInt(1,t);
-			    preStmt_Mont_Nr.setInt(2,get_lastID());
+			    preStmt_Mont_Nr.setInt(2,get_lastProjID());
 			    preStmt_Mont_Nr.execute();
 			   
 			    
@@ -88,7 +89,7 @@ public class New_project_SQL {
 		
 	}
 	
-		public static  int get_lastID() {
+		public static  int get_lastProjID() {
 			int id=0;
 			Connection conn = null;
 			Statement stmt = null;
@@ -134,7 +135,7 @@ public class New_project_SQL {
 	
 				conn = get_connection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT * FROM projekte where idProjekte= " + get_lastID());
+				rs = stmt.executeQuery("SELECT * FROM projekte where idProjekte= " + get_lastProjID());
 				while (rs.next()) {
 					Projekte Projektobj= new Projekte();
 					Projektobj.idProjekte = rs.getInt("idProjekte");
@@ -209,7 +210,7 @@ public class New_project_SQL {
 			   
 			    preStmt_Mont_Name = conn.prepareStatement(query1);
 			    preStmt_Mont_Name.setString(1,t);
-			    preStmt_Mont_Name.setInt(2,get_lastID());
+			    preStmt_Mont_Name.setInt(2,get_lastProjID());
 			    preStmt_Mont_Name.execute();
 			   
 			    
@@ -225,4 +226,13 @@ public class New_project_SQL {
 			return t;
 		
 	}
+		
+		
+		
+		
+	
+		
+		
+		
+		
 }

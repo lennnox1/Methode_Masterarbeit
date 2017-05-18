@@ -55,18 +55,18 @@ public class GridBagLayoutExample {
         d.anchor= GridBagConstraints.EAST;;
         d.gridx = 0;
         d.gridy = 0;
-        d.weightx = 0.4;
-        d.weighty = 0;
+       // d.weightx = 0.4;
+       // d.weighty = 0;
        
         
         
         grayPanel.setLayout(new GridBagLayout ());
         JButton btn_prev = new JButton("Previous");
-       // d.anchor = GridBagConstraints.EAST;
+        d.anchor = GridBagConstraints.SOUTHEAST;
         grayPanel.add(btn_prev, d);
         
         JButton btn_next = new JButton("Next");
-        d.anchor = GridBagConstraints.EAST;
+        d.anchor = GridBagConstraints.SOUTHEAST;
         d.gridx = 1;
         d.gridy = 0;
         grayPanel.add(btn_next, d);

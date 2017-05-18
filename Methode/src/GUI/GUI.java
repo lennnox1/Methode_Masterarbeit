@@ -19,9 +19,12 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.Caret;
 
+import org.jdesktop.swingx.JXLabel;
+
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
+import GUI_NEW.GUI_MONT_OP;
 import gUITable.TableRendererPanel;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
@@ -248,9 +251,12 @@ public class GUI extends JFrame {
 			New_project_SQL.createProject(txtProjekt.getText());
 			saved_Projects.addItem(txtProjekt.getText());
 			
-			guiMO_ANZ guiMO = new guiMO_ANZ(contentPane);
+			//guiMO_ANZ guiMO = new guiMO_ANZ(contentPane);
+			//guiMO_ANZ guiMO = new guiMO_ANZ();
+			GUI_MONT_OP guiMO = new GUI_MONT_OP();
 			contentPane.add(guiMO);
 			setContentPane(guiMO);
+			
 			
 			//GUIKriterium gui2 = new GUIKriterium();
 			//contentPane.add(gui2);
@@ -278,7 +284,7 @@ public class GUI extends JFrame {
 		
 		txtMon_Nr = new JTextField();
 		txtMon_Nr.setBounds(10, 219, 86, 20);
-		contentPane.add(txtMon_Nr);
+		//contentPane.add(txtMon_Nr);
 		txtMon_Nr.setColumns(10);
 		
 		JButton btnOk_1 = new JButton("ok");
@@ -288,11 +294,11 @@ public class GUI extends JFrame {
 			}
 		});
 		btnOk_1.setBounds(117, 219, 89, 23);
-		contentPane.add(btnOk_1);
+		//contentPane.add(btnOk_1);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(242, 219, 86, 20);
-		contentPane.add(textField_1);
+		//contentPane.add(textField_1);
 		
 		
 	
@@ -309,7 +315,7 @@ public class GUI extends JFrame {
 			}
 		});
 		btnNext.setBounds(345, 218, 89, 23);
-		contentPane.add(btnNext);
+		//contentPane.add(btnNext);
 		
 		
 	}		

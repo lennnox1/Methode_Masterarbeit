@@ -1,17 +1,15 @@
-package GUI;
+package GUI_NEW;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
@@ -19,40 +17,25 @@ import javax.swing.SwingConstants;
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
-import Test.GUI_GRIDBAG;
+import GUI.GUI;
+import GUI.guiMO_ANZ;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
 import sql_connector.Used_AuspSQL;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
-
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import javax.swing.Action;
-import java.awt.event.ActionListener;
-
-public class guiMO_ANZ extends JPanel {
-	private int n=1;
-	private int i= 0;
-	private JPanel contPanel;
+public class GUI_MONT_OP extends JPanel {
 	public ArrayList<Projekte> Projarray;
-    private Auspraegungen retAus;
-	 public guiMO_ANZ() {
-		 	
-		//setMont_OP_Panel();
-			 fillPanel(); 
-			
-		//contPanel =this;
+	private int  i=0;
+	private int n=1;
+	private Auspraegungen retAus;
+	public boolean update=false;
+	public GUI_MONT_OP() {
 
-		}
-	 
-	
+		setMont_OP_Panel();
+		
+
+	}
 
 	protected void setMont_OP_Panel(){
 		this.setBounds(100, 100, 450, 300);
@@ -63,93 +46,62 @@ public class guiMO_ANZ extends JPanel {
 		this.add(txtMon_Nr);
 		txtMon_Nr.setColumns(10);
 		JButton btn_mont_OP = new JButton("OK");
-		btn_mont_OP.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) {
-		 		New_project_SQL.set_Montage_Nr(Integer.valueOf(txtMon_Nr.getText()));
-		 		 Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
-		 		removeAll();
-		 		montOPNames();
-		 		//fillPanel();
-		 		
-		 		
-		 	}
-		 });
 		this.add(btn_mont_OP);
-	}
-	 
-
-	protected void montOPNames(){
-		
-		this.setBounds(100, 100, 450, 300);
-		//this.setLayout(new GridBagLayout());
-		JLabel lmontOPNames = new JLabel("Name:");
-		JTextArea txtmontOPNames = new JTextArea("test");
-		this.add(lmontOPNames);
-		this.add(txtmontOPNames);
-		JButton btn_mont_OP = new JButton("OK");
-		
 		btn_mont_OP.addActionListener(new ActionListener() {
-		 	public void actionPerformed(ActionEvent e) {
-		 		ArrayList<Projekte> Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
+			public void actionPerformed(ActionEvent e) {
+				New_project_SQL.set_Montage_Nr(Integer.valueOf(txtMon_Nr.getText()));
+				Projarray=sql_connector.New_project_SQL.giveAnzMOPZuLastID();
+				
+				mont_OP.setVisible(false);
+				txtMon_Nr.setVisible(false);
+				btn_mont_OP.setVisible(false);
+				setMont_OP_Names();
+				
+				//fillPanel();
+
+
+			}
+		});
+		
+	}
+	protected void setMont_OP_Names(){
+		this.setBounds(100, 100, 450, 300);
+		JLabel mont_OP_Name = new JLabel("Namen der Montageoperationen:");
+		this.add(mont_OP_Name);
+		JTextField txtMon_Name = new JTextField("TEST");
+		txtMon_Name.setBounds(10, 219, 86, 20);
+		this.add(txtMon_Name);
+		txtMon_Name.setColumns(10);
+		JButton btn_mont_OP_Name = new JButton("OK");
+		this.add(btn_mont_OP_Name);
+		btn_mont_OP_Name.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Projarray = New_project_SQL.giveAnzMOPZuLastID();
 				int k=0;
-				
-				
 				
 				for (Projekte kr : Projarray)
 				{
 					k = kr.Anz_Montageop;
 				}
-		 		 
-		 		++i;
-	    		System.out.println(i);
-	    		sql_connector.New_project_SQL.set_Montage_Name(txtmontOPNames.getText());
-		 		 
-			    	if(i==k){
-			    		
-			    		//(new GUI_GRIDBAG());
-			    		//test.setVisible(true);
-			    	//contPanel.removeAll();
-			    	//scontPanel.setVisible(false);
-			    		contPanel.setVisible(true);
-			    
-				 		
-			    	}
-			    	
-			    		
-			    	
-			    
-		 		
-		 		
-		 		
-		 		
-		 		//removeAll();
-		 		//montOPNames();
-		 		//fillPanel();
-		 		
-		 	}
-		 });
-		this.add(btn_mont_OP);
-		/*GridBagConstraints gbc = new GridBagConstraints();
-		gbc.insets = new Insets(2,2,2,2);
-		gbc.weightx=1;
-		gbc.weighty=1;
-		
-		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.WEST;
-		this.add(lmontOPNames, gbc);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.WEST;
-		this.add(txtmontOPNames, gbc);*/
-		
-		//this.setVisible(true);
+				++i;
+				System.out.println("k:"+k);
+				System.out.println("i:"+i);
+				sql_connector.New_project_SQL.set_Montage_Name(txtMon_Name.getText());
+				
+				if(i==k){
+					
+					mont_OP_Name.setVisible(false);
+					txtMon_Name.setVisible(false);
+					btn_mont_OP_Name.setVisible(false);
+					fillPanel();
+		    	}
+
+
+			}
+		});
 		
 	}
-	
-	
-	
 	protected void fillPanel() {
 		this.setBounds(100, 100, 450, 300);
 		 
@@ -195,7 +147,15 @@ public class guiMO_ANZ extends JPanel {
 			 		removeAll();
 			 		fillPanel();
 			 		System.out.println(n);
+			 		if(update==false){
 			 		Used_AuspSQL.set_usedAusp(Integer.valueOf(group.getSelection().getActionCommand()));
+			 		System.out.println(update);
+			 		update=false;
+			 		}
+			 		else{
+			 			System.out.println("Update muss durchgeführt werden");
+			 			Used_AuspSQL.update_usedAusp(Integer.valueOf(group.getSelection().getActionCommand()));
+			 		}
 			 	}
 			 });
 			 
@@ -208,7 +168,8 @@ public class guiMO_ANZ extends JPanel {
 			    --n;
 			 	removeAll();
 		 		fillPanel();
-		 		Used_AuspSQL.delete_lastRow();
+		 		//Used_AuspSQL.delete_lastRow();
+		 		update=true;
 			 	System.out.println(n);
 			 	};
 			 });
@@ -240,13 +201,5 @@ public class guiMO_ANZ extends JPanel {
 				   	this.add(rdbtnAusp_2);
 			   	    
 			    }
-				
-			   	
-			   	 
-			   
 	}
-
-
-	
-
 }
