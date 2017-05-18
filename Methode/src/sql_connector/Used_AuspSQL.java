@@ -141,5 +141,70 @@ public class Used_AuspSQL {
 			
 		}
 	}
+
+	public static  void update_usedAusp(int t, int usedAusPrId) {
+		Connection conn = null;
+		Statement stmt = null;
+	
+		String query1= "update kriterienkatalog.used_auspr set Auspr_id =? where idused_Auspr=?;";
+		try {
+	
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    conn = get_connection();
+		   
+		    preStmt_usedAusp = conn.prepareStatement(query1);
+		    
+		    preStmt_usedAusp.setInt(1,t);
+		    preStmt_usedAusp.setInt(2,usedAusPrId);
+		    preStmt_usedAusp.execute();
+		   
+		    
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+	
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+	}
+
+	public static  int get_minAuspID(int opID) {
+		int id=0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		
+		String query= "SELECT min(idused_Auspr) FROM kriterienkatalog.used_auspr where idMonOP=?;";
+		
+		try {
+	
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    conn = get_connection();
+		   
+		    preStmt_usedAusp = conn.prepareStatement(query);
+		    preStmt_usedAusp.setInt(1,opID);
+		    preStmt_usedAusp.execute();
+		 
+		    rs =preStmt_usedAusp.getResultSet();
+		    
+		 
+		    if (rs.next()) {
+		       id = rs.getInt(1);
+		     
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+	
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+		
+		
+		return id;
+	}
 	
 }

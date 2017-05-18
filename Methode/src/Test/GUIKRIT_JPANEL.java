@@ -29,9 +29,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
-public class GUIKRIT_JPANEL extends JFrame {
+public class GUIKRIT_JPANEL extends JPanel {
 
-	private JPanel contentPane;
+	//private JPanel contentPane;
 	private JPanel contentPane1;
 	private JTextField txtFMontOPName;
 	private int n =1;
@@ -66,17 +66,17 @@ public class GUIKRIT_JPANEL extends JFrame {
 
 	}
 	protected void initGUI(){
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//contentPane = new JPanel();
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		//setContentPane(this);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 55, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 0.2, 0.2, 0.2, 0.6, 0.0};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0};
-		contentPane.setLayout(gbl_contentPane);
+		this.setLayout(gbl_contentPane);
 
 
 
@@ -95,7 +95,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 		gbc_lblMontOP.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblMontOP.gridx = 0;
 		gbc_lblMontOP.gridy = 0;
-		contentPane.add(lblMontOP, gbc_lblMontOP);
+		this.add(lblMontOP, gbc_lblMontOP);
 
 
 		txtFMontOPName = new JTextField(retMont_OP.montOP_name);
@@ -107,7 +107,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 		gbc_txtFMontOPName.gridx = 1;
 		gbc_txtFMontOPName.gridy = 0;
 
-		contentPane.add(txtFMontOPName, gbc_txtFMontOPName);
+		this.add(txtFMontOPName, gbc_txtFMontOPName);
 		txtFMontOPName.setColumns(10);
 
 		JLabel lblKritNR = new JLabel(krit.Krit_Nr+":");
@@ -116,7 +116,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 		gbc_lblKritNR.insets = new Insets(0, 0, 5, 5);
 		gbc_lblKritNR.gridx = 0;
 		gbc_lblKritNR.gridy = 1;
-		contentPane.add(lblKritNR, gbc_lblKritNR);
+		this.add(lblKritNR, gbc_lblKritNR);
 
 		JTextArea txtArkrit_Besch = new JTextArea();
 		txtArkrit_Besch.setLineWrap(true);
@@ -130,7 +130,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 		gbc_txtArkrit_Besch.gridx = 1;
 		gbc_txtArkrit_Besch.gridy = 1;
 		gbc_txtArkrit_Besch.weighty=0.9;
-		contentPane.add(txtArkrit_Besch, gbc_txtArkrit_Besch);
+		this.add(txtArkrit_Besch, gbc_txtArkrit_Besch);
 
 
 
@@ -175,7 +175,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				++n;
 				++k;
-				contentPane.setVisible(false);
+				setVisible(false);
 				initGUI();
 				System.out.println(n);
 				if(update==false){
@@ -190,7 +190,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 				//while(nMontOP+1<=Mont_OParray.size()){
 				if(n==Kritarray.size()){
 					++nMontOP;
-					contentPane.setVisible(false);
+					setVisible(false);
 					initGUI();
 					n=0;
 					k=0;
@@ -205,7 +205,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 		btnPREV.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				--n;
-				contentPane.setVisible(false);
+				setVisible(false);
 				initGUI();
 				update=true;
 			}
@@ -217,14 +217,14 @@ public class GUIKRIT_JPANEL extends JFrame {
 		gbc_btnPREV.insets = new Insets(0, 0, 0, 5);
 		gbc_btnPREV.gridx = 3;
 		gbc_btnPREV.gridy = Ausparray.size()+1;
-		contentPane.add(btnPREV, gbc_btnPREV);
+		this.add(btnPREV, gbc_btnPREV);
 
 		GridBagConstraints gbc_btnNEXT = new GridBagConstraints();
 		gbc_btnNEXT.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNEXT.anchor = GridBagConstraints.EAST;
 		gbc_btnNEXT.gridx = 4;
 		gbc_btnNEXT.gridy = Ausparray.size()+1;
-		contentPane.add(btnNEXT, gbc_btnNEXT);
+		this.add(btnNEXT, gbc_btnNEXT);
 
 
 		
@@ -272,7 +272,7 @@ public class GUIKRIT_JPANEL extends JFrame {
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 3;
 		gbc_panel.gridy = 1;
-		contentPane.add(contentPane1, gbc_panel);
+		this.add(contentPane1, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0};
 		gbl_panel.rowHeights = new int[]{0};

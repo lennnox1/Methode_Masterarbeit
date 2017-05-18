@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import Data.Auspraegungen;
 import Data.Kriterien;
+import Data.Mont_OP;
 import Data.Projekte;
 import GUI.GUI;
 import GUI.guiMO_ANZ;
@@ -91,7 +92,33 @@ public class GUI_MONT_OP extends JPanel {
 				System.out.println("i:"+i);
 				sql_connector.New_project_SQL.set_Montage_Name(txtMon_Name.getText());
 				
-				if(i==k){
+				ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
+				
+				Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
+				int maxOpId = 0;
+				int projId = 0;
+				for (Mont_OP retMont_OP : Mont_OParray)
+					{
+					    if (maxOpId < retMont_OP.idmontOP)
+					    {
+					    	maxOpId = retMont_OP.idmontOP;
+					    	projId  = retMont_OP.idProjekte;
+					    }
+					}
+				
+				ArrayList<Kriterien> kritArray = sql_connector.Krit_SQL.giveKrits();
+				
+				for (Kriterien krit : kritArray)
+				{
+					int kritId = krit.Krit_id;
+					ArrayList<Auspraegungen> auspArray = sql_connector.Ausp_SQL.giveAuspraegungenZuKrit(kritId);
+					int auspr_id = auspArray.get(0).Auspr_id;
+					
+					Used_AuspSQL.set_usedAusp(auspr_id, maxOpId);
+					
+				}
+				
+ 				if(i==k){
 					
 					mont_OP_Name.setVisible(false);
 					txtMon_Name.setVisible(false);

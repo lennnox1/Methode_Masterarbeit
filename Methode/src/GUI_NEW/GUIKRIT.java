@@ -35,12 +35,14 @@ public class GUIKRIT extends JFrame {
 	private JPanel contentPane1;
 	private JTextField txtFMontOPName;
 	private int n =1;
+	private int usedAusp_id = 0;
 	private static int k=0;
 	private int nMontOP =0;
+	private int anzMomtOp = 0;
 	private boolean update=false;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private Mont_OP retMont_OP;
-	private ArrayList<Mont_OP> Mont_OParray;
+	private  ArrayList<Mont_OP> Mont_OParray;
 	/**
 	 * Launch the application.
 	 */
@@ -86,6 +88,7 @@ public class GUIKRIT extends JFrame {
 		ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
 		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
 		retMont_OP=Mont_OParray.get(nMontOP);
+		anzMomtOp = Mont_OParray.size();
 
 
 
@@ -173,22 +176,30 @@ public class GUIKRIT extends JFrame {
 		JButton btnNEXT = new JButton("NEXT");
 		btnNEXT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				++usedAusp_id;
+				if (n==1)
+				{
+					usedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
+				}
 				++n;
 				System.out.println("n= " + n);
 				//++k;
 				contentPane.setVisible(false);
 				initGUI();
 				System.out.println(n);
-				if(update==false){
+			/*	if(update==false){
 					Used_AuspSQL.set_usedAusp(Integer.valueOf(buttonGroup.getSelection().getActionCommand()),retMont_OP.idmontOP);
 					System.out.println(update);
 					update=false;
 				}
-				else{
+				else{*/
 					System.out.println("Update muss durchgeführt werden");
-					Used_AuspSQL.update_usedAusp(Integer.valueOf(buttonGroup.getSelection().getActionCommand()));
-				}
-				//while(nMontOP+1<=Mont_OParray.size()){
+					Used_AuspSQL.update_usedAusp(Integer.valueOf(buttonGroup.getSelection().getActionCommand()), usedAusp_id);
+				//}
+					
+					
+					
+				//if(nMontOP+1<anzMomtOp ){
 				if(n==Kritarray.size()){
 					
 					contentPane.setVisible(false);
@@ -196,10 +207,12 @@ public class GUIKRIT extends JFrame {
 					
 					n=0;
 					++nMontOP;
-					//}
-				}
+					}
+			//	}
+				//else{
+					//System.exit(0);
+			//	}
 				
-				System.out.println("n= " + n);
 				
 			}
 			
