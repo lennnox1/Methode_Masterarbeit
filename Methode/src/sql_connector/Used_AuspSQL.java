@@ -142,11 +142,11 @@ public class Used_AuspSQL {
 		}
 	}
 
-	public static  void update_usedAusp(int t, int usedAusPrId) {
+	public static  void update_usedAusp(int t,double ratingFM, double ratingFR, int usedAusPrId) {
 		Connection conn = null;
 		Statement stmt = null;
 	
-		String query1= "update kriterienkatalog.used_auspr set Auspr_id =? where idused_Auspr=?;";
+		String query1= "update kriterienkatalog.used_auspr set Auspr_id =? ,ratingFM=? ,ratingFR=? where idused_Auspr=?;";
 		try {
 	
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -155,7 +155,9 @@ public class Used_AuspSQL {
 		    preStmt_usedAusp = conn.prepareStatement(query1);
 		    
 		    preStmt_usedAusp.setInt(1,t);
-		    preStmt_usedAusp.setInt(2,usedAusPrId);
+		    preStmt_usedAusp.setDouble(2,ratingFM);
+		    preStmt_usedAusp.setDouble(3,ratingFR);
+		    preStmt_usedAusp.setInt(4,usedAusPrId);
 		    preStmt_usedAusp.execute();
 		   
 		    

@@ -30,7 +30,7 @@ import sql_connector.Used_AuspSQL;
 
 public class GUI_MONT_OP extends JPanel {
 	public ArrayList<Projekte> Projarray;
-	private int  i=0;
+	private int i=0;
 	private int n=1;
 	private Auspraegungen retAus;
 	public boolean update=false;
@@ -127,7 +127,7 @@ public class GUI_MONT_OP extends JPanel {
 					removeAll();
 					revalidate();
 					//GUIKRIT_JPANEL guiKrit = new GUIKRIT_JPANEL();
-					GUIKRIT guiKrit = new GUIKRIT();
+					GUIKRIT2 guiKrit = new GUIKRIT2();
 					guiKrit.setVisible(true);
 		    	}
 
