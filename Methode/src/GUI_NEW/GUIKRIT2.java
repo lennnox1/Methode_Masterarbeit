@@ -195,10 +195,7 @@ public class GUIKRIT2 extends JFrame {
 
 		ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(n);
 		
-		Auspraegungen ausprNichtRel = new Auspraegungen();
-		ausprNichtRel.Auspr_Beschreibung ="nicht relevant";
-		ausprNichtRel.Auspr_id = 2;
-		Ausparray.add(ausprNichtRel);
+		
 		relevant = false;
 		
 		for (i = 0; i < Ausparray.size(); i++) {
@@ -207,17 +204,8 @@ public class GUIKRIT2 extends JFrame {
 			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.Auspr_id));
 			rdbtnAuspBesch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(e.getActionCommand());
-					System.out.println("e.source " +e.getSource());
-					System.out.println("Exc " +e );
-					if (((JRadioButton) e.getSource()).getText().equals( "nicht relevant"))
-					{
-						relevant=false;
-					}
-					else
-					{
-						relevant=true;
-					}
+		
+					relevant=true;
 				}
 			});
 
@@ -263,9 +251,8 @@ public class GUIKRIT2 extends JFrame {
 		gbc_lblNewLabel.gridy = 3;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
-		/*
+		
 		JRadioButton rdbtnNotRelevant = new JRadioButton("Nicht relevant");
-		rdbtnNotRelevant.setActionCommand("99");
 		rdbtnNotRelevant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -285,9 +272,9 @@ public class GUIKRIT2 extends JFrame {
 		gbc_rdbtnNotRelevant.gridy = i+6;
 		contentPane.add(rdbtnNotRelevant, gbc_rdbtnNotRelevant);
 		
-		//rdbtnNotRelevant.setSelected(true);
+		rdbtnNotRelevant.setSelected(true);
 		
-	*/
+
 		
 		
 		
