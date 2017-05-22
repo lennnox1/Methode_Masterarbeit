@@ -24,7 +24,7 @@ public class Ausp_SQL {
 //// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 			conn = get_connection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM auspraegungen ");
+			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen ");
 			while (rs.next()) {
 				Auspraegungen Auspobj= new Auspraegungen();
 				Auspobj.Krit_id = rs.getInt("Krit_id");
@@ -63,12 +63,12 @@ public class Ausp_SQL {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM Auspraegungen   WHERE Auspr_id = " + r);
+			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen   WHERE Auspr_id = " + r);
 			while (rs.next()) {
 				retAusp = new Auspraegungen();
 				retAusp.Krit_id  = rs.getInt("Krit_id");
-				retAusp.Auspr_id = rs.getInt("Ausp_id");
-				retAusp.Auspr_Nr = rs.getString("Ausp_Nr");
+				retAusp.Auspr_id = rs.getInt("Auspr_id");
+				retAusp.Auspr_Nr = rs.getString("Auspr_Nr");
 				retAusp.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
 		
 			}

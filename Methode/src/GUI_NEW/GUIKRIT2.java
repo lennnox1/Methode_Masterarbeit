@@ -25,6 +25,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -42,7 +43,7 @@ public class GUIKRIT2 extends JFrame {
 	private int nMontOP =0;
 	private int anzMomtOp = 0;
 	private Mont_OP retMont_OP;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup bGroupAusp = new ButtonGroup();
 
 	private final ButtonGroup bGroupFR = new ButtonGroup();
 	private final ButtonGroup bGroupFM = new ButtonGroup();
@@ -59,6 +60,9 @@ public class GUIKRIT2 extends JFrame {
 
 	private double ratingFR;
 	private double ratingFM;
+	
+	private boolean relevant;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -80,7 +84,7 @@ public class GUIKRIT2 extends JFrame {
 	 */
 	public GUIKRIT2() {
 		initGUI();
-
+		
 
 
 
@@ -91,16 +95,17 @@ public class GUIKRIT2 extends JFrame {
 	}
 
 	protected void initGUI() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 658, 438);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 53, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 50, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE, 0.0, 0.0};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE, 0.0};
 		contentPane.setLayout(gbl_contentPane);
 
 
@@ -113,12 +118,16 @@ public class GUIKRIT2 extends JFrame {
 		retMont_OP=Mont_OParray.get(nMontOP);
 		anzMomtOp = Mont_OParray.size();
 
+		if (n==1)
+		{
+			usedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
+		}
 
-
+	
 		JLabel lblMontOP = new JLabel("O"+(nMontOP+1)+":");
 		GridBagConstraints gbc_lblMontOP = new GridBagConstraints();
 		gbc_lblMontOP.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMontOP.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblMontOP.anchor = GridBagConstraints.WEST;
 		gbc_lblMontOP.gridx = 0;
 		gbc_lblMontOP.gridy = 0;
 		contentPane.add(lblMontOP, gbc_lblMontOP);
@@ -135,11 +144,20 @@ public class GUIKRIT2 extends JFrame {
 		contentPane.add(txtFMontOPName, gbc_txtFMontOPName);
 		txtFMontOPName.setColumns(10);
 		
+		JLabel lblKh = new JLabel("<html> K<sub>h</sub>: </html>");
+		GridBagConstraints gbc_lblKh = new GridBagConstraints();
+		gbc_lblKh.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_lblKh.insets = new Insets(0, 0, 5, 5);
+		gbc_lblKh.gridx = 0;
+		gbc_lblKh.gridy = 1;
+		contentPane.add(lblKh, gbc_lblKh);
+		
 		JLabel lblBeschreibung = new JLabel("Beschreibung:");
 		GridBagConstraints gbc_lblBeschreibung = new GridBagConstraints();
-		gbc_lblBeschreibung.gridwidth = 5;
+		gbc_lblBeschreibung.anchor = GridBagConstraints.NORTH;
+		gbc_lblBeschreibung.gridwidth = 4;
 		gbc_lblBeschreibung.insets = new Insets(0, 0, 5, 0);
-		gbc_lblBeschreibung.gridx = 0;
+		gbc_lblBeschreibung.gridx = 1;
 		gbc_lblBeschreibung.gridy = 1;
 		contentPane.add(lblBeschreibung, gbc_lblBeschreibung);
 
@@ -176,32 +194,102 @@ public class GUIKRIT2 extends JFrame {
 
 
 		ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(n);
-
+		
+		Auspraegungen ausprNichtRel = new Auspraegungen();
+		ausprNichtRel.Auspr_Beschreibung ="nicht relevant";
+		ausprNichtRel.Auspr_id = 2;
+		Ausparray.add(ausprNichtRel);
+		relevant = false;
+		
 		for (i = 0; i < Ausparray.size(); i++) {
 			Auspraegungen retAus = Ausparray.get(i);
 			JRadioButton rdbtnAuspBesch = new JRadioButton(retAus.Auspr_Beschreibung);
 			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.Auspr_id));
 			rdbtnAuspBesch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					System.out.println(e.getActionCommand());
+					System.out.println("e.source " +e.getSource());
+					System.out.println("Exc " +e );
+					if (((JRadioButton) e.getSource()).getText().equals( "nicht relevant"))
+					{
+						relevant=false;
+					}
+					else
+					{
+						relevant=true;
+					}
 				}
 			});
 
-			buttonGroup.add(rdbtnAuspBesch);
+			bGroupAusp.add(rdbtnAuspBesch);
+			rdbtnAuspBesch.setSelected(true);
 			GridBagConstraints gbc_rdbtnAuspBesch = new GridBagConstraints();
 			gbc_rdbtnAuspBesch.anchor = GridBagConstraints.NORTHWEST;
 			gbc_rdbtnAuspBesch.insets = new Insets(0, 0, 5, 0);
 			gbc_rdbtnAuspBesch.gridx = 1;
-			gbc_rdbtnAuspBesch.gridy = i+4;
+			gbc_rdbtnAuspBesch.gridy = i+6;
 			contentPane.add(rdbtnAuspBesch, gbc_rdbtnAuspBesch);
-			JLabel lblAuspNR = new JLabel(retAus.Auspr_Nr+":");
+			JLabel lblAuspNR;
+			if (retAus.Auspr_Nr != null)
+			{
+				lblAuspNR = new JLabel(retAus.Auspr_Nr+":");
+			}else{
+				lblAuspNR = new JLabel("");
+			}
 			GridBagConstraints gbc_lblAuspNR = new GridBagConstraints();
 			gbc_lblAuspNR.anchor = GridBagConstraints.NORTH;
 			gbc_lblAuspNR.insets = new Insets(0, 0, 5, 5);
 			gbc_lblAuspNR.gridx = 0;
-			gbc_lblAuspNR.gridy = i+4;
+			gbc_lblAuspNR.gridy = i+6;
 			contentPane.add(lblAuspNR, gbc_lblAuspNR);
-
+			
 		}
+	
+		
+		JLabel lblAhg = new JLabel("<html> A<sub>hg</sub>: </html>");
+		GridBagConstraints gbc_lblAhg = new GridBagConstraints();
+		gbc_lblAhg.anchor = GridBagConstraints.SOUTHWEST;
+		gbc_lblAhg.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAhg.gridx = 0;
+		gbc_lblAhg.gridy = 3;
+		contentPane.add(lblAhg, gbc_lblAhg);
+		
+		JLabel lblNewLabel = new JLabel("Beschreibung:");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblNewLabel.gridwidth = 4;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 3;
+		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		
+		/*
+		JRadioButton rdbtnNotRelevant = new JRadioButton("Nicht relevant");
+		rdbtnNotRelevant.setActionCommand("99");
+		rdbtnNotRelevant.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println(e.getActionCommand());
+				System.out.println("e.source " +e.getSource());
+				System.out.println("Exc " +e );
+				relevant=false;
+			}
+		});
+		
+		
+		bGroupAusp.add(rdbtnNotRelevant);
+		GridBagConstraints gbc_rdbtnNotRelevant = new GridBagConstraints();
+		gbc_rdbtnNotRelevant.anchor = GridBagConstraints.NORTHWEST;
+		gbc_rdbtnNotRelevant.insets = new Insets(0, 0, 5, 5);
+		gbc_rdbtnNotRelevant.gridx = 1;
+		gbc_rdbtnNotRelevant.gridy = i+6;
+		contentPane.add(rdbtnNotRelevant, gbc_rdbtnNotRelevant);
+		
+		//rdbtnNotRelevant.setSelected(true);
+		
+	*/
+		
+		
 		
 		JButton btnPrevious = new JButton("PREVIOUS");
 		btnPrevious.addActionListener(new ActionListener() {
@@ -211,61 +299,78 @@ public class GUIKRIT2 extends JFrame {
 				initGUI();
 			}
 		});
+		
+		JLabel lblBewertung = new JLabel("Bewertung:");
+		GridBagConstraints gbc_lblBewertung = new GridBagConstraints();
+		gbc_lblBewertung.anchor = GridBagConstraints.WEST;
+		gbc_lblBewertung.gridwidth = 2;
+		gbc_lblBewertung.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBewertung.gridx = 0;
+		gbc_lblBewertung.gridy = i+7;
+		contentPane.add(lblBewertung, gbc_lblBewertung);
 		GridBagConstraints gbc_btnPrevious = new GridBagConstraints();
 		gbc_btnPrevious.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_btnPrevious.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPrevious.insets = new Insets(0, 0, 0, 5);
 		gbc_btnPrevious.gridx = 3;
-		gbc_btnPrevious.gridy = i+6;
+		gbc_btnPrevious.gridy = i+10;
 		contentPane.add(btnPrevious, gbc_btnPrevious);
 		
 		JButton btnNEXT = new JButton("NEXT");
 		btnNEXT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				++usedAusp_id;
-				if (n==1)
-				{
-					usedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
-				}
-				++n;
-				System.out.println("n= " + n);
 				
 				getSelectedBtnF();
-
+				System.out.println("ratingFM:"+ ratingFM);
+				if(relevant==true){
+				    Used_AuspSQL.update_usedAusp(Integer.valueOf(bGroupAusp.getSelection().getActionCommand()), ratingFM,ratingFR,relevant, usedAusp_id);
+				}
+				else{
+					Used_AuspSQL.update_Relevant(relevant, usedAusp_id);
+				}
+					
+		
+				++n;
+				++usedAusp_id;
+				System.out.println("n= " + n);
 				
-				contentPane.setVisible(false);
-				initGUI();
-				System.out.println(n);
-		
-					System.out.println("ratingFM:"+ ratingFM);
-					Used_AuspSQL.update_usedAusp(Integer.valueOf(buttonGroup.getSelection().getActionCommand()), ratingFM,ratingFR, usedAusp_id);
-		
-				if(n==Kritarray.size()){
-					
+				if(nMontOP==anzMomtOp){
 					contentPane.setVisible(false);
+					GUI_WEIGHTING test = new GUI_WEIGHTING();
+					test.setVisible(true);
+				}
+				else
+				{
+					contentPane.setVisible(false);
+
 					initGUI();
-					
-					n=0;
-					++nMontOP;
+					System.out.println(n);
+
+					if(n==Kritarray.size()){
+
+						//contentPane.setVisible(false);
+						//initGUI();
+
+						n=0;
+						++nMontOP;
 					}
 
-				
+				}
 			}
-			
+
 		});
 		GridBagConstraints gbc_btnNext = new GridBagConstraints();
 		gbc_btnNext.anchor = GridBagConstraints.SOUTHEAST;
-		gbc_btnNext.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNext.gridx = 4;
-		gbc_btnNext.gridy = i+6;
+		gbc_btnNext.gridy = i+10;
 		contentPane.add(btnNEXT, gbc_btnNext);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 2;
-		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = i+5;
+		gbc_panel.gridy = i+9;
 		contentPane.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
@@ -466,7 +571,7 @@ public class GUIKRIT2 extends JFrame {
 		if(rbtnFRWorse.isSelected()){
 			ratingFR=0.0;
 		}
-		System.out.println("ratingFR:"+ratingFR+"ratingFM:" + ratingFM);
+		//System.out.println("ratingFR:"+ratingFR+"ratingFM:" + ratingFM);
 	}
 	
 }
