@@ -181,7 +181,7 @@ public class GUI_SOLUTION extends JFrame {
 		
 		
 		
-		for(i =0; i<Mont_OParray.size();i++){
+	for(i =0; i<Mont_OParray.size();i++){
 			
 			retMont_OP = Mont_OParray.get(i);
 			JPanel contentPane1 = new JPanel();
@@ -230,17 +230,18 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_txtFMontOPName.gridy = 2;
 			contentPane1.add(txtFMontOPName, gbc_txtFMontOPName);
 			txtFMontOPName.setColumns(10);
-
+			
 			JProgressBar proBar = new JProgressBar();
+			proBar.setBackground(Color.GREEN);
+			proBar.setForeground(Color.RED);
+			proBar.setValue(50);
 			GridBagConstraints gbc_proBar = new GridBagConstraints();
 			gbc_proBar.fill = GridBagConstraints.BOTH;
 			gbc_proBar.gridwidth = 2;
+			gbc_proBar.insets = new Insets(0, 0, 0, 5);
 			gbc_proBar.gridx = 2;
 			gbc_proBar.gridy = 2;
 			contentPane1.add(proBar, gbc_proBar);
-			proBar.setValue(63);
-			proBar.setForeground(Color.GREEN);
-			proBar.setBackground(Color.RED);
 		}
 	
 		JButton btnPrevious = new JButton("Previous");

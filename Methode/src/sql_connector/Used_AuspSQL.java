@@ -289,5 +289,35 @@ public class Used_AuspSQL {
 			
 		}
 	}
+	public static  void update_Gewichtung(int weight ,int usedAusPrId) {
+		Connection conn = null;
+		Statement stmt = null;
+	
+		String query1= "update kriterienkatalog.used_auspr set gewichtung=? where idused_Auspr=?;";
+		try {
+	
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    conn = get_connection();
+		   
+		    preStmt_usedAusp = conn.prepareStatement(query1);
+		    
+		 
+		    preStmt_usedAusp.setInt(1,weight);
+		    preStmt_usedAusp.setInt(2,usedAusPrId);
+		    preStmt_usedAusp.execute();
+		   
+		    
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+	
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+	}
+	
+	
 	
 }

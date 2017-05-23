@@ -61,9 +61,13 @@ public class Eignungsgrade {
 		double test1 = sumRatingFR*100;
 		int h =(int) test;
 		int h1 =(int) test1;
+		
+		Math.round(test);
 		System.out.println("test: "+test);
-		System.out.println("test1: "+h);
-		System.out.println("test2: "+h1);
+		System.out.println("test1: "+Math.round(test));
+		System.out.println("test2: "+(100-Math.round(test)));
+		
+		
 		Object[] RatingFM = new Object[Used_ausprArray.size()];
 		Object[] RatingFR = new Object[Used_ausprArray.size()];
 		for (Used_auspr ap1 : Used_ausprArray)

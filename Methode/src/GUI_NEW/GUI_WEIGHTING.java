@@ -42,7 +42,7 @@ public class GUI_WEIGHTING extends JFrame {
 	private int k = 0;
 	private ArrayList<Mont_OP> Mont_OParray;
 	private final ButtonGroup bgroupRating1 = new ButtonGroup();
-	
+
 
 	/**
 	 * Launch the application.
@@ -65,11 +65,11 @@ public class GUI_WEIGHTING extends JFrame {
 	 */
 	public GUI_WEIGHTING() {
 		initGUI();
-		
+
 	}
 
 	protected void initGUI() {
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -83,14 +83,14 @@ public class GUI_WEIGHTING extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 
 
-		
 
-		
+
+
 		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
 		retMont_OP=Mont_OParray.get(nMontOP);
-		
+
 		//System.out.println(Mont_OParray.size());
-		
+
 
 		JLabel lblMontOP = new JLabel("O"+(nMontOP+1)+":");
 		GridBagConstraints gbc_lblMontOP = new GridBagConstraints();
@@ -140,10 +140,10 @@ public class GUI_WEIGHTING extends JFrame {
 		gbc_lblGewichtung.gridx = 2;
 		gbc_lblGewichtung.gridy = 2;
 		contentPane.add(lblGewichtung, gbc_lblGewichtung);
-		
-		
-		
-		
+
+
+
+
 		contentPane1 = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		//gbc_panel.fill = GridBagConstraints.BOTH;
@@ -158,26 +158,26 @@ public class GUI_WEIGHTING extends JFrame {
 		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		contentPane1.setLayout(gbl_panel);
-		
-		
-		
+
+
+
 		ArrayList<Used_auspr> Used_ausprArray= sql_connector.Used_AuspSQL.giveRelevant(retMont_OP.idmontOP);
-		
-		
-		 
+
+
+
 		ButtonGroup[] bgroupRating = new ButtonGroup[Used_ausprArray.size()];
-		
-		
-	
-		 
+
+
+
+
 		for(i = 0; i < Used_ausprArray.size(); i++) {
 			bgroupRating[i]= new ButtonGroup(); // Warum hier die nochmal erstellen??
 			retUsed_auspr=Used_ausprArray.get(i); 
 			retAus = sql_connector.Ausp_SQL.giveAusp(retUsed_auspr.Auspr_id);
 			retKrit = sql_connector.Krit_SQL.giveKrit(retAus.Krit_id);
-			
-			
-			
+
+
+
 			JLabel lblK = new JLabel(retKrit.Krit_Nr+":");
 			GridBagConstraints gbc_lblK = new GridBagConstraints();
 			gbc_lblK.insets = new Insets(0, 0, 0, 5);
@@ -195,7 +195,7 @@ public class GUI_WEIGHTING extends JFrame {
 			lblA.setToolTipText(retAus.Auspr_Beschreibung);
 
 			JRadioButton rdbtn1 = new JRadioButton("1");
-			//bgroupRating1.add(rdbtn1);
+			rdbtn1.setActionCommand("1");
 			bgroupRating[i].add(rdbtn1);
 			GridBagConstraints gbc_rdbtn1 = new GridBagConstraints();
 			gbc_rdbtn1.insets = new Insets(0, 0, 0, 5);
@@ -204,7 +204,7 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn1, gbc_rdbtn1);
 
 			JRadioButton rdbtn2 = new JRadioButton("2");
-			//bgroupRating1.add(rdbtn2);
+			rdbtn2.setActionCommand("2");
 			bgroupRating[i].add(rdbtn2);
 			GridBagConstraints gbc_rdbtn2 = new GridBagConstraints();
 			gbc_rdbtn2.insets = new Insets(0, 0, 0, 5);
@@ -213,19 +213,20 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn2, gbc_rdbtn2);
 
 			JRadioButton rdbtn3 = new JRadioButton("3");
-			//bgroupRating1.add(rdbtn3);
+			rdbtn3.setActionCommand("3");
 			bgroupRating[i].add(rdbtn3);
 			GridBagConstraints gbc_rdbtn3 = new GridBagConstraints();
 			gbc_rdbtn3.insets = new Insets(0, 0, 0, 5);
 			gbc_rdbtn3.gridx = 4;
 			gbc_rdbtn3.gridy = i;
 			contentPane1.add(rdbtn3, gbc_rdbtn3);
-			
-			
+
+
 			//Default RadioButton Selection
 			rdbtn3.setSelected(true);
 
 			JRadioButton rdbtn4 = new JRadioButton("4");
+			rdbtn4.setActionCommand("4");
 			bgroupRating[i].add(rdbtn4);
 			GridBagConstraints gbc_rdbtn4 = new GridBagConstraints();
 			gbc_rdbtn4.insets = new Insets(0, 0, 0, 5);
@@ -234,15 +235,16 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn4, gbc_rdbtn4);
 
 			JRadioButton rdbtn5 = new JRadioButton("5");
+			rdbtn5.setActionCommand("5");
 			bgroupRating[i].add(rdbtn5);
 			GridBagConstraints gbc_rdbtn5 = new GridBagConstraints();
 			gbc_rdbtn5.gridx = 6;
 			gbc_rdbtn5.gridy = i;
 			contentPane1.add(rdbtn5, gbc_rdbtn5);
-			
-		
-		 }
-		
+
+
+		}
+
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -257,27 +259,30 @@ public class GUI_WEIGHTING extends JFrame {
 		gbc_btnPrevious.gridx = 4;
 		gbc_btnPrevious.gridy = 4;
 		contentPane.add(btnPrevious, gbc_btnPrevious);
-		
+
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			
+
 				++nMontOP;
-				System.out.println(nMontOP);
-				
+				//System.out.println(nMontOP);
+				for(i = 0; i < Used_ausprArray.size(); i++) {
+					int usedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
+				sql_connector.Used_AuspSQL.update_Gewichtung(Integer.valueOf(bgroupRating[i].getSelection().getActionCommand()), usedAusp_id);
+				++usedAusp_id;
+				}
 				if(nMontOP==Mont_OParray.size()){
-					//contentPane.setVisible(false);
+
 					dispose();
-					getContentPane().setVisible(false);
 					GUI_SOLUTION test = new GUI_SOLUTION();
 					test.setVisible(true);
-					
+
 				}else{
-					
+
 					contentPane.setVisible(false);	
 					initGUI();
 				}
-			
+
 			}
 		});
 		GridBagConstraints gbc_btnNext = new GridBagConstraints();
