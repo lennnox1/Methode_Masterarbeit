@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.ButtonGroup;
 
 public class GUI_WEIGHTING extends JFrame {
 
@@ -31,12 +32,18 @@ public class GUI_WEIGHTING extends JFrame {
 	private JPanel contentPane1;
 	private JTextField txtFMontOPName;
 
+
 	private Mont_OP retMont_OP;
 	private Used_auspr retUsed_auspr;
 	private Kriterien retKrit;
 	private Auspraegungen retAus;
 	private int nMontOP=0;
-	int i = 0;
+	private int i = 0;
+	private int k = 0;
+	private ArrayList<Mont_OP> Mont_OParray;
+	private final ButtonGroup bgroupRating1 = new ButtonGroup();
+	
+
 	/**
 	 * Launch the application.
 	 */
@@ -78,11 +85,11 @@ public class GUI_WEIGHTING extends JFrame {
 
 		
 
-		ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
+		
 		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
 		retMont_OP=Mont_OParray.get(nMontOP);
 		
-		System.out.println(Mont_OParray.size());
+		//System.out.println(Mont_OParray.size());
 		
 
 		JLabel lblMontOP = new JLabel("O"+(nMontOP+1)+":");
@@ -157,11 +164,14 @@ public class GUI_WEIGHTING extends JFrame {
 		ArrayList<Used_auspr> Used_ausprArray= sql_connector.Used_AuspSQL.giveRelevant(retMont_OP.idmontOP);
 		
 		
+		 
+		ButtonGroup[] bgroupRating = new ButtonGroup[Used_ausprArray.size()];
 		
 		
-		
-		
-		for (i = 0; i < Used_ausprArray.size(); i++) {
+	
+		 
+		for(i = 0; i < Used_ausprArray.size(); i++) {
+			bgroupRating[i]= new ButtonGroup(); // Warum hier die nochmal erstellen??
 			retUsed_auspr=Used_ausprArray.get(i); 
 			retAus = sql_connector.Ausp_SQL.giveAusp(retUsed_auspr.Auspr_id);
 			retKrit = sql_connector.Krit_SQL.giveKrit(retAus.Krit_id);
@@ -185,6 +195,8 @@ public class GUI_WEIGHTING extends JFrame {
 			lblA.setToolTipText(retAus.Auspr_Beschreibung);
 
 			JRadioButton rdbtn1 = new JRadioButton("1");
+			//bgroupRating1.add(rdbtn1);
+			bgroupRating[i].add(rdbtn1);
 			GridBagConstraints gbc_rdbtn1 = new GridBagConstraints();
 			gbc_rdbtn1.insets = new Insets(0, 0, 0, 5);
 			gbc_rdbtn1.gridx = 2;
@@ -192,6 +204,8 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn1, gbc_rdbtn1);
 
 			JRadioButton rdbtn2 = new JRadioButton("2");
+			//bgroupRating1.add(rdbtn2);
+			bgroupRating[i].add(rdbtn2);
 			GridBagConstraints gbc_rdbtn2 = new GridBagConstraints();
 			gbc_rdbtn2.insets = new Insets(0, 0, 0, 5);
 			gbc_rdbtn2.gridx = 3;
@@ -199,6 +213,8 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn2, gbc_rdbtn2);
 
 			JRadioButton rdbtn3 = new JRadioButton("3");
+			//bgroupRating1.add(rdbtn3);
+			bgroupRating[i].add(rdbtn3);
 			GridBagConstraints gbc_rdbtn3 = new GridBagConstraints();
 			gbc_rdbtn3.insets = new Insets(0, 0, 0, 5);
 			gbc_rdbtn3.gridx = 4;
@@ -210,6 +226,7 @@ public class GUI_WEIGHTING extends JFrame {
 			rdbtn3.setSelected(true);
 
 			JRadioButton rdbtn4 = new JRadioButton("4");
+			bgroupRating[i].add(rdbtn4);
 			GridBagConstraints gbc_rdbtn4 = new GridBagConstraints();
 			gbc_rdbtn4.insets = new Insets(0, 0, 0, 5);
 			gbc_rdbtn4.gridx = 5;
@@ -217,12 +234,15 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn4, gbc_rdbtn4);
 
 			JRadioButton rdbtn5 = new JRadioButton("5");
+			bgroupRating[i].add(rdbtn5);
 			GridBagConstraints gbc_rdbtn5 = new GridBagConstraints();
 			gbc_rdbtn5.gridx = 6;
 			gbc_rdbtn5.gridy = i;
 			contentPane1.add(rdbtn5, gbc_rdbtn5);
-		}
-
+			
+		
+		 }
+		
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -241,10 +261,23 @@ public class GUI_WEIGHTING extends JFrame {
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+			
 				++nMontOP;
 				System.out.println(nMontOP);
-				contentPane.setVisible(false);
-				initGUI();
+				
+				if(nMontOP==Mont_OParray.size()){
+					//contentPane.setVisible(false);
+					dispose();
+					getContentPane().setVisible(false);
+					GUI_SOLUTION test = new GUI_SOLUTION();
+					test.setVisible(true);
+					
+				}else{
+					
+					contentPane.setVisible(false);	
+					initGUI();
+				}
+			
 			}
 		});
 		GridBagConstraints gbc_btnNext = new GridBagConstraints();

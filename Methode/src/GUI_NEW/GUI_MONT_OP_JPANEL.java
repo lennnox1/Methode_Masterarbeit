@@ -28,13 +28,13 @@ import sql_connector.Krit_SQL;
 import sql_connector.New_project_SQL;
 import sql_connector.Used_AuspSQL;
 
-public class GUI_MONT_OP extends JPanel {
+public class GUI_MONT_OP_JPANEL extends JPanel {
 	public ArrayList<Projekte> Projarray;
 	private int i=0;
 	private int n=1;
 	private Auspraegungen retAus;
 	public boolean update=false;
-	public GUI_MONT_OP() {
+	public GUI_MONT_OP_JPANEL() {
 		
 	
 		
@@ -126,8 +126,9 @@ public class GUI_MONT_OP extends JPanel {
 					//fillPanel();
 					removeAll();
 					revalidate();
+					
 					//GUIKRIT_JPANEL guiKrit = new GUIKRIT_JPANEL();
-					GUIKRIT2 guiKrit = new GUIKRIT2();
+					GUIKRIT guiKrit = new GUIKRIT();
 					guiKrit.setVisible(true);
 		    	}
 

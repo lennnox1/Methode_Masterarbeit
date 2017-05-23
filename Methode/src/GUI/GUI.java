@@ -24,7 +24,8 @@ import org.jdesktop.swingx.JXLabel;
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
-import GUI_NEW.GUI_MONT_OP;
+import GUI_NEW.GUI_MONTOP;
+import GUI_NEW.GUI_MONT_OP_JPANEL;
 import Test.GUI_MONT_OP_JFRAME;
 import gUITable.TableRendererPanel;
 import sql_connector.Ausp_SQL;
@@ -254,11 +255,12 @@ public class GUI extends JFrame {
 			
 			//guiMO_ANZ guiMO = new guiMO_ANZ(contentPane);
 			//guiMO_ANZ guiMO = new guiMO_ANZ();
-			GUI_MONT_OP guiMO = new GUI_MONT_OP();
-	
-			contentPane.add(guiMO);
-			setContentPane(guiMO);
-			
+			//GUI_MONT_OP guiMO = new GUI_MONT_OP();
+			GUI_MONTOP guiMO = new GUI_MONTOP();
+			//contentPane.add(guiMO);
+			//setContentPane(guiMO);
+			dispose();
+			guiMO.setVisible(true);
 			
 			//GUIKriterium gui2 = new GUIKriterium();
 			//contentPane.add(gui2);
