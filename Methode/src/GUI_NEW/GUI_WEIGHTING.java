@@ -39,7 +39,7 @@ public class GUI_WEIGHTING extends JFrame {
 	private Auspraegungen retAus;
 	private int nMontOP=0;
 	private int i = 0;
-	private int k = 0;
+	private final int  usedAusp_id = 0;
 	private ArrayList<Mont_OP> Mont_OParray;
 	private final ButtonGroup bgroupRating1 = new ButtonGroup();
 
@@ -171,7 +171,7 @@ public class GUI_WEIGHTING extends JFrame {
 
 
 		for(i = 0; i < Used_ausprArray.size(); i++) {
-			bgroupRating[i]= new ButtonGroup(); // Warum hier die nochmal erstellen??
+			bgroupRating[i]= new ButtonGroup(); 
 			retUsed_auspr=Used_ausprArray.get(i); 
 			retAus = sql_connector.Ausp_SQL.giveAusp(retUsed_auspr.Auspr_id);
 			retKrit = sql_connector.Krit_SQL.giveKrit(retAus.Krit_id);
@@ -260,16 +260,20 @@ public class GUI_WEIGHTING extends JFrame {
 		gbc_btnPrevious.gridy = 4;
 		contentPane.add(btnPrevious, gbc_btnPrevious);
 
+
+
+		System.out.println(Used_ausprArray.size());	
+
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
 				++nMontOP;
-				//System.out.println(nMontOP);
 				for(i = 0; i < Used_ausprArray.size(); i++) {
-					int usedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
-				sql_connector.Used_AuspSQL.update_Gewichtung(Integer.valueOf(bgroupRating[i].getSelection().getActionCommand()), usedAusp_id);
-				++usedAusp_id;
+					retUsed_auspr=Used_ausprArray.get(i);
+					System.out.println("id"+retUsed_auspr.idused_Auspr);	
+					sql_connector.Used_AuspSQL.update_Gewichtung(Integer.valueOf(bgroupRating[i].getSelection().getActionCommand()), retUsed_auspr.idused_Auspr);
+
 				}
 				if(nMontOP==Mont_OParray.size()){
 

@@ -7,4 +7,5 @@ public class Used_auspr {
 		public double ratingFM;
 		public double ratingFR;
 		public boolean relevant;
+		public int gewichtung;
 }

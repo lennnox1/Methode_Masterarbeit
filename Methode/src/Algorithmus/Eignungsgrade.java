@@ -1,5 +1,7 @@
 package Algorithmus;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import com.mysql.fabric.xmlrpc.base.Array;
@@ -12,73 +14,43 @@ public class Eignungsgrade {
 	private static ArrayList<Mont_OP> Mont_OParray;
 	private static Mont_OP retMont_OP;
 	public ArrayList<Used_auspr> Used_ausprArray;
-
-	Eignungsgrade(){
+	public BigDecimal[] RatingFM;
+	public BigDecimal[] RatingFR;
+	
+	public Eignungsgrade(){
 		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
-		retMont_OP=Mont_OParray.get(0);
-		ArrayList<Used_auspr> Used_ausprArray= sql_connector.Used_AuspSQL.giveRelevant(retMont_OP.idmontOP);
 
-		Object[] RatingFM = new Object[Used_ausprArray.size()];
-		Object[] RatingFR = new Object[Used_ausprArray.size()];
-		for (Used_auspr ap1 : Used_ausprArray)
-		{
-			RatingFM[0]=ap1.ratingFM;
-			RatingFR[0]=ap1.ratingFR;
+		RatingFM = new BigDecimal[Mont_OParray.size()];
+		RatingFR = new BigDecimal[Mont_OParray.size()];
+		for(int i=0; i< Mont_OParray.size();i++){
+			BigDecimal sum_Gewichtung=new BigDecimal(0.0);
+			RatingFM[i]=new BigDecimal(0.0);
+			RatingFR[i]=new BigDecimal(0.0);
+			retMont_OP=Mont_OParray.get(i);
+			ArrayList<Used_auspr> Used_ausprArray= sql_connector.Used_AuspSQL.giveRelevant(retMont_OP.idmontOP);
+
+			for (Used_auspr ap : Used_ausprArray)
+			{
+				RatingFM[i]=RatingFM[i].add(new BigDecimal(ap.ratingFM * ap.gewichtung));
+				RatingFR[i]=RatingFR[i].add(new BigDecimal(ap.ratingFR * ap.gewichtung));
+				sum_Gewichtung=sum_Gewichtung.add(new BigDecimal(ap.gewichtung));
+			}
+			RatingFM[i]=RatingFM[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
+			RatingFR[i]=RatingFR[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
+
+			
+			
+			System.out.println("RatingFM: "+RatingFM[i]);
+			System.out.println("RatingFR: "+RatingFR[i]);
 
 		}
-		System.out.println(RatingFM);
 	}
 
 	public static void main(String[] args) {
-
-		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
-		retMont_OP=Mont_OParray.get(3);
-		ArrayList<Used_auspr> Used_ausprArray= sql_connector.Used_AuspSQL.giveRelevant(retMont_OP.idmontOP);
+		Eignungsgrade test = new Eignungsgrade();
 
 
-		double sumRatingFM =0.0;
-		double sumRatingFR =0.0;
-		int[] myIntArray = new int[Used_ausprArray.size()];
-		int num[] = {5, 4, 3, 2};
-		for(int i = 0; i < Used_ausprArray.size(); i++) {
-			Used_auspr retUsed_auspr=Used_ausprArray.get(i);
-			 System.out.println("RatingFM"+(i+1)+": "+retUsed_auspr.ratingFM);
-			//System.out.println("RatingFR"+(i+1)+": "+retUsed_auspr.ratingFR);
-			// System.out.println("Test: "+test);
-			 
-			 int t=0;
-			 t=t+num[i];
-			sumRatingFM = sumRatingFM+(retUsed_auspr.ratingFM)/Used_ausprArray.size();
-			sumRatingFR = sumRatingFR+retUsed_auspr.ratingFR/Used_ausprArray.size();
-		}
-
-		System.out.println("sumRatingFM: "+sumRatingFM);
-		System.out.println("sumRatingFR: "+sumRatingFR);
 		
-		
-		
-		double test = sumRatingFM*100;
-		double test1 = sumRatingFR*100;
-		int h =(int) test;
-		int h1 =(int) test1;
-		
-		Math.round(test);
-		System.out.println("test: "+test);
-		System.out.println("test1: "+Math.round(test));
-		System.out.println("test2: "+(100-Math.round(test)));
-		
-		
-		Object[] RatingFM = new Object[Used_ausprArray.size()];
-		Object[] RatingFR = new Object[Used_ausprArray.size()];
-		for (Used_auspr ap1 : Used_ausprArray)
-		{
-			RatingFM[0]=ap1.ratingFM;
-			RatingFR[0]=ap1.ratingFR;
-
-		}
-		//	System.out.println(RatingFM);
-
-
 
 	}
 

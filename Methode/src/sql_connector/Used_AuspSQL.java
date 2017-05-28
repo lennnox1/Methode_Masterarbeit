@@ -244,6 +244,7 @@ public class Used_AuspSQL {
 				Used_ausprobj.ratingFM= rs.getDouble("ratingFM");
 				Used_ausprobj.ratingFR= rs.getDouble("ratingFR");
 				Used_ausprobj.relevant= rs.getBoolean("relevant");
+				Used_ausprobj.gewichtung=rs.getInt("gewichtung");
 				Used_ausprarray.add(Used_ausprobj);
 			}
 		    
@@ -293,7 +294,7 @@ public class Used_AuspSQL {
 		Connection conn = null;
 		Statement stmt = null;
 	
-		String query1= "update kriterienkatalog.used_auspr set gewichtung=? where idused_Auspr=?;";
+		String query1= "update kriterienkatalog.used_auspr set gewichtung=? where idused_Auspr=?  and relevant=1;";
 		try {
 	
 			Class.forName("com.mysql.jdbc.Driver").newInstance();

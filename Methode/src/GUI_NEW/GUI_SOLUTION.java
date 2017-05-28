@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Algorithmus.Eignungsgrade;
 import Data.Mont_OP;
 import GUI.GUI;
 
@@ -19,6 +20,7 @@ import javax.swing.JProgressBar;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -64,7 +66,7 @@ public class GUI_SOLUTION extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{25, 150, 40, 40, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 50, 30, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 30, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
@@ -179,7 +181,7 @@ public class GUI_SOLUTION extends JFrame {
 		
 		Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
 		
-		
+		Eignungsgrade eigGrade = new Eignungsgrade();
 		
 	for(i =0; i<Mont_OParray.size();i++){
 			
@@ -198,7 +200,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbl_contentPane1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 			contentPane1.setLayout(gbl_contentPane1);
 
-			JLabel lblFM = new JLabel("<html>F<sub>M</sub>= 0.5</html>");
+			JLabel lblFM = new JLabel("<html>F<sub>M</sub>=" +eigGrade.RatingFM[i]+"</html>");
 			GridBagConstraints gbc_lblFM = new GridBagConstraints();
 			gbc_lblFM.anchor = GridBagConstraints.WEST;
 			gbc_lblFM.insets = new Insets(0, 0, 5, 5);
@@ -206,7 +208,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_lblFM.gridy = 1;
 			contentPane1.add(lblFM, gbc_lblFM);
 
-			JLabel lblFR = new JLabel("<html>F<sub>R</sub>= 0.5</html>");
+			JLabel lblFR = new JLabel("<html>F<sub>R</sub>="+eigGrade.RatingFR[i]+"</html>");
 			GridBagConstraints gbc_lblFR = new GridBagConstraints();
 			gbc_lblFR.anchor = GridBagConstraints.EAST;
 			gbc_lblFR.insets = new Insets(0, 0, 5, 0);
@@ -234,7 +236,7 @@ public class GUI_SOLUTION extends JFrame {
 			JProgressBar proBar = new JProgressBar();
 			proBar.setBackground(Color.GREEN);
 			proBar.setForeground(Color.RED);
-			proBar.setValue(50);
+			proBar.setValue(eigGrade.RatingFM[i].multiply(new BigDecimal(100.0)).intValue());
 			GridBagConstraints gbc_proBar = new GridBagConstraints();
 			gbc_proBar.fill = GridBagConstraints.BOTH;
 			gbc_proBar.gridwidth = 2;
