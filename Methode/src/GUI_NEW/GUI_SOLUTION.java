@@ -28,8 +28,7 @@ public class GUI_SOLUTION extends JFrame {
 
 	private JPanel contentPane;
 	private JProgressBar progressBar;
-	private double fm;
-	private double fr;
+
 	private int i =0;
 	private ArrayList<Mont_OP> Mont_OParray;
 	private Mont_OP retMont_OP;
@@ -74,7 +73,7 @@ public class GUI_SOLUTION extends JFrame {
 
 
 
-/*
+		/*
 
 		JLabel lblFM = new JLabel("<html> F<sub>M</sub>: </html>");
 		GridBagConstraints gbc_lblFM = new GridBagConstraints();
@@ -174,17 +173,17 @@ public class GUI_SOLUTION extends JFrame {
 		gbc_lblFR1.gridx = 3;
 		gbc_lblFR1.gridy = 2;
 		contentPane.add(lblFR1, gbc_lblFR1);
-		*/
-		
-		
-		
-		
+		 */
+
+
+
+
 		Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
-		
+
 		Eignungsgrade eigGrade = new Eignungsgrade();
-		
-	for(i =0; i<Mont_OParray.size();i++){
-			
+
+		for(i =0; i<Mont_OParray.size();i++){
+
 			retMont_OP = Mont_OParray.get(i);
 			JPanel contentPane1 = new JPanel();
 			GridBagConstraints gbc_contentPane1 = new GridBagConstraints();
@@ -232,7 +231,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_txtFMontOPName.gridy = 2;
 			contentPane1.add(txtFMontOPName, gbc_txtFMontOPName);
 			txtFMontOPName.setColumns(10);
-			
+
 			JProgressBar proBar = new JProgressBar();
 			proBar.setBackground(Color.GREEN);
 			proBar.setForeground(Color.RED);
@@ -245,11 +244,11 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_proBar.gridy = 2;
 			contentPane1.add(proBar, gbc_proBar);
 		}
-	
+
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+
 			}
 		});
 		GridBagConstraints gbc_btnPrevious = new GridBagConstraints();
@@ -258,11 +257,11 @@ public class GUI_SOLUTION extends JFrame {
 		gbc_btnPrevious.gridx = 2;
 		gbc_btnPrevious.gridy = 3+i;
 		contentPane.add(btnPrevious, gbc_btnPrevious);
-				
+
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				GUI guiMain = new GUI();
 				dispose();
 				guiMain.setVisible(true);
