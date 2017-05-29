@@ -139,7 +139,7 @@ public class GUI extends JFrame {
 		JButton btnKatalogAnzeign = new JButton("Katalog anzeigen");
 		btnKatalogAnzeign.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TableRendererPanel katalog = new TableRendererPanel();
+				/*//TableRendererPanel katalog = new TableRendererPanel();
 				//contentPane.add(katalog);
 				setContentPane(katalog);
 				
@@ -151,7 +151,7 @@ public class GUI extends JFrame {
 					katalog.setVisible(true);
 				}
 				
-				/*
+				
 				if (Krit_scroll.isVisible()){
 					Krit_scroll.setVisible(false);
 				}

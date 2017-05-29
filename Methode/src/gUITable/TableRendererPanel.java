@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import Data.Ausp_LPS;
 import Data.Auspraegungen;
+import Data.Krit_LPS;
 import Data.Kriterien;
 
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
+import sql_connector.New_KatalogSQL;
 
 public class TableRendererPanel extends JPanel
 {
-	public TableRendererPanel()
+	public TableRendererPanel(int KatID)
 	{
 		
 		DefaultTableModel dtm = new DefaultTableModel() {
@@ -29,24 +32,25 @@ public class TableRendererPanel extends JPanel
 		};
 		String[] columnNames = { "Kh", "Kriterium","Ahg","Ausprägung"};
 
-		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
+		//ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
+		ArrayList<Krit_LPS> Kritarray = New_KatalogSQL.get_KritsofKatID(KatID);
 		Object[][] data_Krit= new Object[Kritarray.size()][4];
 
 		int i=0;
-		for (Kriterien kr: Kritarray){
+		for (Krit_LPS kr: Kritarray){
 
 			data_Krit[i][0]=kr.Krit_Nr;
-			data_Krit[i][1]=kr.Krit_Beschreibung;
+			data_Krit[i][1]=kr.Krit_LPS_Beschreibung;
 
-
-			ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(i + 1);
+			ArrayList<Ausp_LPS> Ausparray=New_KatalogSQL.get_AuspofKatID(i+1);
+			//ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(i + 1);
 			Object[][] data_Ausp1= new Object[Ausparray.size()][1];
 			Object[][] data_Ausp2= new Object[Ausparray.size()][1];
 			int n =  0;
-			for (Auspraegungen ap: Ausparray){
+			for (Ausp_LPS ap: Ausparray){
 				
 				data_Ausp1[n][0]=ap.Auspr_Nr;
-				data_Ausp2[n][0]=ap.Auspr_Beschreibung;
+				data_Ausp2[n][0]=ap.Ausp_LPS_Beschreibung;
 
 				++n;
 
@@ -66,7 +70,7 @@ public class TableRendererPanel extends JPanel
 		JTable table = new JTable(dtm);
 
 
-		table.setBounds(100,50,700,900);
+		table.setBounds(100,50,300,300);
 		table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		JScrollPane scroll = new JScrollPane(table);
 		//getContentPane().add(scroll);

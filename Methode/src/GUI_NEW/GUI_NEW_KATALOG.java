@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Data.Ausp_LPS;
 import Data.Krit_LPS;
 import Data.Kriterienkataloge;
 
@@ -25,6 +26,9 @@ import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import java.awt.Color;
+import java.awt.Dimension;
 
 public class GUI_NEW_KATALOG extends JFrame {
 
@@ -34,6 +38,10 @@ public class GUI_NEW_KATALOG extends JFrame {
 	private JTextField txtFKatalogName;
 	private JLabel lblKVonKn;
 	private int i=0;
+	private int z=0;
+	private int k=0;
+	private int x=0;
+	private ArrayList<Krit_LPS> krit_LPS_array;
 
 	/**
 	 * Launch the application.
@@ -63,9 +71,9 @@ public class GUI_NEW_KATALOG extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 168, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 		JLabel lblKatalogName = new JLabel("Name:");
@@ -95,7 +103,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_btnKatName.insets = new Insets(0, 0, 5, 5);
 		gbc_btnKatName.gridx = 2;
 		gbc_btnKatName.gridy = 0;
-		contentPane.add(btnKatName, gbc_btnKatName);
+		//contentPane.add(btnKatName, gbc_btnKatName);
 
 		JLabel lblAnz_Krit = new JLabel("Anz. Krit:");
 		lblAnz_Krit.setToolTipText("Anzahl der Kriterien");
@@ -118,18 +126,19 @@ public class GUI_NEW_KATALOG extends JFrame {
 		JButton btnAnz_Krit = new JButton("OK");
 		btnAnz_Krit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				sql_connector.New_KatalogSQL.set_KatalogName(txtFKatalogName.getText());
 				New_KatalogSQL.update_anzKrit(Integer.valueOf(txtFAnz_Krit.getText()));
 
 				ArrayList<Kriterienkataloge> KritKatalogArray= new ArrayList<Kriterienkataloge>();
 				KritKatalogArray =sql_connector.New_KatalogSQL.get_lastKatalog();
 				Kriterienkataloge retKat = KritKatalogArray.get(0);
-
+				//System.out.println(KritKatalogArray.size());
 				for(int i=0; i<retKat.anz_Krit; i++){
+
 					sql_connector.New_KatalogSQL.set_Kriterien("K"+(i+1));
 
 				}
-
+				txtFAnz_Krit.setEditable(false);
 			}
 		});
 		GridBagConstraints gbc_btnAnz_Krit = new GridBagConstraints();
@@ -138,21 +147,30 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_btnAnz_Krit.gridy = 1;
 		contentPane.add(btnAnz_Krit, gbc_btnAnz_Krit);
 
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.BLACK);
+		separator.setPreferredSize(new Dimension(50,1));
+		GridBagConstraints gbc_separator = new GridBagConstraints();
+		gbc_separator.insets = new Insets(0, 0, 5, 5);
+		gbc_separator.gridx = 1;
+		gbc_separator.gridy = 2;
+		contentPane.add(separator, gbc_separator);
+
 		JLabel lblBeschreibung = new JLabel("Beschreibung:");
 		GridBagConstraints gbc_lblBeschreibung = new GridBagConstraints();
 		gbc_lblBeschreibung.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBeschreibung.gridx = 1;
-		gbc_lblBeschreibung.gridy = 2;
+		gbc_lblBeschreibung.gridy = 3;
 		contentPane.add(lblBeschreibung, gbc_lblBeschreibung);
 
-		
+
 
 		JLabel lblKn = new JLabel("K_n:");
 		GridBagConstraints gbc_lblKn = new GridBagConstraints();
 		gbc_lblKn.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblKn.insets = new Insets(0, 0, 5, 5);
 		gbc_lblKn.gridx = 0;
-		gbc_lblKn.gridy = 3;
+		gbc_lblKn.gridy = 4;
 		contentPane.add(lblKn, gbc_lblKn);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -160,64 +178,58 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 3;
+		gbc_scrollPane.gridy = 4;
 		contentPane.add(scrollPane, gbc_scrollPane);
 
 		JTextArea txtAKritBesch = new JTextArea();
+		
 		scrollPane.setViewportView(txtAKritBesch);
 
-		
-		ArrayList<Krit_LPS> KritArray= New_KatalogSQL.get_KritstoKatID(New_KatalogSQL.get_lastKatalogID());
 
-		
+
+
 		lblKVonKn = new JLabel();
 		GridBagConstraints gbc_lblKVonKn = new GridBagConstraints();
 		gbc_lblKVonKn.insets = new Insets(0, 0, 5, 0);
 		gbc_lblKVonKn.gridx = 3;
-		gbc_lblKVonKn.gridy = 2;
+		gbc_lblKVonKn.gridy = 3;
 		contentPane.add(lblKVonKn, gbc_lblKVonKn);
-		
-		
-		
+
+
+
+
 
 
 		JButton btnKritBesch = new JButton("OK");
 		btnKritBesch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				if(i==KritArray.size()){
-					System.out.println("Size erreicht");
-				}
-				else{
-					lblKVonKn.setText("K"+(i+1)+" von K"+KritArray.size());
-					Krit_LPS retKrit = KritArray.get(i);
-					New_KatalogSQL.update_KritKatalog(txtAKritBesch.getText(),retKrit.idKrit_LPS);
-					++i;
-					
-				}
+				setKrits(txtAKritBesch);
 
 			}
+
+
 		});
-		
+
+
 		GridBagConstraints gbc_btnKritBesch = new GridBagConstraints();
 		gbc_btnKritBesch.anchor = GridBagConstraints.NORTH;
 		gbc_btnKritBesch.insets = new Insets(0, 0, 5, 5);
 		gbc_btnKritBesch.gridx = 2;
-		gbc_btnKritBesch.gridy = 3;
-		contentPane.add(btnKritBesch, gbc_btnKritBesch);
+		gbc_btnKritBesch.gridy = 4;
+		//contentPane.add(btnKritBesch, gbc_btnKritBesch);
 
-		
-	
-		
-		
-		
-		
+
+
+
+
+
+
 		JLabel lblAnzAusp = new JLabel("Anz. Ausp:");
 		GridBagConstraints gbc_lblAnzAusp = new GridBagConstraints();
 		gbc_lblAnzAusp.anchor = GridBagConstraints.EAST;
 		gbc_lblAnzAusp.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAnzAusp.gridx = 0;
-		gbc_lblAnzAusp.gridy = 4;
+		gbc_lblAnzAusp.gridy = 5;
 		contentPane.add(lblAnzAusp, gbc_lblAnzAusp);
 
 		txtFanzAusp = new JTextField();
@@ -225,34 +237,50 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_txtFanzAusp.insets = new Insets(0, 0, 5, 5);
 		gbc_txtFanzAusp.fill = GridBagConstraints.BOTH;
 		gbc_txtFanzAusp.gridx = 1;
-		gbc_txtFanzAusp.gridy = 4;
+		gbc_txtFanzAusp.gridy = 5;
 		contentPane.add(txtFanzAusp, gbc_txtFanzAusp);
 		txtFanzAusp.setColumns(10);
+
 
 		JButton btnAnzAusp = new JButton("OK");
 		btnAnzAusp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			New_KatalogSQL.update_anzAusp(Integer.valueOf(txtFanzAusp.getText()));
+
+				setKrits(txtAKritBesch);
+
+				krit_LPS_array=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+				for(int k=0; k<Integer.valueOf(txtFanzAusp.getText());k++){
+
+					Krit_LPS retKrit_LPS = krit_LPS_array.get(z);
+					New_KatalogSQL.set_Ausp(retKrit_LPS.idKrit_LPS,"A"+(z+1)+(k+1));
+
+				}
+				++z;
+				txtFanzAusp.setEditable(false);
+				txtAKritBesch.setEditable(false);
+				txtAKritBesch.setBackground(txtFanzAusp.getBackground());
+				scrollPane.setBorder(null);
+				txtAKritBesch.setBorder(txtFanzAusp.getBorder());
 			}
 		});
 		GridBagConstraints gbc_btnAnzAusp = new GridBagConstraints();
 		gbc_btnAnzAusp.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAnzAusp.gridx = 2;
-		gbc_btnAnzAusp.gridy = 4;
+		gbc_btnAnzAusp.gridy = 5;
 		contentPane.add(btnAnzAusp, gbc_btnAnzAusp);
 
 		JLabel lblBeschreibung_1 = new JLabel("Beschreibung:");
 		GridBagConstraints gbc_lblBeschreibung_1 = new GridBagConstraints();
 		gbc_lblBeschreibung_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBeschreibung_1.gridx = 1;
-		gbc_lblBeschreibung_1.gridy = 5;
+		gbc_lblBeschreibung_1.gridy = 6;
 		contentPane.add(lblBeschreibung_1, gbc_lblBeschreibung_1);
 
 		JLabel lblAVonAhg = new JLabel("A11 von Ahg");
 		GridBagConstraints gbc_lblAVonAhg = new GridBagConstraints();
 		gbc_lblAVonAhg.insets = new Insets(0, 0, 5, 0);
 		gbc_lblAVonAhg.gridx = 3;
-		gbc_lblAVonAhg.gridy = 5;
+		gbc_lblAVonAhg.gridy = 6;
 		contentPane.add(lblAVonAhg, gbc_lblAVonAhg);
 
 		JLabel lblAhg = new JLabel("Ahg:");
@@ -260,31 +288,76 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_lblAhg.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblAhg.insets = new Insets(0, 0, 0, 5);
 		gbc_lblAhg.gridx = 0;
-		gbc_lblAhg.gridy = 6;
+		gbc_lblAhg.gridy = 7;
 		contentPane.add(lblAhg, gbc_lblAhg);
 
-		JButton btnAauspBesch = new JButton("OK");
-		btnAauspBesch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 
-		JScrollPane scrollPane_1 = new JScrollPane();
+
+		JScrollPane scrollPaneAuspBesch = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.insets = new Insets(0, 0, 0, 5);
 		gbc_scrollPane_1.gridx = 1;
-		gbc_scrollPane_1.gridy = 6;
-		contentPane.add(scrollPane_1, gbc_scrollPane_1);
+		gbc_scrollPane_1.gridy = 7;
+		contentPane.add(scrollPaneAuspBesch, gbc_scrollPane_1);
 
 		JTextArea txtAauspBesch = new JTextArea();
-		scrollPane_1.setViewportView(txtAauspBesch);
+		scrollPaneAuspBesch.setViewportView(txtAauspBesch);
+
+
+
+
+		JButton btnAauspBesch = new JButton("OK");
+		btnAauspBesch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("x1 "+x);
+				krit_LPS_array=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+				Krit_LPS retKrit= krit_LPS_array.get(k);
+
+				ArrayList<Ausp_LPS> ausp_LPS_array = New_KatalogSQL.get_AuspofKatID(retKrit.idKrit_LPS);
+				Ausp_LPS retAusp = ausp_LPS_array.get(x);
+
+				System.out.println("kritid "+retKrit.idKrit_LPS);
+				System.out.println("ausp_LPS_array "+ausp_LPS_array.size());
+				New_KatalogSQL.update_Ausp(txtAauspBesch.getText(), retAusp.idAusp_LPS);
+				x++;
+
+				if(x==ausp_LPS_array.size()){
+					k++;
+					x = 0;
+					txtFanzAusp.setEditable(true);
+					txtAKritBesch.setEditable(true);
+					txtAKritBesch.setBackground(txtFanzAusp.getBackground());
+				}
+
+
+
+				System.out.println("k "+k);
+				System.out.println("x2 "+x);
+			}	
+		});
 		GridBagConstraints gbc_btnAauspBesch = new GridBagConstraints();
 		gbc_btnAauspBesch.anchor = GridBagConstraints.NORTH;
 		gbc_btnAauspBesch.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAauspBesch.gridx = 2;
-		gbc_btnAauspBesch.gridy = 6;
+		gbc_btnAauspBesch.gridy = 7;
 		contentPane.add(btnAauspBesch, gbc_btnAauspBesch);
+
 	}
 
+	protected void setKrits(JTextArea txtAKritBesch) {
+		ArrayList<Krit_LPS> KritArray= New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+		if(i==KritArray.size()){
+			System.out.println("Size erreicht");
+		}
+		else{
+
+			lblKVonKn.setText("K"+(i+1)+" von K"+KritArray.size());
+			Krit_LPS retKrit = KritArray.get(i);
+
+			New_KatalogSQL.update_KritKatalog(txtAKritBesch.getText(),retKrit.idKrit_LPS);
+			++i;
+
+		}
+	}
 }
