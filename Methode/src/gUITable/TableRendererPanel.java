@@ -74,7 +74,7 @@ public class TableRendererPanel extends JPanel
 		JScrollPane scroll = new JScrollPane(table);
 		//getContentPane().add(scroll);
 		this.add(scroll);
-	  // table.add(scroll);
+	   //table.add(scroll);
 
 
 		table.setDefaultRenderer(Object.class, new ComponentInCellRenderer());

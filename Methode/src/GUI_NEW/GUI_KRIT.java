@@ -11,9 +11,12 @@ import javax.swing.border.EmptyBorder;
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Mont_OP;
+import Data.Projekte;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
+import sql_connector.New_project_SQL;
 import sql_connector.Used_AuspSQL;
+import sql_connector.list_projectsSQL;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -106,11 +109,16 @@ public class GUI_KRIT extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE, 0.0};
 		contentPane.setLayout(gbl_contentPane);
 
-
-
-		Kriterien krit = Krit_SQL.giveKrit(n);
-
-		ArrayList<Kriterien> Kritarray = sql_connector.Krit_SQL.giveKrits();
+		ArrayList<Projekte> Projektarray = list_projectsSQL.get_lastProject();
+		Projekte retProj = Projektarray.get(0);
+		
+		
+		
+		//Kriterien krit = Krit_SQL.giveKrit(n);
+		Kriterien krit = Krit_SQL.giveKrit(n, retProj.idKriterienkataloge);
+		
+		
+		ArrayList<Kriterien> Kritarray = sql_connector.Krit_SQL.giveKrits(retProj.idKriterienkataloge);
 		ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
 		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
 		retMont_OP=Mont_OParray.get(nMontOP);
@@ -316,7 +324,7 @@ public class GUI_KRIT extends JFrame {
 
 				++n;
 				++usedAusp_id;
-				System.out.println("n= " + n);
+				System.out.println("n1= " + n);
 
 				if(nMontOP==anzMomtOp){
 					
@@ -327,18 +335,18 @@ public class GUI_KRIT extends JFrame {
 				else
 				{
 					contentPane.setVisible(false);
-
 					initGUI();
-					System.out.println(n);
+					System.out.println("n2"+n);
 
 					if(n==Kritarray.size()){
 
+						
 
-
-						n=0;
+						n=1;
 						++nMontOP;
 					}
-
+					
+					
 				}
 			}
 

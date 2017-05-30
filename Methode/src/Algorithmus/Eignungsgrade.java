@@ -16,7 +16,7 @@ public class Eignungsgrade {
 	public ArrayList<Used_auspr> Used_ausprArray;
 	public BigDecimal[] RatingFM;
 	public BigDecimal[] RatingFR;
-	
+
 	public Eignungsgrade(){
 		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
 
@@ -28,29 +28,32 @@ public class Eignungsgrade {
 			RatingFR[i]=new BigDecimal(0.0);
 			retMont_OP=Mont_OParray.get(i);
 			ArrayList<Used_auspr> Used_ausprArray= sql_connector.Used_AuspSQL.giveRelevant(retMont_OP.idmontOP);
-
-			for (Used_auspr ap : Used_ausprArray)
-			{
-				RatingFM[i]=RatingFM[i].add(new BigDecimal(ap.ratingFM * ap.gewichtung));
-				RatingFR[i]=RatingFR[i].add(new BigDecimal(ap.ratingFR * ap.gewichtung));
-				sum_Gewichtung=sum_Gewichtung.add(new BigDecimal(ap.gewichtung));
+			if(Used_ausprArray.size()==0){
+				
 			}
-			RatingFM[i]=RatingFM[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
-			RatingFR[i]=RatingFR[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
+			else{
+				for (Used_auspr ap : Used_ausprArray)
+				{
+					RatingFM[i]=RatingFM[i].add(new BigDecimal(ap.ratingFM * ap.gewichtung));
+					RatingFR[i]=RatingFR[i].add(new BigDecimal(ap.ratingFR * ap.gewichtung));
+					sum_Gewichtung=sum_Gewichtung.add(new BigDecimal(ap.gewichtung));
+				}
+				RatingFM[i]=RatingFM[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
+				RatingFR[i]=RatingFR[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
 
-			
-			
-			System.out.println("RatingFM: "+RatingFM[i]);
-			System.out.println("RatingFR: "+RatingFR[i]);
 
+
+				System.out.println("RatingFM: "+RatingFM[i]);
+				System.out.println("RatingFR: "+RatingFR[i]);
+
+			}
 		}
 	}
-
 	public static void main(String[] args) {
 		Eignungsgrade test = new Eignungsgrade();
 
 
-		
+
 
 	}
 

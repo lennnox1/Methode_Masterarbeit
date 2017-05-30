@@ -15,31 +15,29 @@ import Data.Projekte;
 public class Krit_SQL {
 
 	public static PreparedStatement preStmt_Krit;
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	public static  ArrayList<Kriterien> giveKrits() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		ArrayList<Kriterien> Kritarray= new ArrayList<Kriterien>();
 		try {
-			//			new com.mysql.jdbc.Driver();
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			//// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 			conn = get_connection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM kriterien ");
+			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.kriterien ");
 			while (rs.next()) {
 				Kriterien Kritobj= new Kriterien();
 				Kritobj.idKrit = rs.getInt("idKrit");
 				Kritobj.Krit_Nr = rs.getString("Krit_Nr");
 				Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 				Kritarray.add(Kritobj);
-				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -66,15 +64,11 @@ public class Krit_SQL {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String Krit_Beschreibung = "unbekannt";
 		try {
-			//			new com.mysql.jdbc.Driver();
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM kriterien   WHERE idKrit = " + r);
-			///rs = stmt.executeQuery("SELECT * FROM kriterien  ");
 			while (rs.next()) {
 				retKrit = new Kriterien();
 				retKrit.idKrit = rs.getInt("idKrit");
@@ -95,7 +89,7 @@ public class Krit_SQL {
 	}
 
 	public static  ArrayList<Kriterien> giveKritzuKritID(int id) {
-		
+
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs   =null;
@@ -104,21 +98,21 @@ public class Krit_SQL {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		    conn = get_connection();
-		    
-		     preStmt_Krit = conn.prepareStatement(query);
-		     preStmt_Krit.setInt(1,id);
-		     preStmt_Krit.execute();
-		     rs = preStmt_Krit.executeQuery();
-		    while (rs.next()) {
+			conn = get_connection();
 
-		    	Kriterien Kritobj= new Kriterien();
-		    	Kritobj.idKrit = rs.getInt("idKrit");
-		    	Kritobj.Krit_Nr = rs.getString("Krit_Nr");
-		    	Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
+			preStmt_Krit = conn.prepareStatement(query);
+			preStmt_Krit.setInt(1,id);
+			preStmt_Krit.execute();
+			rs = preStmt_Krit.executeQuery();
+			while (rs.next()) {
+
+				Kriterien Kritobj= new Kriterien();
+				Kritobj.idKrit = rs.getInt("idKrit");
+				Kritobj.Krit_Nr = rs.getString("Krit_Nr");
+				Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 				Kritarray.add(Kritobj);
-				
-		    				  }
+
+			}
 
 
 		} catch (Exception e) {
@@ -134,6 +128,79 @@ public class Krit_SQL {
 	}
 
 
+	public static Kriterien giveKrit(int kritNr, int katID) {
+		Kriterien retKrit= null;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		String query= "SELECT * FROM kriterienkatalog.kriterien   WHERE idKrit = ? and idKriterienkataloge=?";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+
+			preStmt_Krit = conn.prepareStatement(query);
+			preStmt_Krit.setInt(1,kritNr);
+			preStmt_Krit.setInt(2,katID);
+			preStmt_Krit.execute();
+			rs = preStmt_Krit.executeQuery();
+			while (rs.next()) {
+
+				retKrit = new Kriterien();
+				retKrit.idKrit = rs.getInt("idKrit");
+				retKrit.Krit_Nr = rs.getString("Krit_Nr");
+				retKrit.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
+
+			}
 
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+
+		}
+		return retKrit;
+
+	}
+
+	
+	public static ArrayList<Kriterien> giveKrits(int katID) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		ArrayList<Kriterien> Kritarray= new ArrayList<Kriterien>();
+		String query= "SELECT * FROM kriterienkatalog.kriterien   WHERE idKriterienkataloge=?";
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+			preStmt_Krit = conn.prepareStatement(query);
+			preStmt_Krit.setInt(1,katID);
+			preStmt_Krit.execute();
+			rs = preStmt_Krit.executeQuery();
+			while (rs.next()) {
+				Kriterien Kritobj= new Kriterien();
+				Kritobj.idKrit = rs.getInt("idKrit");
+				Kritobj.Krit_Nr = rs.getString("Krit_Nr");
+				Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
+				Kritarray.add(Kritobj);
+
+			}
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+
+		}
+		return Kritarray;
+
+	}
+	
 }

@@ -19,6 +19,8 @@ import Data.Mont_OP;
 import Data.Projekte;
 import sql_connector.New_project_SQL;
 import sql_connector.Used_AuspSQL;
+import sql_connector.list_projectsSQL;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -131,8 +133,10 @@ public class GUI_MONTOP extends JFrame {
 					    	projId  = retMont_OP.idProjekte;
 					    }
 					}
+				ArrayList<Projekte> Projektarray = list_projectsSQL.get_lastProject();
+				Projekte retProj = Projektarray.get(0);
 				
-				ArrayList<Kriterien> kritArray = sql_connector.Krit_SQL.giveKrits();
+				ArrayList<Kriterien> kritArray = sql_connector.Krit_SQL.giveKrits(retProj.idKriterienkataloge);
 				
 				for (Kriterien krit : kritArray)
 				{

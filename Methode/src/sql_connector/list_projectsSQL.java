@@ -12,6 +12,7 @@ import javax.swing.ComboBoxModel;
 
 import Data.Auspraegungen;
 import Data.Kriterien;
+import Data.Mont_OP;
 import Data.Projekte;
 
 public class list_projectsSQL {
@@ -69,7 +70,7 @@ public class list_projectsSQL {
 		    preStmt_Mont_Nr = conn.prepareStatement(query1);
 		    preStmt_Mont_Nr.setString(1, r);
 		    preStmt_Mont_Nr.execute();
-		     rs = preStmt_Mont_Nr.executeQuery();
+		    rs = preStmt_Mont_Nr.executeQuery();
 		    while (rs.next()) {
 
 		    	Mont_Nr = rs.getInt("Anz_Montageop");
@@ -88,5 +89,38 @@ public class list_projectsSQL {
 		
 	}
 	
+public static  ArrayList<Projekte> get_lastProject() {
 		
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		ArrayList<Projekte> Projektarray= new ArrayList<Projekte>();
+		String query= "SELECT * FROM kriterienkatalog.projekte WHERE idProjekte=(SELECT max(idProjekte) FROM kriterienkatalog.projekte )";
+		
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				Projekte Projobj= new Projekte();
+				Projobj.idProjekte = rs.getInt("idProjekte");
+				Projobj.Projekt_name = rs.getString("Projekt_name");
+				Projobj.idKriterienkataloge = rs.getInt("idKriterienkataloge");
+				
+				Projektarray.add(Projobj);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+
+		}
+
+
+		return Projektarray;
+	}
 }

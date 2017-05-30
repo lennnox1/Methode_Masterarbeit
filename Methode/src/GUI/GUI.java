@@ -25,7 +25,7 @@ import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Projekte;
 import GUI_NEW.GUI_MONTOP;
-import GUI_NEW.GUI_MONT_OP_JPANEL;
+//import GUI_NEW.GUI_MONT_OP_JPANEL;
 import Test.GUI_MONT_OP_JFRAME;
 import gUITable.TableRendererPanel;
 import sql_connector.Ausp_SQL;

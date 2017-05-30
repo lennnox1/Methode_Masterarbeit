@@ -33,6 +33,7 @@ public class GUI_MAIN extends JFrame {
 	private JLabel lblProjName;
 	private JButton btnOk;
 	private int[] Katalog_id ;
+	private JPanel TablePanel;
 	/**
 	 * Launch the application.
 	 */
@@ -106,12 +107,12 @@ public class GUI_MAIN extends JFrame {
 		}
 
 		JComboBox cBoxKatalog = new JComboBox(Katalog_data);
-		/*cBoxKatalog.addActionListener(new ActionListener() {
+		cBoxKatalog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(cBoxKatalog.getSelectedItem());
-				System.out.println(Katalog_id[cBoxKatalog.getSelectedIndex()]);
+				//System.out.println(cBoxKatalog.getSelectedItem());
+				//System.out.println(Katalog_id[cBoxKatalog.getSelectedIndex()]);
 			}
-		});*/
+		});
 		GridBagConstraints gbc_cBoxKatalog = new GridBagConstraints();
 		gbc_cBoxKatalog.insets = new Insets(0, 0, 5, 5);
 		gbc_cBoxKatalog.fill = GridBagConstraints.HORIZONTAL;
@@ -126,6 +127,19 @@ public class GUI_MAIN extends JFrame {
 		JButton btnKatalogAnzeigen = new JButton("Katalog anzeigen");
 		btnKatalogAnzeigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (TablePanel != null)
+				{
+					TablePanel.removeAll();
+				}
+				if (katalog != null)
+				{
+					katalog.removeAll();
+				}
+				initTableRenderer(Katalog_id[cBoxKatalog.getSelectedIndex()]);
+				
+				
+				
 				if (katalog.isVisible()){
 					katalog.setVisible(false);
 				}
@@ -199,6 +213,7 @@ public class GUI_MAIN extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				New_project_SQL.createProject(txtFProjName.getText());
 				cBoxProjekt.addItem(txtFProjName.getText());
+				New_project_SQL.set_katID(Katalog_id[cBoxKatalog.getSelectedIndex()]);
 				
 				GUI_MONTOP guiMO = new GUI_MONTOP();
 				
@@ -214,9 +229,17 @@ public class GUI_MAIN extends JFrame {
 		btnOk.setVisible(false);
 		contentPane.add(btnOk, gbc_btnOk);
 
+		initTableRenderer(1);
 
+		
+	}
+		
 
-		JPanel TablePanel = new JPanel();
+	
+
+	protected void initTableRenderer(int katID) {
+		
+		TablePanel = new JPanel();
 		GridBagConstraints gbc_TablePanel = new GridBagConstraints();
 		gbc_TablePanel.gridwidth = 3;
 
@@ -231,16 +254,18 @@ public class GUI_MAIN extends JFrame {
 		gbl_TablePanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
 		gbl_TablePanel.rowWeights = new double[]{0.0, 0.0};
 		TablePanel.setLayout(gbl_TablePanel);
-
-
-		katalog = new TableRendererPanel(Katalog_id[cBoxKatalog.getSelectedIndex()]);
+		
+		
+		//System.out.println(Katalog_id[cBoxKatalog.getSelectedIndex()]);
+		
+		
+		katalog = new TableRendererPanel(katID);
 		GridBagConstraints gbc_katalog = new GridBagConstraints();
 		gbc_katalog.anchor = GridBagConstraints.NORTHWEST;
 		gbc_katalog.gridx = 0;
 		gbc_katalog.gridy = 0;
 		gbc_katalog.gridheight=3;
 		TablePanel.add(katalog, gbc_katalog);
-
 	}
 
 }

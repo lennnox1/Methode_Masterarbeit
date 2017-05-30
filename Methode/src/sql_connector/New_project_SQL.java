@@ -201,7 +201,7 @@ public class New_project_SQL {
 			Connection conn = null;
 			Statement stmt = null;
 		
-			//String query1= "update kriterienkatalog.mont_op  set montOP_name = ? where idProjekte=?";
+			
 			String query1= "insert kriterienkatalog.mont_op  (montOP_name,idProjekte) values(?,?)";
 			try {
 
@@ -228,7 +228,35 @@ public class New_project_SQL {
 	}
 		
 		
+		public static  void set_katID(int idKat) {
+			Connection conn = null;
+			Statement stmt = null;
 		
+			String query1= "update  kriterienkatalog.projekte  set idKriterienkataloge = ? where idProjekte=?";
+			
+			try {
+
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+			    conn = get_connection();
+			   
+			    preStmt_Mont_Nr = conn.prepareStatement(query1);
+			    preStmt_Mont_Nr.setInt(1,idKat);
+			    preStmt_Mont_Nr.setInt(2,get_lastProjID());
+			    preStmt_Mont_Nr.execute();
+			   
+			    
+			    
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+
+				try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+				
+			}
+			
+		
+	}	
 		
 	
 		

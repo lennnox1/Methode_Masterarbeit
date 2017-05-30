@@ -38,13 +38,12 @@ public class Mont_OPSQL {
 				Mont_OPobj.idmontOP = rs.getInt("idmontOP");
 				Mont_OPobj.montOP_name = rs.getString("montOP_name");
 				Mont_OPobj.idProjekte = rs.getInt("idProjekte");
-
 				Mont_OParray.add(Mont_OPobj);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (rs != null) rs.close(); }     catch (SQLException e) { e.printStackTrace(); }
 			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 
@@ -88,7 +87,7 @@ public class Mont_OPSQL {
 	}
 
 	public static  ArrayList<Mont_OP> get_lastMontOP() {
-		int id=0;
+		
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs   =null;
@@ -106,7 +105,7 @@ public class Mont_OPSQL {
 				Mont_OPobj.idmontOP = rs.getInt("idmontOP");
 				Mont_OPobj.montOP_name = rs.getString("montOP_name");
 				Mont_OPobj.idProjekte = rs.getInt("idProjekte");
-
+				
 				Mont_OParray.add(Mont_OPobj);
 			}
 		} catch (Exception e) {

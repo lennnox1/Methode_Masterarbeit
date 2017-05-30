@@ -27,7 +27,7 @@ import java.awt.event.ActionEvent;
 public class GUI_SOLUTION extends JFrame {
 
 	private JPanel contentPane;
-	private JProgressBar progressBar;
+	private JProgressBar proBar;
 
 	private int i =0;
 	private ArrayList<Mont_OP> Mont_OParray;
@@ -73,117 +73,20 @@ public class GUI_SOLUTION extends JFrame {
 
 
 
-		/*
+		
 
-		JLabel lblFM = new JLabel("<html> F<sub>M</sub>: </html>");
-		GridBagConstraints gbc_lblFM = new GridBagConstraints();
-		gbc_lblFM.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFM.gridx = 2;
-		gbc_lblFM.gridy = 0;
-		contentPane.add(lblFM, gbc_lblFM);
-
-		JLabel lblFR = new JLabel("<html> F<sub>R</sub>: </html>");
-		GridBagConstraints gbc_lblFR = new GridBagConstraints();
-		gbc_lblFR.insets = new Insets(0, 0, 5, 0);
-		gbc_lblFR.gridx = 3;
-		gbc_lblFR.gridy = 0;
-		contentPane.add(lblFR, gbc_lblFR);
-
-		JLabel lblMontOP = new JLabel("O"+(nMontOP+1)+":");
-		GridBagConstraints gbc_lblMontOP = new GridBagConstraints();
-		gbc_lblMontOP.anchor = GridBagConstraints.EAST;
-		gbc_lblMontOP.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMontOP.gridx = 0;
-		gbc_lblMontOP.gridy = 1;
-		contentPane.add(lblMontOP, gbc_lblMontOP);
-
-		txtFMontOPName = new JTextField();
-		GridBagConstraints gbc_txtFMontOPName = new GridBagConstraints();
-		gbc_txtFMontOPName.insets = new Insets(0, 0, 5, 5);
-		gbc_txtFMontOPName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtFMontOPName.gridx = 1;
-		gbc_txtFMontOPName.gridy = 1;
-		contentPane.add(txtFMontOPName, gbc_txtFMontOPName);
-		txtFMontOPName.setColumns(10);
-
-		JProgressBar proBarFM = new JProgressBar();
-		proBarFM.setStringPainted(true);
-		GridBagConstraints gbc_proBarFM = new GridBagConstraints();
-		gbc_proBarFM.fill = GridBagConstraints.BOTH;
-		gbc_proBarFM.insets = new Insets(0, 0, 5, 5);
-		gbc_proBarFM.gridx = 2;
-		gbc_proBarFM.gridy = 1;
-		contentPane.add(proBarFM, gbc_proBarFM);
-
-		JProgressBar proBarFR = new JProgressBar();
-		proBarFR.setStringPainted(true);
-		GridBagConstraints gbc_proBarFR = new GridBagConstraints();
-		gbc_proBarFR.insets = new Insets(0, 0, 5, 0);
-		gbc_proBarFR.fill = GridBagConstraints.BOTH;
-		gbc_proBarFR.gridx = 3;
-		gbc_proBarFR.gridy = 1;
-		contentPane.add(proBarFR, gbc_proBarFR);
-
-		JLabel lblMontOP1 = new JLabel("O"+(nMontOP+1)+":");
-		GridBagConstraints gbc_lblMontOP1 = new GridBagConstraints();
-		gbc_lblMontOP1.anchor = GridBagConstraints.EAST;
-		gbc_lblMontOP1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMontOP1.gridx = 0;
-		gbc_lblMontOP1.gridy = 3;
-		contentPane.add(lblMontOP1, gbc_lblMontOP1);
-
-		txtFMontOPName1 = new JTextField();
-		GridBagConstraints gbc_txtFMontOPName1 = new GridBagConstraints();
-		gbc_txtFMontOPName1.insets = new Insets(0, 0, 5, 5);
-		gbc_txtFMontOPName1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtFMontOPName1.gridx = 1;
-		gbc_txtFMontOPName1.gridy = 3;
-		contentPane.add(txtFMontOPName1, gbc_txtFMontOPName1);
-		txtFMontOPName1.setColumns(10);
-
-
-
-		progressBar = new JProgressBar();
-		progressBar.setValue(50);
-		progressBar.setForeground(Color.GREEN);
-		progressBar.setBackground(Color.RED);
-		GridBagConstraints gbc_progressBar = new GridBagConstraints();
-		gbc_progressBar.insets = new Insets(0, 0, 5, 0);
-		gbc_progressBar.fill = GridBagConstraints.BOTH;
-		gbc_progressBar.gridwidth = 2;
-		gbc_progressBar.gridx = 2;
-		gbc_progressBar.gridy = 3;
-		contentPane.add(progressBar, gbc_progressBar);
-
-		fm =(double)progressBar.getValue()/100;
-		fr = 1-fm;
-
-		JLabel lblFM1 = new JLabel("<html>"+ "F<sub>M</sub>= " +String.valueOf(fm)+"</html>");
-		GridBagConstraints gbc_lblFM1 = new GridBagConstraints();
-		gbc_lblFM1.anchor = GridBagConstraints.WEST;
-		gbc_lblFM1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFM1.gridx = 2;
-		gbc_lblFM1.gridy = 2;
-		contentPane.add(lblFM1, gbc_lblFM1);
-
-		JLabel lblFR1 = new JLabel("<html>"+ "F<sub>R</sub>= " +String.valueOf(fr)+"</html>");
-		GridBagConstraints gbc_lblFR1 = new GridBagConstraints();
-		gbc_lblFR1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblFR1.anchor = GridBagConstraints.EAST;
-		gbc_lblFR1.gridx = 3;
-		gbc_lblFR1.gridy = 2;
-		contentPane.add(lblFR1, gbc_lblFR1);
-		 */
-
-
-
+			
 
 		Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
-
+		
+		System.out.println(Mont_OParray.size());
+		
 		Eignungsgrade eigGrade = new Eignungsgrade();
 
 		for(i =0; i<Mont_OParray.size();i++){
-
+			
+			
+			
 			retMont_OP = Mont_OParray.get(i);
 			JPanel contentPane1 = new JPanel();
 			GridBagConstraints gbc_contentPane1 = new GridBagConstraints();
@@ -232,8 +135,7 @@ public class GUI_SOLUTION extends JFrame {
 			contentPane1.add(txtFMontOPName, gbc_txtFMontOPName);
 			txtFMontOPName.setColumns(10);
 
-			JProgressBar proBar = new JProgressBar();
-			proBar.setBackground(Color.GREEN);
+			proBar = new JProgressBar();
 			proBar.setForeground(Color.RED);
 			proBar.setValue(eigGrade.RatingFM[i].multiply(new BigDecimal(100.0)).intValue());
 			GridBagConstraints gbc_proBar = new GridBagConstraints();
@@ -243,12 +145,24 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_proBar.gridx = 2;
 			gbc_proBar.gridy = 2;
 			contentPane1.add(proBar, gbc_proBar);
+		
+			if(eigGrade.RatingFM[i].equals(new BigDecimal(0.0)) 
+					&& eigGrade.RatingFR[i].equals(new BigDecimal(0.0))){
+				proBar.setBackground(Color.GRAY);
+			}
+			else{
+				proBar.setBackground(Color.GREEN);
+			}
+		
 		}
+	
 
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				GUI_KRIT guiKrit = new GUI_KRIT();
+				dispose();
+				guiKrit.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnPrevious = new GridBagConstraints();
@@ -262,7 +176,7 @@ public class GUI_SOLUTION extends JFrame {
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				GUI guiMain = new GUI();
+				GUI_MAIN guiMain = new GUI_MAIN();
 				dispose();
 				guiMain.setVisible(true);
 			}
