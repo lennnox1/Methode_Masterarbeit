@@ -1,6 +1,6 @@
 package GUI_NEW;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.ButtonGroup;
@@ -25,21 +25,19 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
+//import java.util.Collection;
 
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
-public class GUIKRIT extends JFrame {
+public class GUI_KRIT extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private int n =1;
 	private int i = 0;
 	private int usedAusp_id = 0;
-	private static int k=0;
 	private int nMontOP =0;
 	private int anzMomtOp = 0;
 	private Mont_OP retMont_OP;
@@ -70,7 +68,7 @@ public class GUIKRIT extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUIKRIT frame = new GUIKRIT();
+					GUI_KRIT frame = new GUI_KRIT();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -82,7 +80,7 @@ public class GUIKRIT extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUIKRIT() {
+	public GUI_KRIT() {
 		initGUI();
 
 
@@ -201,7 +199,7 @@ public class GUIKRIT extends JFrame {
 		for (i = 0; i < Ausparray.size(); i++) {
 			Auspraegungen retAus = Ausparray.get(i);
 			JRadioButton rdbtnAuspBesch = new JRadioButton(retAus.Auspr_Beschreibung);
-			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.Auspr_id));
+			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.idAuspr));
 			rdbtnAuspBesch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
@@ -321,7 +319,7 @@ public class GUIKRIT extends JFrame {
 				System.out.println("n= " + n);
 
 				if(nMontOP==anzMomtOp){
-					//contentPane.setVisible(false);
+					
 					dispose();
 					GUI_WEIGHTING test = new GUI_WEIGHTING();
 					test.setVisible(true);
@@ -558,7 +556,7 @@ public class GUIKRIT extends JFrame {
 		if(rbtnFRWorse.isSelected()){
 			ratingFR=0.0;
 		}
-		//System.out.println("ratingFR:"+ratingFR+"ratingFM:" + ratingFM);
+		
 	}
 
 }

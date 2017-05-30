@@ -35,13 +35,11 @@ public class Krit_SQL {
 			rs = stmt.executeQuery("SELECT * FROM kriterien ");
 			while (rs.next()) {
 				Kriterien Kritobj= new Kriterien();
-				Kritobj.Krit_id = rs.getInt("Krit_id");
+				Kritobj.idKrit = rs.getInt("idKrit");
 				Kritobj.Krit_Nr = rs.getString("Krit_Nr");
 				Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 				Kritarray.add(Kritobj);
-				//	System.out.println("ID: " + Krit_id + ", Krit_Nr: " + Krit_nr
-				//		+ ", Anzahl Ausprägungen: " + Krit_Ausp_anzahl+" Beschreibung: "+ Krit_Beschreibung);
-			}
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -75,11 +73,11 @@ public class Krit_SQL {
 			// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 			conn = get_connection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM kriterien   WHERE Krit_id = " + r);
+			rs = stmt.executeQuery("SELECT * FROM kriterien   WHERE idKrit = " + r);
 			///rs = stmt.executeQuery("SELECT * FROM kriterien  ");
 			while (rs.next()) {
 				retKrit = new Kriterien();
-				retKrit.Krit_id = rs.getInt("Krit_id");
+				retKrit.idKrit = rs.getInt("idKrit");
 				retKrit.Krit_Nr = rs.getString("Krit_Nr");
 				retKrit.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 
@@ -102,7 +100,7 @@ public class Krit_SQL {
 		Statement stmt = null;
 		ResultSet rs   =null;
 		ArrayList<Kriterien> Kritarray= new ArrayList<Kriterien>();
-		String query= "SELECT * FROM kriterienkatalog.kriterien   WHERE Krit_id = ?";
+		String query= "SELECT * FROM kriterienkatalog.kriterien   WHERE idKrit = ?";
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -115,7 +113,7 @@ public class Krit_SQL {
 		    while (rs.next()) {
 
 		    	Kriterien Kritobj= new Kriterien();
-		    	Kritobj.Krit_id = rs.getInt("Krit_id");
+		    	Kritobj.idKrit = rs.getInt("idKrit");
 		    	Kritobj.Krit_Nr = rs.getString("Krit_Nr");
 		    	Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 				Kritarray.add(Kritobj);

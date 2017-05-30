@@ -27,8 +27,8 @@ public class Ausp_SQL {
 			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen ");
 			while (rs.next()) {
 				Auspraegungen Auspobj= new Auspraegungen();
-				Auspobj.Krit_id = rs.getInt("Krit_id");
-				Auspobj.Auspr_id = rs.getInt("Auspr_id");
+				Auspobj.idKrit = rs.getInt("idKrit");
+				Auspobj.idAuspr = rs.getInt("idAuspr");
 				Auspobj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
 				Auspobj.Auspr_Nr = rs.getString("Auspr_Nr");
 				Ausparray.add(Auspobj);
@@ -63,11 +63,11 @@ public class Ausp_SQL {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen   WHERE Auspr_id = " + r);
+			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen   WHERE idAuspr = " + r);
 			while (rs.next()) {
 				retAusp = new Auspraegungen();
-				retAusp.Krit_id  = rs.getInt("Krit_id");
-				retAusp.Auspr_id = rs.getInt("Auspr_id");
+				retAusp.idKrit  = rs.getInt("idKrit");
+				retAusp.idAuspr = rs.getInt("idAuspr");
 				retAusp.Auspr_Nr = rs.getString("Auspr_Nr");
 				retAusp.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
 		
@@ -95,11 +95,11 @@ public class Ausp_SQL {
 	//// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 				conn = get_connection();
 				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT * FROM auspraegungen where Krit_id=" + krit_nr );
+				rs = stmt.executeQuery("SELECT * FROM auspraegungen where idKrit=" + krit_nr );
 				while (rs.next()) {
 					Auspraegungen Auspobj= new Auspraegungen();
-					Auspobj.Krit_id = rs.getInt("Krit_id");
-					Auspobj.Auspr_id = rs.getInt("Auspr_id");
+					Auspobj.idKrit = rs.getInt("idKrit");
+					Auspobj.idAuspr = rs.getInt("idAuspr");
 					Auspobj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
 					Auspobj.Auspr_Nr = rs.getString("Auspr_Nr");
 					Ausparray.add(Auspobj);

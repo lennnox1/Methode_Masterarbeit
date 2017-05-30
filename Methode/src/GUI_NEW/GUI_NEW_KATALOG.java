@@ -8,7 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Data.Ausp_LPS;
+import Data.Auspraegungen;
 import Data.Krit_LPS;
+import Data.Kriterien;
 import Data.Kriterienkataloge;
 
 import java.awt.GridBagLayout;
@@ -41,7 +43,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 	private int z=0;
 	private int k=0;
 	private int x=0;
-	private ArrayList<Krit_LPS> krit_LPS_array;
+	private ArrayList<Kriterien> kritarray;
 
 	/**
 	 * Launch the application.
@@ -248,11 +250,11 @@ public class GUI_NEW_KATALOG extends JFrame {
 
 				setKrits(txtAKritBesch);
 
-				krit_LPS_array=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+				kritarray=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
 				for(int k=0; k<Integer.valueOf(txtFanzAusp.getText());k++){
 
-					Krit_LPS retKrit_LPS = krit_LPS_array.get(z);
-					New_KatalogSQL.set_Ausp(retKrit_LPS.idKrit_LPS,"A"+(z+1)+(k+1));
+					Kriterien retKrit = kritarray.get(z);
+					New_KatalogSQL.set_Ausp(retKrit.idKrit,"A"+(z+1)+(k+1));
 
 				}
 				++z;
@@ -311,15 +313,15 @@ public class GUI_NEW_KATALOG extends JFrame {
 		btnAauspBesch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("x1 "+x);
-				krit_LPS_array=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
-				Krit_LPS retKrit= krit_LPS_array.get(k);
+				kritarray=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+				Kriterien retKrit= kritarray.get(k);
 
-				ArrayList<Ausp_LPS> ausp_LPS_array = New_KatalogSQL.get_AuspofKatID(retKrit.idKrit_LPS);
-				Ausp_LPS retAusp = ausp_LPS_array.get(x);
+				ArrayList<Auspraegungen> ausp_LPS_array = New_KatalogSQL.get_AuspofKatID(retKrit.idKrit);
+				Auspraegungen retAusp = ausp_LPS_array.get(x);
 
-				System.out.println("kritid "+retKrit.idKrit_LPS);
+				System.out.println("kritid "+retKrit.idKrit);
 				System.out.println("ausp_LPS_array "+ausp_LPS_array.size());
-				New_KatalogSQL.update_Ausp(txtAauspBesch.getText(), retAusp.idAusp_LPS);
+				New_KatalogSQL.update_Ausp(txtAauspBesch.getText(), retAusp.idAuspr);
 				x++;
 
 				if(x==ausp_LPS_array.size()){
@@ -346,16 +348,16 @@ public class GUI_NEW_KATALOG extends JFrame {
 	}
 
 	protected void setKrits(JTextArea txtAKritBesch) {
-		ArrayList<Krit_LPS> KritArray= New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+		ArrayList<Kriterien> KritArray= New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
 		if(i==KritArray.size()){
 			System.out.println("Size erreicht");
 		}
 		else{
 
 			lblKVonKn.setText("K"+(i+1)+" von K"+KritArray.size());
-			Krit_LPS retKrit = KritArray.get(i);
+			Kriterien retKrit = KritArray.get(i);
 
-			New_KatalogSQL.update_KritKatalog(txtAKritBesch.getText(),retKrit.idKrit_LPS);
+			New_KatalogSQL.update_KritKatalog(txtAKritBesch.getText(),retKrit.idKrit);
 			++i;
 
 		}

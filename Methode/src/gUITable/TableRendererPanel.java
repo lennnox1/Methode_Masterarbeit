@@ -32,25 +32,24 @@ public class TableRendererPanel extends JPanel
 		};
 		String[] columnNames = { "Kh", "Kriterium","Ahg","Ausprägung"};
 
-		//ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
-		ArrayList<Krit_LPS> Kritarray = New_KatalogSQL.get_KritsofKatID(KatID);
+		
+		ArrayList<Kriterien> Kritarray = New_KatalogSQL.get_KritsofKatID(KatID);
 		Object[][] data_Krit= new Object[Kritarray.size()][4];
 
 		int i=0;
-		for (Krit_LPS kr: Kritarray){
+		for (Kriterien kr: Kritarray){
 
 			data_Krit[i][0]=kr.Krit_Nr;
-			data_Krit[i][1]=kr.Krit_LPS_Beschreibung;
+			data_Krit[i][1]=kr.Krit_Beschreibung;
 
-			ArrayList<Ausp_LPS> Ausparray=New_KatalogSQL.get_AuspofKatID(i+1);
-			//ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(i + 1);
+			ArrayList<Auspraegungen> Ausparray=New_KatalogSQL.get_AuspofKatID(i+1);
 			Object[][] data_Ausp1= new Object[Ausparray.size()][1];
 			Object[][] data_Ausp2= new Object[Ausparray.size()][1];
 			int n =  0;
-			for (Ausp_LPS ap: Ausparray){
+			for (Auspraegungen ap: Ausparray){
 				
 				data_Ausp1[n][0]=ap.Auspr_Nr;
-				data_Ausp2[n][0]=ap.Ausp_LPS_Beschreibung;
+				data_Ausp2[n][0]=ap.Auspr_Beschreibung;
 
 				++n;
 

@@ -136,9 +136,9 @@ public class GUI_MONTOP extends JFrame {
 				
 				for (Kriterien krit : kritArray)
 				{
-					int kritId = krit.Krit_id;
+					int kritId = krit.idKrit;
 					ArrayList<Auspraegungen> auspArray = sql_connector.Ausp_SQL.giveAuspraegungenZuKrit(kritId);
-					int auspr_id = auspArray.get(0).Auspr_id;
+					int auspr_id = auspArray.get(0).idAuspr;
 					
 					Used_AuspSQL.set_usedAusp(auspr_id, maxOpId);
 					
@@ -148,7 +148,7 @@ public class GUI_MONTOP extends JFrame {
 					
 				
 					dispose();
-					GUIKRIT guiKrit = new GUIKRIT();
+					GUI_KRIT guiKrit = new GUI_KRIT();
 					guiKrit.setVisible(true);
 		    	}
 

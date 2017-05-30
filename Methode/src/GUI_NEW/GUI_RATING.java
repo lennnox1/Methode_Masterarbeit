@@ -16,7 +16,7 @@ import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class GUI_Rating extends JFrame {
+public class GUI_RATING extends JFrame {
 
 	private JPanel contentPane;
 
@@ -39,7 +39,7 @@ public class GUI_Rating extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_Rating frame = new GUI_Rating();
+					GUI_RATING frame = new GUI_RATING();
 					frame.setVisible(true);
 					frame.pack();
 				} catch (Exception e) {
@@ -52,7 +52,7 @@ public class GUI_Rating extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_Rating() {
+	public GUI_RATING() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

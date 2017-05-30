@@ -11,6 +11,8 @@ import Data.Kriterienkataloge;
 import Data.Projekte;
 import gUITable.TableRendererPanel;
 import sql_connector.New_KatalogSQL;
+import sql_connector.New_project_SQL;
+import sql_connector.list_projectsSQL;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -152,8 +154,21 @@ public class GUI_MAIN extends JFrame {
 		gbc_btnProjektLaden.gridx = 3;
 		gbc_btnProjektLaden.gridy = 1;
 		contentPane.add(btnProjektLaden, gbc_btnProjektLaden);
-
-		JComboBox cBoxProjekt = new JComboBox();
+		
+		
+		ArrayList<Projekte> Projectsarray= list_projectsSQL.giveProjects();
+		Object[] Project_data = new Object[Projectsarray.size()] ;
+		int ind2 = 0;
+		for (Projekte ap1 : Projectsarray)
+		{
+			Project_data[ind2]=ap1.Projekt_name;
+			
+			++ind2;
+		}
+		
+		
+		
+		JComboBox cBoxProjekt = new JComboBox(Project_data);
 		GridBagConstraints gbc_cBoxProjekt = new GridBagConstraints();
 		gbc_cBoxProjekt.insets = new Insets(0, 0, 5, 0);
 		gbc_cBoxProjekt.fill = GridBagConstraints.HORIZONTAL;
@@ -172,7 +187,7 @@ public class GUI_MAIN extends JFrame {
 		txtFProjName = new JTextField();
 		GridBagConstraints gbc_txtFProjName = new GridBagConstraints();
 		gbc_txtFProjName.insets = new Insets(0, 0, 5, 5);
-		gbc_txtFProjName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtFProjName.fill = GridBagConstraints.BOTH;
 		gbc_txtFProjName.gridx = 1;
 		gbc_txtFProjName.gridy = 2;
 		contentPane.add(txtFProjName, gbc_txtFProjName);
@@ -182,6 +197,13 @@ public class GUI_MAIN extends JFrame {
 		btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				New_project_SQL.createProject(txtFProjName.getText());
+				cBoxProjekt.addItem(txtFProjName.getText());
+				
+				GUI_MONTOP guiMO = new GUI_MONTOP();
+				
+				dispose();
+				guiMO.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnOk = new GridBagConstraints();

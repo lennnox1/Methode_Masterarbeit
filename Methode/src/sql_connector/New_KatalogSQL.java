@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Data.Ausp_LPS;
+import Data.Auspraegungen;
 import Data.Krit_LPS;
 import Data.Kriterien;
 import Data.Kriterienkataloge;
@@ -153,7 +154,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 
-		String query= "update kriterienkatalog.krit_lps set Krit_LPS_Beschreibung =? where idKrit_LPS=?;";
+		String query= "update kriterienkatalog.kriterien set Krit_Beschreibung =? where idKrit=?;";
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -182,7 +183,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 		
-		String query= "insert kriterienkatalog.krit_lps  (idKriterienkataloge,Krit_Nr) values(?,?)";
+		String query= "insert kriterienkatalog.kriterien  (idKriterienkataloge,Krit_Nr) values(?,?)";
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -205,22 +206,22 @@ public class New_KatalogSQL {
 		}
 	}
 
-	public static  ArrayList<Krit_LPS> giveKrits() {
+	public static  ArrayList<Kriterien> giveKrits() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		ArrayList<Krit_LPS> Kritarray= new ArrayList<Krit_LPS>();
+		ArrayList<Kriterien> Kritarray= new ArrayList<Kriterien>();
 		try {
 		
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.krit_lps ");
+			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.kriterien ");
 			while (rs.next()) {
-				Krit_LPS Kritobj= new Krit_LPS();
-				Kritobj.idKrit_LPS = rs.getInt("idKrit_LPS");
+				Kriterien Kritobj= new Kriterien();
+				Kritobj.idKrit = rs.getInt("idKrit");
 				Kritobj.Krit_Nr= rs.getString("Krit_Nr");
-				Kritobj.Krit_LPS_Beschreibung = rs.getString("Krit_LPS_Beschreibung");
+				Kritobj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 				Kritobj.idKriterienkataloge= rs.getInt("idKriterienkataloge");
 				Kritarray.add(Kritobj);
 				
@@ -238,13 +239,13 @@ public class New_KatalogSQL {
 	}
 	
 	
-	public static  ArrayList<Krit_LPS> get_KritsofKatID(int idKritKat) {
+	public static  ArrayList<Kriterien> get_KritsofKatID(int idKritKat) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs   =null;
-		ArrayList<Krit_LPS> KritArray= new ArrayList<Krit_LPS>();
+		ArrayList<Kriterien> KritArray= new ArrayList<Kriterien>();
 
-		String query= "SELECT * FROM kriterienkatalog.krit_lps WHERE idKriterienkataloge=?";
+		String query= "SELECT * FROM kriterienkatalog.kriterien WHERE idKriterienkataloge=?";
 
 		try {
 			
@@ -258,10 +259,10 @@ public class New_KatalogSQL {
 			rs = preStmt_kritKatalog.executeQuery();
 			
 			while (rs.next()) {
-				Krit_LPS Krit_obj= new Krit_LPS();
-				Krit_obj.idKrit_LPS = rs.getInt("idKrit_LPS");
+				Kriterien Krit_obj= new Kriterien();
+				Krit_obj.idKrit = rs.getInt("idKrit");
 				Krit_obj.Krit_Nr= rs.getString("Krit_Nr");
-				Krit_obj.Krit_LPS_Beschreibung = rs.getString("Krit_LPS_Beschreibung");
+				Krit_obj.Krit_Beschreibung = rs.getString("Krit_Beschreibung");
 				Krit_obj.idKriterienkataloge = rs.getInt("idKriterienkataloge");
 				KritArray.add(Krit_obj);
 			}
@@ -310,7 +311,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 		
-		String query= "insert kriterienkatalog.ausp_lps  (idKrit_LPS,Auspr_Nr) values(?,?)";
+		String query= "insert kriterienkatalog.auspraegungen  (idKrit,Auspr_Nr) values(?,?)";
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -336,7 +337,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 
-		String query= "update kriterienkatalog.ausp_lps set Ausp_LPS_Beschreibung =? where idAusp_LPS=?;";
+		String query= "update kriterienkatalog.auspraegungen set Auspr_Beschreibung =? where idAuspr=?;";
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -360,13 +361,13 @@ public class New_KatalogSQL {
 		}
 	}
 	
-	public static  ArrayList<Ausp_LPS> get_AuspofKatID(int idKrit_LPS) {
+	public static  ArrayList<Auspraegungen> get_AuspofKatID(int idKrit_LPS) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs   =null;
-		ArrayList<Ausp_LPS> AuspArray= new ArrayList<Ausp_LPS>();
+		ArrayList<Auspraegungen> AuspArray= new ArrayList<Auspraegungen>();
 
-		String query= "SELECT * FROM kriterienkatalog.ausp_lps WHERE idKrit_LPS=?";
+		String query= "SELECT * FROM kriterienkatalog.auspraegungen WHERE idKrit=?";
 
 		try {
 			
@@ -380,11 +381,11 @@ public class New_KatalogSQL {
 			rs = preStmt_kritKatalog.executeQuery();
 			
 			while (rs.next()) {
-				Ausp_LPS Ausp_obj= new Ausp_LPS();
-				Ausp_obj.idAusp_LPS = rs.getInt("idAusp_LPS");
+				Auspraegungen Ausp_obj= new Auspraegungen();
+				Ausp_obj.idAuspr = rs.getInt("idAuspr");
 				Ausp_obj.Auspr_Nr= rs.getString("Auspr_Nr");
-				Ausp_obj.Ausp_LPS_Beschreibung = rs.getString("Ausp_LPS_Beschreibung");
-				Ausp_obj.idKrit_LPS = rs.getInt("idKrit_LPS");
+				Ausp_obj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
+				Ausp_obj.idKrit = rs.getInt("idKrit");
 				AuspArray.add(Ausp_obj);
 			}
 		} catch (Exception e) {

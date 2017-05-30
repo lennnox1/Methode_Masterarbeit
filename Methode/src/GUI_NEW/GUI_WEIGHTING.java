@@ -173,8 +173,8 @@ public class GUI_WEIGHTING extends JFrame {
 		for(i = 0; i < Used_ausprArray.size(); i++) {
 			bgroupRating[i]= new ButtonGroup(); 
 			retUsed_auspr=Used_ausprArray.get(i); 
-			retAus = sql_connector.Ausp_SQL.giveAusp(retUsed_auspr.Auspr_id);
-			retKrit = sql_connector.Krit_SQL.giveKrit(retAus.Krit_id);
+			retAus = sql_connector.Ausp_SQL.giveAusp(retUsed_auspr.idAuspr);
+			retKrit = sql_connector.Krit_SQL.giveKrit(retAus.idKrit);
 
 
 

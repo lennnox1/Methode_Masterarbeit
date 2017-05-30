@@ -30,7 +30,7 @@ public class Used_AuspSQL {
 		Statement stmt = null;
 	
 		//String query1= "update kriterienkatalog.mont_op  set montOP_name = ? where idProjekte=?";
-		String query1= "insert kriterienkatalog.used_auspr  (idMonOP,Auspr_id) values(?,?)";
+		String query1= "insert kriterienkatalog.used_auspr  (idMonOP,idAuspr) values(?,?)";
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -150,7 +150,7 @@ public class Used_AuspSQL {
 		Connection conn = null;
 		Statement stmt = null;
 	
-		String query1= "update kriterienkatalog.used_auspr set Auspr_id =? ,ratingFM=? ,ratingFR=?, relevant=? where idused_Auspr=?;";
+		String query1= "update kriterienkatalog.used_auspr set idAuspr =? ,ratingFM=? ,ratingFR=?, relevant=? where idused_Auspr=?;";
 		try {
 	
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -240,7 +240,7 @@ public class Used_AuspSQL {
 				Used_auspr Used_ausprobj= new Used_auspr();
 				Used_ausprobj.idused_Auspr= rs.getInt("idused_Auspr");
 				Used_ausprobj.idMonOP= rs.getInt("idMonOP");
-				Used_ausprobj.Auspr_id= rs.getInt("Auspr_id");
+				Used_ausprobj.idAuspr= rs.getInt("idAuspr");
 				Used_ausprobj.ratingFM= rs.getDouble("ratingFM");
 				Used_ausprobj.ratingFR= rs.getDouble("ratingFR");
 				Used_ausprobj.relevant= rs.getBoolean("relevant");
