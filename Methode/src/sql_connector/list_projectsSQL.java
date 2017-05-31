@@ -8,11 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.swing.ComboBoxModel;
 
-import Data.Auspraegungen;
-import Data.Kriterien;
-import Data.Mont_OP;
 import Data.Projekte;
 
 public class list_projectsSQL {

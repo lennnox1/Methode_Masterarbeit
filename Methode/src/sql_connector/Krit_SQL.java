@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Data.Kriterien;
-import Data.Projekte;
 
-//import com.mysql.jdbc.Driver;
+
+
 
 public class Krit_SQL {
 

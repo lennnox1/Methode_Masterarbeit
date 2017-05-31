@@ -7,9 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Data.Auspraegungen;
-import Data.Kriterien;
 
-//import com.mysql.jdbc.Driver;
+
+
 
 public class Ausp_SQL {
 	

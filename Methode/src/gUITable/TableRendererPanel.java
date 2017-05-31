@@ -1,14 +1,14 @@
 package gUITable;
 import java.awt.*;
-import java.awt.event.*;
+
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.*;
 
-import Data.Ausp_LPS;
+
 import Data.Auspraegungen;
-import Data.Krit_LPS;
+
 import Data.Kriterien;
 
 import sql_connector.Ausp_SQL;

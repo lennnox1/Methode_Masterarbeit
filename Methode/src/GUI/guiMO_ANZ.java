@@ -102,7 +102,7 @@ public class guiMO_ANZ extends JPanel {
 		 		 
 		 		++i;
 	    		System.out.println(i);
-	    		sql_connector.New_project_SQL.set_Montage_Name(txtmontOPNames.getText());
+	    		//sql_connector.New_project_SQL.set_Montage_Name(txtmontOPNames.getText());
 		 		 
 			    	if(i==k){
 			    		

@@ -14,7 +14,6 @@ import Data.Mont_OP;
 import Data.Projekte;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
-import sql_connector.New_project_SQL;
 import sql_connector.Used_AuspSQL;
 import sql_connector.list_projectsSQL;
 
@@ -35,10 +34,15 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class GUI_KRIT extends JFrame {
 
+	/**
+	 * 
+	 */
+	
 	private JPanel contentPane;
-	private int n =1;
+	private int n = 1;
 	private int i = 0;
 	private int usedAusp_id = 0;
 	private int nMontOP =0;

@@ -7,8 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Data.Auspraegungen;
-import Data.Mont_OP;
+
 import Data.Projekte;
 
 import java.sql.PreparedStatement;
@@ -33,7 +32,7 @@ public class New_project_SQL {
 	public static  String  createProject(String r) {
 		Connection conn = null;
 		Statement stmt = null;
-		int id=1;
+		
 		String query = " insert into projekte (Projekt_name)" + " values (?)"; 
 		try {
 
@@ -193,39 +192,6 @@ public class New_project_SQL {
 			
 		}
 	
-		
-		
-		
-		
-		public static  String set_Montage_Name(String t) {
-			Connection conn = null;
-			Statement stmt = null;
-		
-			
-			String query1= "insert kriterienkatalog.mont_op  (montOP_name,idProjekte) values(?,?)";
-			try {
-
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-			    conn = get_connection();
-			   
-			    preStmt_Mont_Name = conn.prepareStatement(query1);
-			    preStmt_Mont_Name.setString(1,t);
-			    preStmt_Mont_Name.setInt(2,get_lastProjID());
-			    preStmt_Mont_Name.execute();
-			   
-			    
-			    
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-
-				try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-				
-			}
-			return t;
-		
-	}
 		
 		
 		public static  void set_katID(int idKat) {

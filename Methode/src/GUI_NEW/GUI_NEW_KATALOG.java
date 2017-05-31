@@ -1,15 +1,15 @@
 package GUI_NEW;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Data.Ausp_LPS;
+
 import Data.Auspraegungen;
-import Data.Krit_LPS;
+
 import Data.Kriterien;
 import Data.Kriterienkataloge;
 
@@ -24,14 +24,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-import javax.swing.JSlider;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Dimension;
 
+@SuppressWarnings("serial")
 public class GUI_NEW_KATALOG extends JFrame {
 
 	private JPanel contentPane;
@@ -73,9 +72,9 @@ public class GUI_NEW_KATALOG extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 168, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 		JLabel lblKatalogName = new JLabel("Name:");
@@ -288,7 +287,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		JLabel lblAhg = new JLabel("Ahg:");
 		GridBagConstraints gbc_lblAhg = new GridBagConstraints();
 		gbc_lblAhg.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblAhg.insets = new Insets(0, 0, 0, 5);
+		gbc_lblAhg.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAhg.gridx = 0;
 		gbc_lblAhg.gridy = 7;
 		contentPane.add(lblAhg, gbc_lblAhg);
@@ -298,7 +297,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		JScrollPane scrollPaneAuspBesch = new JScrollPane();
 		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.gridx = 1;
 		gbc_scrollPane_1.gridy = 7;
 		contentPane.add(scrollPaneAuspBesch, gbc_scrollPane_1);
@@ -340,10 +339,23 @@ public class GUI_NEW_KATALOG extends JFrame {
 		});
 		GridBagConstraints gbc_btnAauspBesch = new GridBagConstraints();
 		gbc_btnAauspBesch.anchor = GridBagConstraints.NORTH;
-		gbc_btnAauspBesch.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAauspBesch.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAauspBesch.gridx = 2;
 		gbc_btnAauspBesch.gridy = 7;
 		contentPane.add(btnAauspBesch, gbc_btnAauspBesch);
+		
+		JButton btnHauptmen = new JButton("Hauptmenü");
+		btnHauptmen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GUI_MAIN guiMain = new GUI_MAIN();
+				dispose();
+				guiMain.setVisible(true);
+			}
+		});
+		GridBagConstraints gbc_btnHauptmen = new GridBagConstraints();
+		gbc_btnHauptmen.gridx = 3;
+		gbc_btnHauptmen.gridy = 8;
+		contentPane.add(btnHauptmen, gbc_btnHauptmen);
 
 	}
 

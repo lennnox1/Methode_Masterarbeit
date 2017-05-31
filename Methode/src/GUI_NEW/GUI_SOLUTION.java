@@ -9,7 +9,9 @@ import javax.swing.border.EmptyBorder;
 
 import Algorithmus.Eignungsgrade;
 import Data.Mont_OP;
-import GUI.GUI;
+//import GUI.GUI;
+import sql_connector.Mont_OPSQL;
+import sql_connector.Solution_SQL;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -79,7 +81,7 @@ public class GUI_SOLUTION extends JFrame {
 
 		Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
 		
-		System.out.println(Mont_OParray.size());
+		//System.out.println(Mont_OParray.size());
 		
 		Eignungsgrade eigGrade = new Eignungsgrade();
 
@@ -155,7 +157,13 @@ public class GUI_SOLUTION extends JFrame {
 			}
 		
 		}
-	
+		ArrayList<Mont_OP> Mont_OParray= Mont_OPSQL.get_lastMontOP();
+		
+		for(int i=0; i< Mont_OParray.size();i++){
+			Mont_OP retMontOP=Mont_OParray.get(i);
+			
+			Solution_SQL.update_FMFR(eigGrade.RatingFM[i],eigGrade.RatingFR[i],retMontOP.idmontOP);
+		}
 
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {

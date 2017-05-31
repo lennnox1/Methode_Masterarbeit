@@ -1,6 +1,6 @@
 package GUI_NEW;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -55,14 +55,14 @@ public class GUI_MAIN extends JFrame {
 	 */
 	public GUI_MAIN() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 300);
+		setBounds(100, 100, 750, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 150, 0, 0, 150, 0};
+		gbl_contentPane.columnWidths = new int[]{0, 150, 0, 0, 0, 150, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
@@ -76,16 +76,27 @@ public class GUI_MAIN extends JFrame {
 		JLabel lblProjekte = new JLabel("Projekte:");
 		GridBagConstraints gbc_lblProjekte = new GridBagConstraints();
 		gbc_lblProjekte.insets = new Insets(0, 0, 5, 0);
-		gbc_lblProjekte.gridx = 4;
+		gbc_lblProjekte.gridx = 5;
 		gbc_lblProjekte.gridy = 0;
 		contentPane.add(lblProjekte, gbc_lblProjekte);
 
 		JButton btnNeuesProjekt = new JButton("Neues Projekt");
 		btnNeuesProjekt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lblProjName.setVisible(true);
-				txtFProjName.setVisible(true);
-				btnOk.setVisible(true);
+				
+				if (lblProjName.isVisible()){
+					lblProjName.setVisible(false);
+					txtFProjName.setVisible(false);
+					btnOk.setVisible(false);
+				}
+				else{
+					lblProjName.setVisible(true);
+					txtFProjName.setVisible(true);
+					btnOk.setVisible(true);
+				}
+				
+				
+				
 			}
 		});
 		GridBagConstraints gbc_btnNeuesProjekt = new GridBagConstraints();
@@ -161,11 +172,28 @@ public class GUI_MAIN extends JFrame {
 		JButton btnProjektLaden = new JButton("Projekt laden");
 		btnProjektLaden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GUI_SOLUTION guiSolution = new GUI_SOLUTION();
+				dispose();
+				guiSolution.setVisible(true);
 			}
 		});
+		
+		JButton btnKatalogErstellen = new JButton("Katalog erstellen");
+		btnKatalogErstellen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				GUI_NEW_KATALOG guiKatalog = new GUI_NEW_KATALOG();
+				dispose();
+				guiKatalog.setVisible(true);
+			}
+		});
+		GridBagConstraints gbc_btnKatalogErstellen = new GridBagConstraints();
+		gbc_btnKatalogErstellen.insets = new Insets(0, 0, 5, 5);
+		gbc_btnKatalogErstellen.gridx = 3;
+		gbc_btnKatalogErstellen.gridy = 1;
+		contentPane.add(btnKatalogErstellen, gbc_btnKatalogErstellen);
 		GridBagConstraints gbc_btnProjektLaden = new GridBagConstraints();
 		gbc_btnProjektLaden.insets = new Insets(0, 0, 5, 5);
-		gbc_btnProjektLaden.gridx = 3;
+		gbc_btnProjektLaden.gridx = 4;
 		gbc_btnProjektLaden.gridy = 1;
 		contentPane.add(btnProjektLaden, gbc_btnProjektLaden);
 		
@@ -186,7 +214,7 @@ public class GUI_MAIN extends JFrame {
 		GridBagConstraints gbc_cBoxProjekt = new GridBagConstraints();
 		gbc_cBoxProjekt.insets = new Insets(0, 0, 5, 0);
 		gbc_cBoxProjekt.fill = GridBagConstraints.HORIZONTAL;
-		gbc_cBoxProjekt.gridx = 4;
+		gbc_cBoxProjekt.gridx = 5;
 		gbc_cBoxProjekt.gridy = 1;
 		contentPane.add(cBoxProjekt, gbc_cBoxProjekt);
 

@@ -1,6 +1,6 @@
 package GUI_NEW;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +17,7 @@ import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Mont_OP;
 import Data.Projekte;
+import sql_connector.Mont_OPSQL;
 import sql_connector.New_project_SQL;
 import sql_connector.Used_AuspSQL;
 import sql_connector.list_projectsSQL;
@@ -25,6 +26,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+@SuppressWarnings("serial")
 public class GUI_MONTOP extends JFrame {
 
 	private JPanel contentPane;
@@ -96,7 +98,7 @@ public class GUI_MONTOP extends JFrame {
 		getContentPane().add(btn_mont_OP_Name, gbc_btn_mont_OP_Name);
 		
 		
-		ArrayList<Mont_OP> Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
+		//ArrayList<Mont_OP> Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
 		Projarray = New_project_SQL.giveAnzMOPZuLastID();
 		Projekte test = Projarray.get(0);
 		int k=test.Anz_Montageop;
@@ -118,7 +120,7 @@ public class GUI_MONTOP extends JFrame {
 				++i;
 				System.out.println("k:"+k);
 				System.out.println("i:"+i);
-				sql_connector.New_project_SQL.set_Montage_Name(txtMon_Name.getText());
+				Mont_OPSQL.set_Montage_Name(txtMon_Name.getText());
 				
 				ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
 				

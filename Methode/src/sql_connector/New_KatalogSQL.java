@@ -8,12 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Data.Ausp_LPS;
+
 import Data.Auspraegungen;
-import Data.Krit_LPS;
 import Data.Kriterien;
 import Data.Kriterienkataloge;
-import Data.Mont_OP;
+
 
 public class New_KatalogSQL {
 

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Data.Auspraegungen;
+
 import Data.Used_auspr;
 
 import java.sql.PreparedStatement;
