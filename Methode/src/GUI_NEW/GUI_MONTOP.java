@@ -134,6 +134,7 @@ public class GUI_MONTOP extends JFrame {
 					    	maxOpId = retMont_OP.idmontOP;
 					    	projId  = retMont_OP.idProjekte;
 					    }
+					    
 					}
 				ArrayList<Projekte> Projektarray = list_projectsSQL.get_lastProject();
 				Projekte retProj = Projektarray.get(0);
@@ -146,7 +147,8 @@ public class GUI_MONTOP extends JFrame {
 					ArrayList<Auspraegungen> auspArray = sql_connector.Ausp_SQL.giveAuspraegungenZuKrit(kritId);
 					int auspr_id = auspArray.get(0).idAuspr;
 					
-					Used_AuspSQL.set_usedAusp(auspr_id, maxOpId);
+					Used_AuspSQL.set_usedAusp(maxOpId,auspr_id,0.5,0.5,false,3);
+					
 					
 				}
 				

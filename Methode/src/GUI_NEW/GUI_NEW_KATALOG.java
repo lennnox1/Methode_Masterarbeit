@@ -12,6 +12,7 @@ import Data.Auspraegungen;
 
 import Data.Kriterien;
 import Data.Kriterienkataloge;
+import Steuerung.HochTiefSteller;
 
 import java.awt.GridBagLayout;
 import sql_connector.New_KatalogSQL;
@@ -72,9 +73,9 @@ public class GUI_NEW_KATALOG extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 168, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 20, 0, 0, 0, 16, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 		JLabel lblKatalogName = new JLabel("Name:");
@@ -150,10 +151,13 @@ public class GUI_NEW_KATALOG extends JFrame {
 
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.BLACK);
-		separator.setPreferredSize(new Dimension(50,1));
+		separator.setPreferredSize(new Dimension(50,5));
 		GridBagConstraints gbc_separator = new GridBagConstraints();
-		gbc_separator.insets = new Insets(0, 0, 5, 5);
-		gbc_separator.gridx = 1;
+		gbc_separator.fill = GridBagConstraints.HORIZONTAL;
+		gbc_separator.gridwidth = 4;
+		gbc_separator.insets = new Insets(0, 0, 5, 0);
+		gbc_separator.weightx = 1.0;
+		gbc_separator.gridx = 0;
 		gbc_separator.gridy = 2;
 		contentPane.add(separator, gbc_separator);
 
@@ -269,19 +273,29 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_btnAnzAusp.gridx = 2;
 		gbc_btnAnzAusp.gridy = 5;
 		contentPane.add(btnAnzAusp, gbc_btnAnzAusp);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setForeground(Color.BLACK);
+		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
+		gbc_separator_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_separator_1.gridwidth = 4;
+		gbc_separator_1.insets = new Insets(0, 0, 5, 5);
+		gbc_separator_1.gridx = 0;
+		gbc_separator_1.gridy = 6;
+		contentPane.add(separator_1, gbc_separator_1);
 
 		JLabel lblBeschreibung_1 = new JLabel("Beschreibung:");
 		GridBagConstraints gbc_lblBeschreibung_1 = new GridBagConstraints();
 		gbc_lblBeschreibung_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBeschreibung_1.gridx = 1;
-		gbc_lblBeschreibung_1.gridy = 6;
+		gbc_lblBeschreibung_1.gridy = 7;
 		contentPane.add(lblBeschreibung_1, gbc_lblBeschreibung_1);
 
 		JLabel lblAVonAhg = new JLabel("A11 von Ahg");
 		GridBagConstraints gbc_lblAVonAhg = new GridBagConstraints();
 		gbc_lblAVonAhg.insets = new Insets(0, 0, 5, 0);
 		gbc_lblAVonAhg.gridx = 3;
-		gbc_lblAVonAhg.gridy = 6;
+		gbc_lblAVonAhg.gridy = 7;
 		contentPane.add(lblAVonAhg, gbc_lblAVonAhg);
 
 		JLabel lblAhg = new JLabel("Ahg:");
@@ -289,7 +303,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_lblAhg.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblAhg.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAhg.gridx = 0;
-		gbc_lblAhg.gridy = 7;
+		gbc_lblAhg.gridy = 8;
 		contentPane.add(lblAhg, gbc_lblAhg);
 
 
@@ -299,7 +313,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane_1.gridx = 1;
-		gbc_scrollPane_1.gridy = 7;
+		gbc_scrollPane_1.gridy = 8;
 		contentPane.add(scrollPaneAuspBesch, gbc_scrollPane_1);
 
 		JTextArea txtAauspBesch = new JTextArea();
@@ -341,7 +355,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_btnAauspBesch.anchor = GridBagConstraints.NORTH;
 		gbc_btnAauspBesch.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAauspBesch.gridx = 2;
-		gbc_btnAauspBesch.gridy = 7;
+		gbc_btnAauspBesch.gridy = 8;
 		contentPane.add(btnAauspBesch, gbc_btnAauspBesch);
 		
 		JButton btnHauptmen = new JButton("Hauptmenü");
@@ -354,7 +368,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		});
 		GridBagConstraints gbc_btnHauptmen = new GridBagConstraints();
 		gbc_btnHauptmen.gridx = 3;
-		gbc_btnHauptmen.gridy = 8;
+		gbc_btnHauptmen.gridy = 9;
 		contentPane.add(btnHauptmen, gbc_btnHauptmen);
 
 	}
@@ -366,7 +380,8 @@ public class GUI_NEW_KATALOG extends JFrame {
 		}
 		else{
 
-			lblKVonKn.setText("K"+(i+1)+" von K"+KritArray.size());
+			
+			lblKVonKn.setText(HochTiefSteller.stelleZiffernTief("K"+(i+1)+" von K"+KritArray.size()));
 			Kriterien retKrit = KritArray.get(i);
 
 			New_KatalogSQL.update_KritKatalog(txtAKritBesch.getText(),retKrit.idKrit);

@@ -12,6 +12,8 @@ import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Mont_OP;
 import Data.Projekte;
+import Data.Used_auspr;
+import Steuerung.HochTiefSteller;
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
 import sql_connector.Used_AuspSQL;
@@ -45,6 +47,8 @@ public class GUI_KRIT extends JFrame {
 	private int n = 1;
 	private int i = 0;
 	private int usedAusp_id = 0;
+	private int maxUusedAusp_id = 0;
+	private int minUusedAusp_id=0;
 	private int nMontOP =0;
 	private int anzMomtOp = 0;
 	private Mont_OP retMont_OP;
@@ -118,7 +122,7 @@ public class GUI_KRIT extends JFrame {
 		
 		
 		
-		//Kriterien krit = Krit_SQL.giveKrit(n);
+		
 		Kriterien krit = Krit_SQL.giveKrit(n, retProj.idKriterienkataloge);
 		
 		
@@ -130,11 +134,14 @@ public class GUI_KRIT extends JFrame {
 
 		if (n==1)
 		{
-			usedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
+			minUusedAusp_id = sql_connector.Used_AuspSQL.get_minAuspID(retMont_OP.idmontOP);
+			maxUusedAusp_id = sql_connector.Used_AuspSQL.get_maxAuspID(retMont_OP.idmontOP);
+			usedAusp_id= minUusedAusp_id;
 		}
+		Used_auspr retUsed_auspr = Used_AuspSQL.get_usedAuspr(usedAusp_id);
 
-
-		JLabel lblMontOP = new JLabel("O"+(nMontOP+1)+":");
+		
+		JLabel lblMontOP = new JLabel(HochTiefSteller.stelleZiffernTief("O"+(nMontOP+1)+":"));
 		GridBagConstraints gbc_lblMontOP = new GridBagConstraints();
 		gbc_lblMontOP.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMontOP.anchor = GridBagConstraints.WEST;
@@ -171,7 +178,7 @@ public class GUI_KRIT extends JFrame {
 		gbc_lblBeschreibung.gridy = 1;
 		contentPane.add(lblBeschreibung, gbc_lblBeschreibung);
 
-		JLabel lblKritNR = new JLabel(krit.Krit_Nr+":");
+		JLabel lblKritNR = new JLabel(HochTiefSteller.stelleZiffernTief(krit.Krit_Nr+":"));
 		GridBagConstraints gbc_lblKritNR = new GridBagConstraints();
 		gbc_lblKritNR.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblKritNR.insets = new Insets(0, 0, 5, 5);
@@ -211,16 +218,23 @@ public class GUI_KRIT extends JFrame {
 		for (i = 0; i < Ausparray.size(); i++) {
 			Auspraegungen retAus = Ausparray.get(i);
 			JRadioButton rdbtnAuspBesch = new JRadioButton(retAus.Auspr_Beschreibung);
+			if (retUsed_auspr.relevant  && retUsed_auspr.idAuspr == retAus.idAuspr)
+			{
+				rdbtnAuspBesch.setSelected(true);
+			}
 			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.idAuspr));
 			rdbtnAuspBesch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
+					//relevant=retUsed_auspr.relevant;
 					relevant=true;
 				}
 			});
 
+			
+			
+			
 			bGroupAusp.add(rdbtnAuspBesch);
-			rdbtnAuspBesch.setSelected(true);
 			GridBagConstraints gbc_rdbtnAuspBesch = new GridBagConstraints();
 			gbc_rdbtnAuspBesch.anchor = GridBagConstraints.NORTHWEST;
 			gbc_rdbtnAuspBesch.insets = new Insets(0, 0, 5, 0);
@@ -230,7 +244,7 @@ public class GUI_KRIT extends JFrame {
 			JLabel lblAuspNR;
 			if (retAus.Auspr_Nr != null)
 			{
-				lblAuspNR = new JLabel(retAus.Auspr_Nr+":");
+				lblAuspNR = new JLabel(HochTiefSteller.stelleZiffernTief(retAus.Auspr_Nr+":"));
 			}else{
 				lblAuspNR = new JLabel("");
 			}
@@ -266,9 +280,10 @@ public class GUI_KRIT extends JFrame {
 		rdbtnNotRelevant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				System.out.println(e.getActionCommand());
-				System.out.println("e.source " +e.getSource());
-				System.out.println("Exc " +e );
+				//System.out.println(e.getActionCommand());
+				//System.out.println("e.source " +e.getSource());
+				//System.out.println("Exc " +e );
+				//relevant=retUsed_auspr.relevant;
 				relevant=false;
 			}
 		});
@@ -282,11 +297,11 @@ public class GUI_KRIT extends JFrame {
 		gbc_rdbtnNotRelevant.gridy = i+6;
 		contentPane.add(rdbtnNotRelevant, gbc_rdbtnNotRelevant);
 
-		rdbtnNotRelevant.setSelected(true);
+		rdbtnNotRelevant.setSelected(!retUsed_auspr.relevant);
 
 
 
-
+		
 
 		JButton btnPrevious = new JButton("PREVIOUS");
 		btnPrevious.addActionListener(new ActionListener() {
@@ -376,14 +391,14 @@ public class GUI_KRIT extends JFrame {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 
-		JLabel label = new JLabel("FM:");
+		JLabel label = new JLabel("<html> F<sub>M</sub>: </html>");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 1;
 		gbc_label.gridy = 0;
 		panel.add(label, gbc_label);
 
-		JLabel label_1 = new JLabel("FR:");
+		JLabel label_1 = new JLabel("<html> F<sub>R</sub>: </html>");
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.insets = new Insets(0, 0, 5, 5);
 		gbc_label_1.gridx = 3;
@@ -404,6 +419,7 @@ public class GUI_KRIT extends JFrame {
 				rbtnFRWorse.setSelected(true);
 			}
 		});
+		
 		GridBagConstraints gbc_rbtnFMBetter = new GridBagConstraints();
 		gbc_rbtnFMBetter.anchor = GridBagConstraints.WEST;
 		gbc_rbtnFMBetter.insets = new Insets(0, 0, 5, 5);
@@ -425,6 +441,7 @@ public class GUI_KRIT extends JFrame {
 				rbtnFMWorse.setSelected(true);
 			}
 		});
+		
 		GridBagConstraints gbc_rbtnFRBetter = new GridBagConstraints();
 		gbc_rbtnFRBetter.anchor = GridBagConstraints.WEST;
 		gbc_rbtnFRBetter.insets = new Insets(0, 0, 5, 5);
@@ -541,7 +558,13 @@ public class GUI_KRIT extends JFrame {
 		gbc_label_10.gridy = 3;
 		panel.add(label_10, gbc_label_10);
 
-
+		rbtnFRBetter.setSelected(retUsed_auspr.ratingFR == 1.0);
+		rbtnFREqual.setSelected(retUsed_auspr.ratingFR == 0.5);
+		rbtnFRWorse.setSelected(retUsed_auspr.ratingFR == 0);
+		
+		rbtnFMBetter.setSelected(retUsed_auspr.ratingFM == 1.0);
+		rbtnFMEqual.setSelected(retUsed_auspr.ratingFM == 0.5);
+		rbtnFMWorse.setSelected(retUsed_auspr.ratingFM == 0);
 	}
 
 	protected void getSelectedBtnF() {
