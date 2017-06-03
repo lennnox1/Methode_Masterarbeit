@@ -11,8 +11,9 @@ import java.util.ArrayList;
 
 import Data.Projekte;
 
+
 public class list_projectsSQL {
-	public static PreparedStatement preStmt_Mont_Nr;
+	public static PreparedStatement preStmt_Projekt;
 	
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;
@@ -63,10 +64,10 @@ public class list_projectsSQL {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 		    conn = get_connection();
 		    
-		    preStmt_Mont_Nr = conn.prepareStatement(query1);
-		    preStmt_Mont_Nr.setString(1, r);
-		    preStmt_Mont_Nr.execute();
-		    rs = preStmt_Mont_Nr.executeQuery();
+		    preStmt_Projekt = conn.prepareStatement(query1);
+		    preStmt_Projekt.setString(1, r);
+		    preStmt_Projekt.execute();
+		    rs = preStmt_Projekt.executeQuery();
 		    while (rs.next()) {
 
 		    	Mont_Nr = rs.getInt("Anz_Montageop");
@@ -119,4 +120,44 @@ public static  ArrayList<Projekte> get_lastProject() {
 
 		return Projektarray;
 	}
+
+public static Projekte get_Project(int projektID) {
+	
+	Connection conn = null;
+	Statement stmt = null;
+	ResultSet rs   =null;
+	ArrayList<Projekte> Projektarray= new ArrayList<Projekte>();
+	String query= "SELECT * FROM kriterienkatalog.projekte WHERE idProjekte=?";
+	Projekte retProjekt= new Projekte();
+	try {
+
+	
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		conn = get_connection();
+		preStmt_Projekt = conn.prepareStatement(query);
+		preStmt_Projekt.setInt(1,projektID);
+		preStmt_Projekt.execute();
+		
+		rs = preStmt_Projekt.executeQuery();
+		
+		
+		while (rs.next()) {
+			
+			retProjekt.idProjekte = rs.getInt("idProjekte");
+			retProjekt.Projekt_name = rs.getString("Projekt_name");
+			retProjekt.idKriterienkataloge = rs.getInt("idKriterienkataloge");
+			
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+
+		try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+		try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+
+	}
+
+
+	return retProjekt;
+}
 }

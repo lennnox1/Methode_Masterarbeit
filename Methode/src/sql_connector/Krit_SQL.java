@@ -203,4 +203,75 @@ public class Krit_SQL {
 
 	}
 	
+	public static  int get_minKritID(int idKat) {
+		int id=0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		
+		String query= "SELECT min(idKrit) FROM kriterienkatalog.kriterien  where idKriterienkataloge=?";
+		
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+
+			preStmt_Krit = conn.prepareStatement(query);
+			preStmt_Krit.setInt(1,idKat);
+			preStmt_Krit.execute();
+			
+			rs = preStmt_Krit.executeQuery();
+		    if (rs.next()) {
+		       id = rs.getInt(1);
+		     
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+		
+		
+		
+		
+		return id;
+	}
+	
+	public static  int get_maxKritID(int idKat) {
+		int id=0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		
+		String query= "SELECT max(idKrit) FROM kriterienkatalog.kriterien  where idKriterienkataloge=?";
+		
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+
+			preStmt_Krit = conn.prepareStatement(query);
+			preStmt_Krit.setInt(1,idKat);
+			preStmt_Krit.execute();
+			
+			rs = preStmt_Krit.executeQuery();
+		    if (rs.next()) {
+		       id = rs.getInt(1);
+		     
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+		
+		return id;
+	}
+	
 }

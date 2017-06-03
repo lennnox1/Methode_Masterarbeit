@@ -34,6 +34,7 @@ public class GUI_MAIN extends JFrame {
 	private JButton btnOk;
 	private int[] Katalog_id ;
 	private JPanel TablePanel;
+	public static int projektID = 1;
 	/**
 	 * Launch the application.
 	 */
@@ -242,6 +243,9 @@ public class GUI_MAIN extends JFrame {
 				New_project_SQL.createProject(txtFProjName.getText());
 				cBoxProjekt.addItem(txtFProjName.getText());
 				New_project_SQL.set_katID(Katalog_id[cBoxKatalog.getSelectedIndex()]);
+				ArrayList<Projekte> Projektarray = list_projectsSQL.get_lastProject();
+				projektID = Projektarray.get(0).idProjekte;
+			
 				
 				GUI_MONTOP guiMO = new GUI_MONTOP();
 				

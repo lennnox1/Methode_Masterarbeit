@@ -13,6 +13,7 @@ import Data.Mont_OP;
 import Data.Used_auspr;
 import Steuerung.HochTiefSteller;
 import sql_connector.Krit_SQL;
+import sql_connector.Used_AuspSQL;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -184,8 +185,6 @@ public class GUI_WEIGHTING extends JFrame {
 		ButtonGroup[] bgroupRating = new ButtonGroup[Used_ausprArray.size()];
 
 
-
-
 		for(i = 0; i < Used_ausprArray.size(); i++) {
 			
 			bgroupRating[i]= new ButtonGroup(); 
@@ -263,7 +262,7 @@ public class GUI_WEIGHTING extends JFrame {
 
 
 			//Default RadioButton Selection
-			rdbtn3.setSelected(true);
+			//rdbtn3.setSelected(true);
 
 			JRadioButton rdbtn4 = new JRadioButton("4");
 			rdbtn4.setActionCommand("4");
@@ -285,8 +284,35 @@ public class GUI_WEIGHTING extends JFrame {
 			contentPane1.add(rdbtn5, gbc_rdbtn5);
 
 
+			switch (Used_ausprArray.get(i).gewichtung){
+			case 1:
+			{
+				rdbtn1.setSelected(true);
+				break;
+			}
+			case 2:
+			{
+				rdbtn2.setSelected(true);
+				break;
+			}
+			case 3:
+			{
+				rdbtn3.setSelected(true);
+				break;
+			}
+			case 4:
+			{
+				rdbtn4.setSelected(true);
+				break;
+			}
+			case 5:
+			{
+				rdbtn5.setSelected(true);
+				break;
+			}
+			}
 		}
-
+	 
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

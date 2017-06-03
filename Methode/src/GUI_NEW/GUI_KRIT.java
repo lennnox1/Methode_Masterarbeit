@@ -49,6 +49,9 @@ public class GUI_KRIT extends JFrame {
 	private int usedAusp_id = 0;
 	private int maxUusedAusp_id = 0;
 	private int minUusedAusp_id=0;
+	private int aktKrit_id = 0;
+	private int maxKrit_id = 0;
+	private int minKrit_id=0;
 	private int nMontOP =0;
 	private int anzMomtOp = 0;
 	private Mont_OP retMont_OP;
@@ -92,6 +95,11 @@ public class GUI_KRIT extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI_KRIT() {
+		
+		int kritKatID = list_projectsSQL.get_Project(GUI_MAIN.projektID).idKriterienkataloge;
+		minKrit_id = Krit_SQL.get_minKritID(kritKatID);
+		maxKrit_id = Krit_SQL.get_maxKritID(kritKatID); 
+		
 		initGUI();
 
 
@@ -123,7 +131,7 @@ public class GUI_KRIT extends JFrame {
 		
 		
 		
-		Kriterien krit = Krit_SQL.giveKrit(n, retProj.idKriterienkataloge);
+		Kriterien krit = Krit_SQL.giveKrit(minKrit_id + n - 1, retProj.idKriterienkataloge);
 		
 		
 		ArrayList<Kriterien> Kritarray = sql_connector.Krit_SQL.giveKrits(retProj.idKriterienkataloge);
@@ -210,7 +218,7 @@ public class GUI_KRIT extends JFrame {
 		scrollPane.setViewportView(txtArkrit_Besch);
 
 
-		ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(n);
+		ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(minKrit_id + n -1);
 
 
 		relevant = false;
@@ -218,10 +226,6 @@ public class GUI_KRIT extends JFrame {
 		for (i = 0; i < Ausparray.size(); i++) {
 			Auspraegungen retAus = Ausparray.get(i);
 			JRadioButton rdbtnAuspBesch = new JRadioButton(retAus.Auspr_Beschreibung);
-			if (retUsed_auspr.relevant  && retUsed_auspr.idAuspr == retAus.idAuspr)
-			{
-				rdbtnAuspBesch.setSelected(true);
-			}
 			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.idAuspr));
 			rdbtnAuspBesch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -254,7 +258,13 @@ public class GUI_KRIT extends JFrame {
 			gbc_lblAuspNR.gridx = 0;
 			gbc_lblAuspNR.gridy = i+6;
 			contentPane.add(lblAuspNR, gbc_lblAuspNR);
-
+	
+			if (retUsed_auspr.relevant  && retUsed_auspr.idAuspr == retAus.idAuspr)
+			{
+				rdbtnAuspBesch.setSelected(true);
+				relevant = true;
+			}
+	
 		}
 
 
@@ -297,8 +307,10 @@ public class GUI_KRIT extends JFrame {
 		gbc_rdbtnNotRelevant.gridy = i+6;
 		contentPane.add(rdbtnNotRelevant, gbc_rdbtnNotRelevant);
 
-		rdbtnNotRelevant.setSelected(!retUsed_auspr.relevant);
-
+		if (!relevant)
+		{
+			rdbtnNotRelevant.setSelected(true);
+		}
 
 
 		
@@ -306,9 +318,41 @@ public class GUI_KRIT extends JFrame {
 		JButton btnPrevious = new JButton("PREVIOUS");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				getSelectedBtnF();
+				System.out.println("ratingFM:"+ ratingFM);
+				if(relevant==true){
+					Used_AuspSQL.update_usedAusp(Integer.valueOf(bGroupAusp.getSelection().getActionCommand()), ratingFM,ratingFR,relevant, usedAusp_id);
+				}
+				else{
+					Used_AuspSQL.update_Relevant(relevant, usedAusp_id);
+				}
+				
 				--n;
-				contentPane.setVisible(false);
-				initGUI();
+
+				--usedAusp_id;
+				System.out.println("n beim Previous  " + n);
+			
+				if(n==0){
+					n=Kritarray.size();
+					--nMontOP;
+				}
+				
+
+				if(nMontOP < 0){
+					
+					dispose();
+					GUI_WEIGHTING test = new GUI_WEIGHTING();
+					test.setVisible(true);
+				}
+				else
+				{
+					System.out.println("n im action... des Previous.."+n);
+					contentPane.setVisible(false);
+					initGUI();
+			
+				
+				}
+
 			}
 		});
 
@@ -343,7 +387,16 @@ public class GUI_KRIT extends JFrame {
 
 				++n;
 				++usedAusp_id;
-				System.out.println("n1= " + n);
+				System.out.println("n im action.."+n);
+
+				if(n > Kritarray.size()){
+
+					
+
+					n=1;
+					++nMontOP;
+				}
+				
 
 				if(nMontOP==anzMomtOp){
 					
@@ -355,17 +408,7 @@ public class GUI_KRIT extends JFrame {
 				{
 					contentPane.setVisible(false);
 					initGUI();
-					System.out.println("n2"+n);
-
-					if(n==Kritarray.size()){
-
-						
-
-						n=1;
-						++nMontOP;
-					}
-					
-					
+								
 				}
 			}
 
