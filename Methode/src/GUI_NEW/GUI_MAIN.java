@@ -32,7 +32,10 @@ public class GUI_MAIN extends JFrame {
 	private TableRendererPanel katalog;
 	private JLabel lblProjName;
 	private JButton btnOk;
+	private JComboBox cBoxProjekt;
+	private JComboBox cBoxKatalog;
 	private int[] Katalog_id ;
+	private int[] Projekt_id;
 	private JPanel TablePanel;
 	public static int projektID = 1;
 	/**
@@ -118,7 +121,7 @@ public class GUI_MAIN extends JFrame {
 			++i;
 		}
 
-		JComboBox cBoxKatalog = new JComboBox(Katalog_data);
+		cBoxKatalog = new JComboBox(Katalog_data);
 		cBoxKatalog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println(cBoxKatalog.getSelectedItem());
@@ -173,7 +176,8 @@ public class GUI_MAIN extends JFrame {
 		JButton btnProjektLaden = new JButton("Projekt laden");
 		btnProjektLaden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GUI_SOLUTION guiSolution = new GUI_SOLUTION();
+				
+				GUI_SOLUTION guiSolution = new GUI_SOLUTION(Projekt_id[cBoxProjekt.getSelectedIndex()]);
 				dispose();
 				guiSolution.setVisible(true);
 			}
@@ -202,16 +206,22 @@ public class GUI_MAIN extends JFrame {
 		ArrayList<Projekte> Projectsarray= list_projectsSQL.giveProjects();
 		Object[] Project_data = new Object[Projectsarray.size()] ;
 		int ind2 = 0;
+		Projekt_id = new int[Projectsarray.size()];
 		for (Projekte ap1 : Projectsarray)
 		{
 			Project_data[ind2]=ap1.Projekt_name;
-			
+			Projekt_id[ind2]=ap1.idProjekte;
 			++ind2;
 		}
 		
 		
 		
-		JComboBox cBoxProjekt = new JComboBox(Project_data);
+		cBoxProjekt = new JComboBox(Project_data);
+		cBoxProjekt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		GridBagConstraints gbc_cBoxProjekt = new GridBagConstraints();
 		gbc_cBoxProjekt.insets = new Insets(0, 0, 5, 0);
 		gbc_cBoxProjekt.fill = GridBagConstraints.HORIZONTAL;
@@ -247,7 +257,7 @@ public class GUI_MAIN extends JFrame {
 				projektID = Projektarray.get(0).idProjekte;
 			
 				
-				GUI_MONTOP guiMO = new GUI_MONTOP();
+				GUI_MONTOP guiMO = new GUI_MONTOP(projektID);
 				
 				dispose();
 				guiMO.setVisible(true);
@@ -261,7 +271,7 @@ public class GUI_MAIN extends JFrame {
 		btnOk.setVisible(false);
 		contentPane.add(btnOk, gbc_btnOk);
 
-		initTableRenderer(1);
+		initTableRenderer(Katalog_id[cBoxKatalog.getSelectedIndex()]);
 
 		
 	}

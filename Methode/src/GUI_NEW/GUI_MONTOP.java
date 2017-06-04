@@ -34,6 +34,7 @@ public class GUI_MONTOP extends JFrame {
 	private int i=0;
 	private JTextField txtMon_Nr;
 	private int nMontOP=0;
+	private int projektID;
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +42,7 @@ public class GUI_MONTOP extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_MONTOP frame = new GUI_MONTOP();
+					GUI_MONTOP frame = new GUI_MONTOP(39);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +54,8 @@ public class GUI_MONTOP extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_MONTOP() {
+	public GUI_MONTOP(int inputprojektID) {
+	    projektID = inputprojektID;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -156,7 +158,7 @@ public class GUI_MONTOP extends JFrame {
 					
 				
 					dispose();
-					GUI_KRIT guiKrit = new GUI_KRIT();
+					GUI_KRIT guiKrit = new GUI_KRIT(projektID);
 					guiKrit.setVisible(true);
 		    	}
 

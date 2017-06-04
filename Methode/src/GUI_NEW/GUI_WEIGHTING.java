@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import Data.Auspraegungen;
 import Data.Kriterien;
 import Data.Mont_OP;
+import Data.Projekte;
 import Data.Used_auspr;
 import Steuerung.HochTiefSteller;
 import sql_connector.Krit_SQL;
@@ -34,7 +35,7 @@ public class GUI_WEIGHTING extends JFrame {
 	private JPanel contentPane1;
 	private JTextField txtFMontOPName;
 
-
+	private int projektID;
 	private Mont_OP retMont_OP;
 	private Used_auspr retUsed_auspr;
 	private Kriterien retKrit;
@@ -53,7 +54,7 @@ public class GUI_WEIGHTING extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_WEIGHTING frame = new GUI_WEIGHTING();
+					GUI_WEIGHTING frame = new GUI_WEIGHTING(39);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -65,7 +66,8 @@ public class GUI_WEIGHTING extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_WEIGHTING() {
+	public GUI_WEIGHTING(int input_projektID) {
+		projektID= input_projektID;
 		initGUI();
 
 	}
@@ -88,7 +90,7 @@ public class GUI_WEIGHTING extends JFrame {
 
 
 
-		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
+		Mont_OParray =sql_connector.Mont_OPSQL.get_MontOPzuProjekt(projektID);
 		retMont_OP=Mont_OParray.get(nMontOP);
 
 		
@@ -346,7 +348,7 @@ public class GUI_WEIGHTING extends JFrame {
 				if(nMontOP==Mont_OParray.size()){
 
 					dispose();
-					GUI_SOLUTION test = new GUI_SOLUTION();
+					GUI_SOLUTION test = new GUI_SOLUTION(projektID);
 					test.setVisible(true);
 
 				}else{

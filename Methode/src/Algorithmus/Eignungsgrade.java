@@ -17,9 +17,9 @@ public class Eignungsgrade {
 	public BigDecimal[] RatingFM;
 	public BigDecimal[] RatingFR;
 
-	public Eignungsgrade(){
-		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
-
+	public Eignungsgrade(int projektID){
+		//Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
+		Mont_OParray=sql_connector.Mont_OPSQL.get_MontOPzuProjekt(projektID);
 		RatingFM = new BigDecimal[Mont_OParray.size()];
 		RatingFR = new BigDecimal[Mont_OParray.size()];
 		for(int i=0; i< Mont_OParray.size();i++){
@@ -41,7 +41,7 @@ public class Eignungsgrade {
 				RatingFM[i]=RatingFM[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
 				RatingFR[i]=RatingFR[i].divide(sum_Gewichtung, 2, RoundingMode.HALF_UP);
 
-
+				
 
 				System.out.println("RatingFM: "+RatingFM[i]);
 				System.out.println("RatingFR: "+RatingFR[i]);
@@ -50,7 +50,7 @@ public class Eignungsgrade {
 		}
 	}
 	public static void main(String[] args) {
-		Eignungsgrade test = new Eignungsgrade();
+		Eignungsgrade test = new Eignungsgrade(2);
 
 
 

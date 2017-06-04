@@ -46,6 +46,7 @@ public class GUI_KRIT extends JFrame {
 	private JPanel contentPane;
 	private int n = 1;
 	private int i = 0;
+	private int projektID;
 	private int usedAusp_id = 0;
 	private int maxUusedAusp_id = 0;
 	private int minUusedAusp_id=0;
@@ -82,7 +83,7 @@ public class GUI_KRIT extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_KRIT frame = new GUI_KRIT();
+					GUI_KRIT frame = new GUI_KRIT(39);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -94,9 +95,9 @@ public class GUI_KRIT extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_KRIT() {
-		
-		int kritKatID = list_projectsSQL.get_Project(GUI_MAIN.projektID).idKriterienkataloge;
+	public GUI_KRIT(int inputprojektID) {
+		projektID= inputprojektID;
+		int kritKatID = list_projectsSQL.get_Project(projektID).idKriterienkataloge;
 		minKrit_id = Krit_SQL.get_minKritID(kritKatID);
 		maxKrit_id = Krit_SQL.get_maxKritID(kritKatID); 
 		
@@ -125,8 +126,8 @@ public class GUI_KRIT extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE, 0.0};
 		contentPane.setLayout(gbl_contentPane);
 
-		ArrayList<Projekte> Projektarray = list_projectsSQL.get_lastProject();
-		Projekte retProj = Projektarray.get(0);
+		Projekte retProj = list_projectsSQL.get_Project(projektID);
+		//Projekte retProj = Projektarray.get(0);
 		
 		
 		
@@ -136,7 +137,7 @@ public class GUI_KRIT extends JFrame {
 		
 		ArrayList<Kriterien> Kritarray = sql_connector.Krit_SQL.giveKrits(retProj.idKriterienkataloge);
 		ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
-		Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
+		Mont_OParray =sql_connector.Mont_OPSQL.get_MontOPzuProjekt(projektID);
 		retMont_OP=Mont_OParray.get(nMontOP);
 		anzMomtOp = Mont_OParray.size();
 
@@ -341,7 +342,7 @@ public class GUI_KRIT extends JFrame {
 				if(nMontOP < 0){
 					
 					dispose();
-					GUI_WEIGHTING test = new GUI_WEIGHTING();
+					GUI_WEIGHTING test = new GUI_WEIGHTING(projektID);
 					test.setVisible(true);
 				}
 				else
@@ -401,7 +402,7 @@ public class GUI_KRIT extends JFrame {
 				if(nMontOP==anzMomtOp){
 					
 					dispose();
-					GUI_WEIGHTING test = new GUI_WEIGHTING();
+					GUI_WEIGHTING test = new GUI_WEIGHTING(projektID);
 					test.setVisible(true);
 				}
 				else

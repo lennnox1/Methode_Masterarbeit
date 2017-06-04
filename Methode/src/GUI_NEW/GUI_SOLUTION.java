@@ -42,7 +42,7 @@ public class GUI_SOLUTION extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_SOLUTION frame = new GUI_SOLUTION();
+					GUI_SOLUTION frame = new GUI_SOLUTION(39);
 					frame.setVisible(true);
 					//frame.pack();
 				} catch (Exception e) {
@@ -55,11 +55,11 @@ public class GUI_SOLUTION extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GUI_SOLUTION() {
-		initGUI();
+	public GUI_SOLUTION(int projektID) {
+		initGUI(projektID);
 	}
 
-	protected void initGUI() {
+	protected void initGUI(int projektID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 300);
 		contentPane = new JPanel();
@@ -76,14 +76,13 @@ public class GUI_SOLUTION extends JFrame {
 
 
 		
-
+		Mont_OParray =sql_connector.Mont_OPSQL.get_MontOPzuProjekt(projektID);
 			
 
-		Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
+		//Mont_OParray = sql_connector.Mont_OPSQL.get_lastMontOP();
 		
-		//System.out.println(Mont_OParray.size());
 		
-		Eignungsgrade eigGrade = new Eignungsgrade();
+		Eignungsgrade eigGrade = new Eignungsgrade(projektID);
 
 		for(i =0; i<Mont_OParray.size();i++){
 			
@@ -157,7 +156,7 @@ public class GUI_SOLUTION extends JFrame {
 			}
 		
 		}
-		ArrayList<Mont_OP> Mont_OParray= Mont_OPSQL.get_lastMontOP();
+		//ArrayList<Mont_OP> Mont_OParray= Mont_OPSQL.get_lastMontOP();
 		
 		for(int i=0; i< Mont_OParray.size();i++){
 			Mont_OP retMontOP=Mont_OParray.get(i);
@@ -168,7 +167,7 @@ public class GUI_SOLUTION extends JFrame {
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GUI_KRIT guiKrit = new GUI_KRIT();
+				GUI_KRIT guiKrit = new GUI_KRIT(projektID);
 				dispose();
 				guiKrit.setVisible(true);
 			}

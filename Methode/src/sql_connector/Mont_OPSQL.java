@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Data.Mont_OP;
+import Data.Projekte;
+import Data.Used_auspr;
 
 public class Mont_OPSQL {
 
@@ -155,6 +157,47 @@ public class Mont_OPSQL {
 		
 	
 }
-	
+	public static  ArrayList<Mont_OP>  get_MontOPzuProjekt(int idProjekte) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		
+		ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
+		
+		String query= "select * FROM kriterienkatalog.mont_op   WHERE idProjekte =? ";
+		try {
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    conn = get_connection();
+		    preStmt_Mont_Name = conn.prepareStatement(query);
+		    preStmt_Mont_Name.setInt(1,idProjekte);
+		    preStmt_Mont_Name.execute();
+			
+			rs = preStmt_Mont_Name.executeQuery();
+
+			
+			while (rs.next()) {
+				Mont_OP Mont_OPobj= new Mont_OP();
+				Mont_OPobj.idmontOP = rs.getInt("idmontOP");
+				Mont_OPobj.montOP_name= rs.getString("montOP_name");
+				Mont_OPobj.idProjekte= rs.getInt("idProjekte");
+				Mont_OPobj.FM=rs.getBigDecimal("FM");
+				Mont_OPobj.FR=rs.getBigDecimal("FR");
+				Mont_OParray.add(Mont_OPobj);
+		
+			}
+		   
+		    
+		    
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+			
+		}
+	return Mont_OParray;
+	}	
 	
 }
