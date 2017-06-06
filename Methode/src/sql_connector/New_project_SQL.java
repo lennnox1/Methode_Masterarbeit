@@ -58,19 +58,20 @@ public class New_project_SQL {
 	}
 
 	//public static  int set_Montage_Nr(int t, String r) {
-		public static  int set_Montage_Nr(int t) {
+		public static  int set_Montage_Nr(int anzMontOP) {
 			Connection conn = null;
 			Statement stmt = null;
 		
-			String query1= "update  kriterienkatalog.projekte  set Anz_Montageop = ? where idProjekte=?";
+			String query= "update  kriterienkatalog.projekte  set Anz_Montageop = ? where idProjekte=?";
 			
 			try {
 
+				
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 			    conn = get_connection();
 			   
-			    preStmt_Mont_Nr = conn.prepareStatement(query1);
-			    preStmt_Mont_Nr.setInt(1,t);
+			    preStmt_Mont_Nr = conn.prepareStatement(query);
+			    preStmt_Mont_Nr.setInt(1,anzMontOP);
 			    preStmt_Mont_Nr.setInt(2,get_lastProjID());
 			    preStmt_Mont_Nr.execute();
 			   
@@ -84,7 +85,7 @@ public class New_project_SQL {
 				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 				
 			}
-			return t;
+			return anzMontOP;
 		
 	}
 	
@@ -155,7 +156,7 @@ public class New_project_SQL {
 		}
 		
 		
-		public static  ArrayList<Projekte> giveMontage_Nr(String r) {
+		/*public static  ArrayList<Projekte> giveMontage_Nr(String r) {
 			Connection conn = null;
 			Statement stmt = null;
 			ResultSet rs = null;
@@ -190,7 +191,7 @@ public class New_project_SQL {
 			}
 			return Projectsarray;
 			
-		}
+		}*/
 	
 		
 		

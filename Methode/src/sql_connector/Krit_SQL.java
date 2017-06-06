@@ -21,7 +21,7 @@ public class Krit_SQL {
 
 
 
-	public static  ArrayList<Kriterien> giveKrits() {
+	/*public static  ArrayList<Kriterien> giveKrits() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -48,7 +48,7 @@ public class Krit_SQL {
 		}
 		return Kritarray;
 
-	}
+	}*/
 
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;
@@ -88,7 +88,7 @@ public class Krit_SQL {
 
 	}
 
-	public static  ArrayList<Kriterien> giveKritzuKritID(int id) {
+	/*public static  ArrayList<Kriterien> giveKritzuKritID(int id) {
 
 		Connection conn = null;
 		Statement stmt = null;
@@ -125,7 +125,7 @@ public class Krit_SQL {
 		}
 		return Kritarray;
 
-	}
+	}*/
 
 
 	public static Kriterien giveKrit(int kritNr, int katID) {

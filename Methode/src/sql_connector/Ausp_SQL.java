@@ -13,7 +13,7 @@ import Data.Auspraegungen;
 
 public class Ausp_SQL {
 
-	public static  ArrayList<Auspraegungen> giveAuspraegungen() {
+	/*public static  ArrayList<Auspraegungen> giveAuspraegungen() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -41,7 +41,7 @@ public class Ausp_SQL {
 		}
 		return Ausparray;
 
-	}
+	}*/
 
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;

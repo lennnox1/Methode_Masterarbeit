@@ -205,7 +205,7 @@ public class New_KatalogSQL {
 		}
 	}
 
-	public static  ArrayList<Kriterien> giveKrits() {
+	/*public static  ArrayList<Kriterien> giveKrits() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -235,7 +235,7 @@ public class New_KatalogSQL {
 		}
 		return Kritarray;
 
-	}
+	}*/
 	
 	
 	public static  ArrayList<Kriterien> get_KritsofKatID(int idKritKat) {
@@ -278,7 +278,7 @@ public class New_KatalogSQL {
 		return KritArray;
 	}
 	
-	public static  void update_anzAusp(int anz_Ausp) {
+	/*public static  void update_anzAusp(int anz_Ausp) {
 		Connection conn = null;
 		Statement stmt = null;
 
@@ -304,7 +304,7 @@ public class New_KatalogSQL {
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 
 		}
-	}
+	}*/
 	
 	public static  void set_Ausp(int kritid,String auspr_Nr) {
 		Connection conn = null;

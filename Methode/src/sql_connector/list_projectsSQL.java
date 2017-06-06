@@ -14,7 +14,7 @@ import Data.Projekte;
 
 public class list_projectsSQL {
 	public static PreparedStatement preStmt_Projekt;
-	
+
 	protected static Connection get_connection() throws SQLException {
 		Connection conn;
 		String connectionUrl = "jdbc:mysql://localhost:3306/Kriterienkatalog?useSSL=false";
@@ -23,16 +23,14 @@ public class list_projectsSQL {
 		conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		return conn;
 	}
-	
+
 	public static  ArrayList<Projekte> giveProjects() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		ArrayList<Projekte> Projectsarray= new ArrayList<Projekte>();
 		try {
-//			new com.mysql.jdbc.Driver();
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-//// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM projekte ");
@@ -48,12 +46,13 @@ public class list_projectsSQL {
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-			
+
 		}
 		return Projectsarray;
-		
+
 	}
-	public static  int giveMontage_Nr(String r) {
+	
+	/*public static  int giveMontage_Nr(String r) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -62,17 +61,17 @@ public class list_projectsSQL {
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		    conn = get_connection();
-		    
-		    preStmt_Projekt = conn.prepareStatement(query1);
-		    preStmt_Projekt.setString(1, r);
-		    preStmt_Projekt.execute();
-		    rs = preStmt_Projekt.executeQuery();
-		    while (rs.next()) {
+			conn = get_connection();
 
-		    	Mont_Nr = rs.getInt("Anz_Montageop");
-				
-		    				  }
+			preStmt_Projekt = conn.prepareStatement(query1);
+			preStmt_Projekt.setString(1, r);
+			preStmt_Projekt.execute();
+			rs = preStmt_Projekt.executeQuery();
+			while (rs.next()) {
+
+				Mont_Nr = rs.getInt("Anz_Montageop");
+
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,20 +79,20 @@ public class list_projectsSQL {
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-			
+
 		}
 		return Mont_Nr;
-		
-	}
-	
-public static  ArrayList<Projekte> get_lastProject() {
-		
+
+	}*/
+
+	public static  ArrayList<Projekte> get_lastProject() {
+
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs   =null;
 		ArrayList<Projekte> Projektarray= new ArrayList<Projekte>();
 		String query= "SELECT * FROM kriterienkatalog.projekte WHERE idProjekte=(SELECT max(idProjekte) FROM kriterienkatalog.projekte )";
-		
+
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -105,7 +104,7 @@ public static  ArrayList<Projekte> get_lastProject() {
 				Projobj.idProjekte = rs.getInt("idProjekte");
 				Projobj.Projekt_name = rs.getString("Projekt_name");
 				Projobj.idKriterienkataloge = rs.getInt("idKriterienkataloge");
-				
+
 				Projektarray.add(Projobj);
 			}
 		} catch (Exception e) {
@@ -121,43 +120,42 @@ public static  ArrayList<Projekte> get_lastProject() {
 		return Projektarray;
 	}
 
-public static Projekte get_Project(int projektID) {
-	
-	Connection conn = null;
-	Statement stmt = null;
-	ResultSet rs   =null;
-	//ArrayList<Projekte> Projektarray= new ArrayList<Projekte>();
-	String query= "SELECT * FROM kriterienkatalog.projekte WHERE idProjekte=?";
-	Projekte retProjekt= new Projekte();
-	try {
+	public static Projekte get_Project(int projektID) {
 
-	
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		conn = get_connection();
-		preStmt_Projekt = conn.prepareStatement(query);
-		preStmt_Projekt.setInt(1,projektID);
-		preStmt_Projekt.execute();
-		
-		rs = preStmt_Projekt.executeQuery();
-		
-		
-		while (rs.next()) {
-			
-			retProjekt.idProjekte = rs.getInt("idProjekte");
-			retProjekt.Projekt_name = rs.getString("Projekt_name");
-			retProjekt.idKriterienkataloge = rs.getInt("idKriterienkataloge");
-			
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs   =null;
+		String query= "SELECT * FROM kriterienkatalog.projekte WHERE idProjekte=?";
+		Projekte retProjekt= new Projekte();
+		try {
+
+
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+			preStmt_Projekt = conn.prepareStatement(query);
+			preStmt_Projekt.setInt(1,projektID);
+			preStmt_Projekt.execute();
+
+			rs = preStmt_Projekt.executeQuery();
+
+
+			while (rs.next()) {
+
+				retProjekt.idProjekte = rs.getInt("idProjekte");
+				retProjekt.Projekt_name = rs.getString("Projekt_name");
+				retProjekt.idKriterienkataloge = rs.getInt("idKriterienkataloge");
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
 
-		try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-		try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 
+		return retProjekt;
 	}
-
-
-	return retProjekt;
-}
 }

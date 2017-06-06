@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
-import Data.Mont_OP;
+//import Data.Mont_OP;
 //import Data.Used_auspr;
 
 public class Solution_SQL {
@@ -52,7 +52,7 @@ public class Solution_SQL {
 
 		}
 	}
-	public static   ArrayList<Mont_OP> get_usedAuspr(int idMontOP) {
+	/*public static   ArrayList<Mont_OP> get_usedAuspr(int idMontOP) {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs   =null;
@@ -94,7 +94,7 @@ public class Solution_SQL {
 			
 		}
 	return Mont_OPArray;
-	}
+	}*/
 
 
 }

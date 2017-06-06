@@ -158,7 +158,7 @@ public class Used_AuspSQL {
 	
 	}*/
 	
-	public static  void update_usedAusp(int t) {
+	/*public static  void update_usedAusp(int t) {
 		Connection conn = null;
 		Statement stmt = null;
 	
@@ -184,7 +184,7 @@ public class Used_AuspSQL {
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
 			
 		}
-	}
+	}*/
 
 	public static  void update_usedAusp(int t,double ratingFM, double ratingFR,boolean relevant ,int usedAusPrId) {
 		Connection conn = null;

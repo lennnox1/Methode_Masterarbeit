@@ -29,7 +29,7 @@ public class Mont_OPSQL {
 
 
 
-	public static  ArrayList<Mont_OP> giveMontOP() {
+	/*public static  ArrayList<Mont_OP> giveMontOP() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -56,10 +56,10 @@ public class Mont_OPSQL {
 		}
 		return Mont_OParray;
 
-	}
+	}*/
 
 
-	public static  int get_lastMontOPID() {
+	/*public static  int get_lastMontOPID() {
 		int id=0;
 		Connection conn = null;
 		Statement stmt = null;
@@ -90,7 +90,7 @@ public class Mont_OPSQL {
 
 
 		return id;
-	}
+	}*/
 
 	public static  ArrayList<Mont_OP> get_lastMontOP() {
 		
