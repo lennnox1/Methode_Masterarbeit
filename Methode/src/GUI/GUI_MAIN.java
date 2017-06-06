@@ -1,4 +1,4 @@
-package GUI_NEW;
+package GUI;
 
 
 import java.awt.EventQueue;
@@ -9,7 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import Data.Kriterienkataloge;
 import Data.Projekte;
-import gUITable.TableRendererPanel;
+import Krit_Table.TableRendererPanel;
 import sql_connector.New_KatalogSQL;
 import sql_connector.New_project_SQL;
 import sql_connector.list_projectsSQL;

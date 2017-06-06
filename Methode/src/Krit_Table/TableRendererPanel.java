@@ -1,20 +1,23 @@
-package Test;
+package Krit_Table;
 import java.awt.*;
-import java.awt.event.*;
+
 import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.*;
 
+
 import Data.Auspraegungen;
+
 import Data.Kriterien;
 
 import sql_connector.Ausp_SQL;
 import sql_connector.Krit_SQL;
+import sql_connector.New_KatalogSQL;
 
-public class TablePanel extends JTable
+public class TableRendererPanel extends JPanel
 {
-	public TablePanel()
+	public TableRendererPanel(int KatID)
 	{
 		
 		DefaultTableModel dtm = new DefaultTableModel() {
@@ -28,23 +31,21 @@ public class TablePanel extends JTable
 			}
 		};
 		String[] columnNames = { "Kh", "Kriterium","Ahg","Ausprägung"};
+
 		
-		//ArrayList<Kriterien> Kritarray=Krit_SQL.giveKrits();
-		ArrayList<Kriterien> Kritarray=Krit_SQL.giveKritzuKritID(1);
+		ArrayList<Kriterien> Kritarray = New_KatalogSQL.get_KritsofKatID(KatID);
 		Object[][] data_Krit= new Object[Kritarray.size()][4];
-		int  i=0;
-		// i=0;
+
+		int i=0;
 		for (Kriterien kr: Kritarray){
 
 			data_Krit[i][0]=kr.Krit_Nr;
 			data_Krit[i][1]=kr.Krit_Beschreibung;
 
-
-			ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(i + 1);
+			ArrayList<Auspraegungen> Ausparray=New_KatalogSQL.get_AuspofKatID(i+1);
 			Object[][] data_Ausp1= new Object[Ausparray.size()][1];
 			Object[][] data_Ausp2= new Object[Ausparray.size()][1];
 			int n =  0;
-			 n =  0;
 			for (Auspraegungen ap: Ausparray){
 				
 				data_Ausp1[n][0]=ap.Auspr_Nr;
@@ -68,14 +69,12 @@ public class TablePanel extends JTable
 		JTable table = new JTable(dtm);
 
 
-		//table.setBounds(100,50,700,900);
+		table.setBounds(100,50,300,300);
 		table.setPreferredScrollableViewportSize(table.getPreferredSize());
-		//JScrollPane scroll = new JScrollPane(table);
-		//scroll.setPreferredSize(new Dimension(100, 100));
+		JScrollPane scroll = new JScrollPane(table);
 		//getContentPane().add(scroll);
-		this.add(table);
-		
-	  // table.add(scroll);
+		this.add(scroll);
+	   //table.add(scroll);
 
 
 		table.setDefaultRenderer(Object.class, new ComponentInCellRenderer());
@@ -94,7 +93,7 @@ public class TablePanel extends JTable
 		// tcm.getColumn(2).setMaxWidth(30);
 		tcm.getColumn(3).setPreferredWidth(200);
 		// tcm.getColumn(3).setMaxWidth(200);
-		//table.setRowHeight(80);
+
 		
 		
 		this.setVisible(false);
@@ -107,9 +106,9 @@ public class TablePanel extends JTable
 	/* public static void main(String[] args)
     {
        TableRendererPanel frame = new TableRendererPanel();
-        //frame.setDefaultCloseOperation( EXIT_ON_CLOSE );
-        //frame.pack();
-        //frame.setLocationRelativeTo( null );
+        frame.setDefaultCloseOperation( EXIT_ON_CLOSE );
+        frame.pack();
+        frame.setLocationRelativeTo( null );
         frame.setVisible(true);
 
     }*/

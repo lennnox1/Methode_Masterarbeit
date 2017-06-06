@@ -129,7 +129,7 @@ public class Used_AuspSQL {
 	
 	
 	
-	public static  void delete_lastRow() {
+	/*public static  void delete_lastRow() {
 		Connection conn = null;
 		Statement stmt = null;
 	
@@ -156,7 +156,7 @@ public class Used_AuspSQL {
 		}
 		
 	
-	}
+	}*/
 	
 	public static  void update_usedAusp(int t) {
 		Connection conn = null;
