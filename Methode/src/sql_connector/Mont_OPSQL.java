@@ -25,7 +25,14 @@ public class Mont_OPSQL {
 		conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
 		return conn;
 	}
-
+	/*protected static Connection get_connection() throws SQLException {
+	Connection conn;
+	String connectionUrl = "jdbc:h2:~/Kriterienkatalog";
+	String connectionUser = "root";
+	String connectionPassword = "1234";
+	conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
+	return conn;
+}*/
 
 
 

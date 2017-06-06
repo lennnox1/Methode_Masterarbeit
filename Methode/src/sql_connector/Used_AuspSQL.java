@@ -26,6 +26,17 @@ public class Used_AuspSQL {
 		return conn;
 	}
 	
+/*protected static Connection get_connection() throws SQLException {
+		Connection conn;
+		String connectionUrl = "jdbc:h2:~/Kriterienkatalog";
+		String connectionUser = "root";
+		String connectionPassword = "1234";
+		conn = DriverManager.getConnection(connectionUrl, connectionUser, connectionPassword);
+		return conn;
+	}*/
+	
+	
+	
 /*	public static  void set_usedAusp(int idMontOP,int idAuspr) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -60,8 +71,9 @@ public class Used_AuspSQL {
 		Statement stmt = null;
 		
 	
-		
 		String query= "insert kriterienkatalog.used_auspr  (idMontOP,idAuspr,ratingFM,ratingFR, relevant,gewichtung) values(?,?,?,?,?,?)";
+		
+		//String query= "insert into used_auspr  (idMontOP,idAuspr,ratingFM,ratingFR, relevant,gewichtung) values(?,?,?,?,?,?)";
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -189,8 +201,9 @@ public class Used_AuspSQL {
 	public static  void update_usedAusp(int t,double ratingFM, double ratingFR,boolean relevant ,int usedAusPrId) {
 		Connection conn = null;
 		Statement stmt = null;
-	
-		String query1= "update kriterienkatalog.used_auspr set idAuspr =? ,ratingFM=? ,ratingFR=?, relevant=? where idused_Auspr=?;";
+		//String query1= "update kriterienkatalog.used_auspr set idAuspr =? ,ratingFM=? ,ratingFR=?, relevant=? where idused_Auspr=?;";
+		
+		String query1= "update used_auspr set idAuspr =? ,ratingFM=? ,ratingFR=?, relevant=? where idused_Auspr=?;";
 		try {
 	
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
