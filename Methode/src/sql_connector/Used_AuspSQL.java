@@ -1,13 +1,13 @@
 package sql_connector;
 
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Data.Auspraegungen;
+//import Data.Auspraegungen;
 import Data.Used_auspr;
 
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class Used_AuspSQL {
 		return conn;
 	}
 	
-	public static  void set_usedAusp(int idMontOP,int idAuspr) {
+/*	public static  void set_usedAusp(int idMontOP,int idAuspr) {
 		Connection conn = null;
 		Statement stmt = null;
 		
@@ -54,7 +54,7 @@ public class Used_AuspSQL {
 			
 		}
 	}
-	
+	*/
 	public static  void set_usedAusp(int idMontOP,int idAuspr, double ratingFM,double ratingFR,boolean relevant, int gewichtung) {
 		Connection conn = null;
 		Statement stmt = null;

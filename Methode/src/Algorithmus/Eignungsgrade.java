@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
-import com.mysql.fabric.xmlrpc.base.Array;
+//import com.mysql.fabric.xmlrpc.base.Array;
 
 import Data.Mont_OP;
-import Data.Projekte;
+//import Data.Projekte;
 import Data.Used_auspr;
 
 public class Eignungsgrade {
@@ -50,7 +50,7 @@ public class Eignungsgrade {
 		}
 	}
 	public static void main(String[] args) {
-		Eignungsgrade test = new Eignungsgrade(2);
+		//Eignungsgrade test = new Eignungsgrade(2);
 
 
 

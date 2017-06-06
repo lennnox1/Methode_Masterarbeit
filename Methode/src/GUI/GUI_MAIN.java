@@ -25,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class GUI_MAIN extends JFrame {
 
 	private JPanel contentPane;

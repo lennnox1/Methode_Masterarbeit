@@ -11,10 +11,11 @@ import Data.Auspraegungen;
 
 import Data.Kriterien;
 
-import sql_connector.Ausp_SQL;
-import sql_connector.Krit_SQL;
+//import sql_connector.Ausp_SQL;
+//import sql_connector.Krit_SQL;
 import sql_connector.New_KatalogSQL;
 
+@SuppressWarnings("serial")
 public class TableRendererPanel extends JPanel
 {
 	public TableRendererPanel(int KatID)

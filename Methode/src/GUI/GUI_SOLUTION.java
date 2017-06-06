@@ -1,6 +1,6 @@
 package GUI;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import Algorithmus.Eignungsgrade;
 import Data.Mont_OP;
 //import GUI.GUI;
-import sql_connector.Mont_OPSQL;
+//import sql_connector.Mont_OPSQL;
 import sql_connector.Solution_SQL;
 
 import java.awt.GridBagLayout;
@@ -26,6 +26,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class GUI_SOLUTION extends JFrame {
 
 	private JPanel contentPane;

@@ -9,8 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import Data.Mont_OP;
-import Data.Projekte;
-import Data.Used_auspr;
+//import Data.Projekte;
+//import Data.Used_auspr;
 
 public class Mont_OPSQL {
 

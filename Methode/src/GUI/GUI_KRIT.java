@@ -1,6 +1,6 @@
 package GUI;
 
-//import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.ButtonGroup;
@@ -127,7 +127,7 @@ public class GUI_KRIT extends JFrame {
 		contentPane.setLayout(gbl_contentPane);
 
 		Projekte retProj = list_projectsSQL.get_Project(projektID);
-		//Projekte retProj = Projektarray.get(0);
+		
 		
 		
 		

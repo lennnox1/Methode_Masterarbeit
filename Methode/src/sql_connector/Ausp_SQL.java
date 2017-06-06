@@ -12,16 +12,14 @@ import Data.Auspraegungen;
 
 
 public class Ausp_SQL {
-	
+
 	public static  ArrayList<Auspraegungen> giveAuspraegungen() {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		ArrayList<Auspraegungen> Ausparray= new ArrayList<Auspraegungen>();
 		try {
-//			new com.mysql.jdbc.Driver();
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-//// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen ");
@@ -39,10 +37,10 @@ public class Ausp_SQL {
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-			
+
 		}
 		return Ausparray;
-		
+
 	}
 
 	protected static Connection get_connection() throws SQLException {
@@ -58,7 +56,7 @@ public class Ausp_SQL {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = get_connection();
@@ -70,7 +68,7 @@ public class Ausp_SQL {
 				retAusp.idAuspr = rs.getInt("idAuspr");
 				retAusp.Auspr_Nr = rs.getString("Auspr_Nr");
 				retAusp.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
-		
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,42 +76,40 @@ public class Ausp_SQL {
 			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
 			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-			
+
 		}
 		return retAusp;
-		
+
 	}
 
 	public static  ArrayList<Auspraegungen> giveAuspraegungenZuKrit(int krit_nr) {
-			Connection conn = null;
-			Statement stmt = null;
-			ResultSet rs = null;
-			ArrayList<Auspraegungen> Ausparray= new ArrayList<Auspraegungen>();
-			try {
-	//			new com.mysql.jdbc.Driver();
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
-	//// conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdatabase?user=testuser&password=testpassword");
-				conn = get_connection();
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery("SELECT * FROM auspraegungen where idKrit=" + krit_nr );
-				while (rs.next()) {
-					Auspraegungen Auspobj= new Auspraegungen();
-					Auspobj.idKrit = rs.getInt("idKrit");
-					Auspobj.idAuspr = rs.getInt("idAuspr");
-					Auspobj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
-					Auspobj.Auspr_Nr = rs.getString("Auspr_Nr");
-					Ausparray.add(Auspobj);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-				try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-				try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-				
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Auspraegungen> Ausparray= new ArrayList<Auspraegungen>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = get_connection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM auspraegungen where idKrit=" + krit_nr );
+			while (rs.next()) {
+				Auspraegungen Auspobj= new Auspraegungen();
+				Auspobj.idKrit = rs.getInt("idKrit");
+				Auspobj.idAuspr = rs.getInt("idAuspr");
+				Auspobj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
+				Auspobj.Auspr_Nr = rs.getString("Auspr_Nr");
+				Ausparray.add(Auspobj);
 			}
-			return Ausparray;
-			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+
 		}
- 
+		return Ausparray;
+
+	}
+
 }

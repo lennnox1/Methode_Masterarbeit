@@ -126,7 +126,7 @@ public static Projekte get_Project(int projektID) {
 	Connection conn = null;
 	Statement stmt = null;
 	ResultSet rs   =null;
-	ArrayList<Projekte> Projektarray= new ArrayList<Projekte>();
+	//ArrayList<Projekte> Projektarray= new ArrayList<Projekte>();
 	String query= "SELECT * FROM kriterienkatalog.projekte WHERE idProjekte=?";
 	Projekte retProjekt= new Projekte();
 	try {
