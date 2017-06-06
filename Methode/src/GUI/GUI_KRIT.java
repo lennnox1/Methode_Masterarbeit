@@ -3,6 +3,7 @@ package GUI;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,6 +27,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import java.awt.Insets;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -83,7 +85,7 @@ public class GUI_KRIT extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_KRIT frame = new GUI_KRIT(39);
+					GUI_KRIT frame = new GUI_KRIT(2);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -115,6 +117,10 @@ public class GUI_KRIT extends JFrame {
 	protected void initGUI() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+	
+		
 		setBounds(100, 100, 658, 438);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -409,7 +415,7 @@ public class GUI_KRIT extends JFrame {
 				{
 					contentPane.setVisible(false);
 					initGUI();
-								
+					setExtendedState(JFrame.MAXIMIZED_BOTH);			
 				}
 			}
 
