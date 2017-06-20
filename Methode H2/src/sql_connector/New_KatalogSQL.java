@@ -61,7 +61,7 @@ public class New_KatalogSQL {
 		String query= "update kriterienkataloge set anz_Krit =? where idKriterienkataloge=?;";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -91,7 +91,7 @@ public class New_KatalogSQL {
 
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
@@ -124,7 +124,7 @@ public class New_KatalogSQL {
 
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
@@ -156,7 +156,7 @@ public class New_KatalogSQL {
 		String query= "update kriterienkatalog.kriterien set Krit_Beschreibung =? where idKrit=?;";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -185,7 +185,7 @@ public class New_KatalogSQL {
 		String query= "insert kriterienkatalog.kriterien  (idKriterienkataloge,Krit_Nr) values(?,?)";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -248,7 +248,7 @@ public class New_KatalogSQL {
 
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -313,7 +313,7 @@ public class New_KatalogSQL {
 		String query= "insert kriterienkatalog.auspraegungen  (idKrit,Auspr_Nr) values(?,?)";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -339,7 +339,7 @@ public class New_KatalogSQL {
 		String query= "update kriterienkatalog.auspraegungen set Auspr_Beschreibung =? where idAuspr=?;";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -370,7 +370,7 @@ public class New_KatalogSQL {
 
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_kritKatalog = conn.prepareStatement(query);
@@ -410,7 +410,7 @@ public class New_KatalogSQL {
 
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);

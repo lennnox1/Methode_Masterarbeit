@@ -102,7 +102,7 @@ public class Mont_OPSQL {
 		
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
@@ -136,7 +136,7 @@ public class Mont_OPSQL {
 		String query= "insert into mont_op  (montOP_name,idProjekte) values(?,?)";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 		    conn = get_connection();
 		   
 		    preStmt_Mont_Name = conn.prepareStatement(query);
@@ -167,7 +167,7 @@ public class Mont_OPSQL {
 		String query= "select * FROM mont_op   WHERE idProjekte =? ";
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 		    conn = get_connection();
 		    preStmt_Mont_Name = conn.prepareStatement(query);
 		    preStmt_Mont_Name.setInt(1,idProjekte);

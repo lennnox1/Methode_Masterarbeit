@@ -70,7 +70,7 @@ public class Ausp_SQL {
 		ResultSet rs = null;
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM auspraegungen   WHERE idAuspr = " + r);
@@ -100,7 +100,7 @@ public class Ausp_SQL {
 		ResultSet rs = null;
 		ArrayList<Auspraegungen> Ausparray= new ArrayList<Auspraegungen>();
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM auspraegungen where idKrit=" + krit_nr );

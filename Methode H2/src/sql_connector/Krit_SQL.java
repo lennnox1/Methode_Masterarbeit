@@ -66,7 +66,7 @@ public class Krit_SQL {
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM kriterien   WHERE idKrit = " + r);
@@ -137,7 +137,7 @@ public class Krit_SQL {
 		String query= "SELECT * FROM kriterien   WHERE idKrit = ? and idKriterienkataloge=?";
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_Krit = conn.prepareStatement(query);
@@ -176,7 +176,7 @@ public class Krit_SQL {
 		String query= "SELECT * FROM kriterien   WHERE idKriterienkataloge=?";
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			preStmt_Krit = conn.prepareStatement(query);
 			preStmt_Krit.setInt(1,katID);
@@ -214,7 +214,7 @@ public class Krit_SQL {
 		
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_Krit = conn.prepareStatement(query);
@@ -251,7 +251,7 @@ public class Krit_SQL {
 		
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 
 			preStmt_Krit = conn.prepareStatement(query);

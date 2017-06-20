@@ -31,7 +31,7 @@ public class list_projectsSQL {
 		ResultSet rs = null;
 		ArrayList<Projekte> Projectsarray= new ArrayList<Projekte>();
 		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM projekte ");
@@ -96,7 +96,7 @@ public class list_projectsSQL {
 
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 			conn = get_connection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);

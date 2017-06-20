@@ -37,7 +37,7 @@ public class New_project_SQL {
 		String query = " insert into projekte (Projekt_name)" + " values (?)"; 
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("org.h2.Driver").newInstance();
 		    conn = get_connection();
 			
 			 PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -68,7 +68,7 @@ public class New_project_SQL {
 			try {
 
 				
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				Class.forName("org.h2.Driver").newInstance();
 			    conn = get_connection();
 			   
 			    preStmt_Mont_Nr = conn.prepareStatement(query);
@@ -100,7 +100,7 @@ public class New_project_SQL {
 			
 			try {
 
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				Class.forName("org.h2.Driver").newInstance();
 			    conn = get_connection();
 			    stmt = conn.createStatement();
 			    rs = stmt.executeQuery(query);
@@ -132,7 +132,7 @@ public class New_project_SQL {
 			ArrayList<Projekte> Projectsarray= new ArrayList<Projekte>();
 			try {
 			
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				Class.forName("org.h2.Driver").newInstance();
 	
 				conn = get_connection();
 				stmt = conn.createStatement();
@@ -204,7 +204,7 @@ public class New_project_SQL {
 			
 			try {
 
-				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				Class.forName("org.h2.Driver").newInstance();
 			    conn = get_connection();
 			   
 			    preStmt_Mont_Nr = conn.prepareStatement(query1);

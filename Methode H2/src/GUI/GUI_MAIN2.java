@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import Data.Kriterienkataloge;
 import Data.Projekte;
 import Krit_Table.TableRendererPanel;
+import Tables.db_Tables;
 import sql_connector.New_KatalogSQL;
 import sql_connector.New_project_SQL;
 import sql_connector.list_projectsSQL;
@@ -24,6 +25,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+
+
+
 
 @SuppressWarnings("serial")
 public class GUI_MAIN2 extends JFrame {
@@ -43,7 +47,14 @@ public class GUI_MAIN2 extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		db_Tables.table_auspraegungen();
+		db_Tables.table_Kriterienkataloge();
+		db_Tables.table_projekte();
+		db_Tables.table_Kriterien();
+		db_Tables.mont_op();
+		db_Tables.used_auspr();
 		EventQueue.invokeLater(new Runnable() {
+	
 			public void run() {
 				try {
 					GUI_MAIN2 frame = new GUI_MAIN2();
