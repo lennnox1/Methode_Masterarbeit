@@ -38,17 +38,24 @@ public class GUI_NEW_KATALOG extends JFrame {
 	private JTextField txtFAnz_Krit;
 	private JTextField txtFanzAusp;
 	private JTextField txtFKatalogName;
+	private JTextArea txtAauspBesch;
 	private JLabel lblKVonKn;
+	private JLabel lblKn;
+	private JLabel lblAVonAhg;
+	private JLabel lblAhg;
+	private int anzKrit = 0;
 	private int i=0;
 	private int z=0;
 	private int k=0;
 	private int x=0;
 	private ArrayList<Kriterien> kritarray;
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -129,7 +136,8 @@ public class GUI_NEW_KATALOG extends JFrame {
 		btnAnz_Krit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				sql_connector.New_KatalogSQL.set_KatalogName(txtFKatalogName.getText());
-				New_KatalogSQL.update_anzKrit(Integer.valueOf(txtFAnz_Krit.getText()));
+				anzKrit = Integer.valueOf(txtFAnz_Krit.getText());
+				New_KatalogSQL.update_anzKrit(anzKrit);
 
 				ArrayList<Kriterienkataloge> KritKatalogArray= new ArrayList<Kriterienkataloge>();
 				KritKatalogArray =sql_connector.New_KatalogSQL.get_lastKatalog();
@@ -140,7 +148,10 @@ public class GUI_NEW_KATALOG extends JFrame {
 					sql_connector.New_KatalogSQL.set_Kriterien("K"+(i+1));
 
 				}
-				txtFAnz_Krit.setEditable(false);
+				if (anzKrit > 0)
+				{
+					txtFAnz_Krit.setEditable(false);
+				}
 			}
 		});
 		GridBagConstraints gbc_btnAnz_Krit = new GridBagConstraints();
@@ -170,7 +181,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 
 
 
-		JLabel lblKn = new JLabel("K_n:");
+		lblKn = new JLabel(HochTiefSteller.stelleZiffernTief("K"+1+":"));
 		GridBagConstraints gbc_lblKn = new GridBagConstraints();
 		gbc_lblKn.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblKn.insets = new Insets(0, 0, 5, 5);
@@ -187,7 +198,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 
 		JTextArea txtAKritBesch = new JTextArea();
-		
+
 		scrollPane.setViewportView(txtAKritBesch);
 
 
@@ -254,13 +265,17 @@ public class GUI_NEW_KATALOG extends JFrame {
 				setKrits(txtAKritBesch);
 
 				kritarray=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
+				Kriterien retKrit = kritarray.get(z);
 				for(int k=0; k<Integer.valueOf(txtFanzAusp.getText());k++){
 
-					Kriterien retKrit = kritarray.get(z);
 					New_KatalogSQL.set_Ausp(retKrit.idKrit,"A"+(z+1)+(k+1));
 
 				}
 				++z;
+				
+				
+				txtAauspBesch.setEditable(true);
+				txtAauspBesch.setBackground(txtFanzAusp.getBackground());
 				txtFanzAusp.setEditable(false);
 				txtAKritBesch.setEditable(false);
 				txtAKritBesch.setBackground(txtFanzAusp.getBackground());
@@ -273,7 +288,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_btnAnzAusp.gridx = 2;
 		gbc_btnAnzAusp.gridy = 5;
 		contentPane.add(btnAnzAusp, gbc_btnAnzAusp);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.BLACK);
 		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
@@ -291,14 +306,14 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_lblBeschreibung_1.gridy = 7;
 		contentPane.add(lblBeschreibung_1, gbc_lblBeschreibung_1);
 
-		JLabel lblAVonAhg = new JLabel("A11 von Ahg");
+		lblAVonAhg = new JLabel("A11 von Ahg");
 		GridBagConstraints gbc_lblAVonAhg = new GridBagConstraints();
 		gbc_lblAVonAhg.insets = new Insets(0, 0, 5, 0);
 		gbc_lblAVonAhg.gridx = 3;
 		gbc_lblAVonAhg.gridy = 7;
 		contentPane.add(lblAVonAhg, gbc_lblAVonAhg);
 
-		JLabel lblAhg = new JLabel("Ahg:");
+		lblAhg = new JLabel(HochTiefSteller.stelleZiffernTief(("A"+1+1+":")));
 		GridBagConstraints gbc_lblAhg = new GridBagConstraints();
 		gbc_lblAhg.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblAhg.insets = new Insets(0, 0, 5, 5);
@@ -316,34 +331,44 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_scrollPane_1.gridy = 8;
 		contentPane.add(scrollPaneAuspBesch, gbc_scrollPane_1);
 
-		JTextArea txtAauspBesch = new JTextArea();
+		txtAauspBesch = new JTextArea();
 		scrollPaneAuspBesch.setViewportView(txtAauspBesch);
-
+		
 
 
 
 		JButton btnAauspBesch = new JButton("OK");
 		btnAauspBesch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("x1 "+x);
+				//System.out.println("x1 "+x);
 				kritarray=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
 				Kriterien retKrit= kritarray.get(k);
 
 				ArrayList<Auspraegungen> ausp_LPS_array = New_KatalogSQL.get_AuspofKatID(retKrit.idKrit);
 				Auspraegungen retAusp = ausp_LPS_array.get(x);
 
-				System.out.println("kritid "+retKrit.idKrit);
-				System.out.println("ausp_LPS_array "+ausp_LPS_array.size());
+			
+
 				New_KatalogSQL.update_Ausp(txtAauspBesch.getText(), retAusp.idAuspr);
 				x++;
 
 				if(x==ausp_LPS_array.size()){
 					k++;
 					x = 0;
-					txtFanzAusp.setEditable(true);
-					txtAKritBesch.setEditable(true);
-					txtAKritBesch.setBackground(txtFanzAusp.getBackground());
+					lblKn.setText(HochTiefSteller.stelleZiffernTief("K"+(i+1)));
+					scrollPaneAuspBesch.setBorder(null);
+					txtAauspBesch.setBorder(txtFanzAusp.getBorder());
+					txtAauspBesch.setEditable(false);
+					if (i + 1 >= anzKrit)
+					{
+						txtAauspBesch.setBackground(txtFanzAusp.getBackground());
+						txtFanzAusp.setEditable(true);
+						txtAKritBesch.setEditable(true);
+						txtAKritBesch.setBackground(txtFanzAusp.getBackground());
+					}
 				}
+				lblAhg.setText(HochTiefSteller.stelleZiffernTief(("A"+(i)+(x+1))));
+				
 
 
 
@@ -357,7 +382,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_btnAauspBesch.gridx = 2;
 		gbc_btnAauspBesch.gridy = 8;
 		contentPane.add(btnAauspBesch, gbc_btnAauspBesch);
-		
+
 		JButton btnHauptmen = new JButton("Hauptmenü");
 		btnHauptmen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -380,12 +405,15 @@ public class GUI_NEW_KATALOG extends JFrame {
 		}
 		else{
 
-			
+
 			lblKVonKn.setText(HochTiefSteller.stelleZiffernTief("K"+(i+1)+" von K"+KritArray.size()));
+
 			Kriterien retKrit = KritArray.get(i);
 
 			New_KatalogSQL.update_KritKatalog(txtAKritBesch.getText(),retKrit.idKrit);
 			++i;
+			lblAhg.setText(HochTiefSteller.stelleZiffernTief(("A"+(i)+(x+1))));
+			
 
 		}
 	}

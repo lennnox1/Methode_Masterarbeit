@@ -117,15 +117,12 @@ public class GUI_MONTOP extends JFrame {
 		btn_mont_OP_Name.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				++nMontOP;
-				
-				
 				++i;
+				lblNewLabel.setText("O"+(nMontOP+1)+ " von O"+k);
 				System.out.println("k:"+k);
 				System.out.println("i:"+i);
 				Mont_OPSQL.set_Montage_Name(txtMon_Name.getText());
-				
 				ArrayList<Mont_OP> Mont_OParray= new ArrayList<Mont_OP>();
-				
 				Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
 				int maxOpId = 0;
 				int projId = 0;

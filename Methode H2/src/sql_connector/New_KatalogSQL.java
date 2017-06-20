@@ -33,7 +33,7 @@ public class New_KatalogSQL {
 		Statement stmt = null;
 
 
-		String query= "insert kriterienkataloge  (katalog_Name) values(?)";
+		String query= "insert into kriterienkataloge  (katalog_Name) values(?)";
 		try {
 
 			Class.forName("org.h2.Driver").newInstance();
@@ -120,7 +120,7 @@ public class New_KatalogSQL {
 		ResultSet rs   =null;
 		ArrayList<Kriterienkataloge> KritKatalogArray= new ArrayList<Kriterienkataloge>();
 
-		String query= "SELECT * FROM kriterienkatalog.kriterienkataloge WHERE idKriterienkataloge=(SELECT max(idKriterienkataloge) FROM kriterienkatalog.kriterienkataloge )";
+		String query= "SELECT * FROM kriterienkataloge WHERE idKriterienkataloge=(SELECT max(idKriterienkataloge) FROM kriterienkataloge )";
 
 		try {
 
@@ -153,7 +153,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 
-		String query= "update kriterienkatalog.kriterien set Krit_Beschreibung =? where idKrit=?;";
+		String query= "update kriterien set Krit_Beschreibung =? where idKrit=?;";
 		try {
 
 			Class.forName("org.h2.Driver").newInstance();
@@ -182,7 +182,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 		
-		String query= "insert kriterienkatalog.kriterien  (idKriterienkataloge,Krit_Nr) values(?,?)";
+		String query= "insert into kriterien  (idKriterienkataloge,Krit_Nr) values(?,?)";
 		try {
 
 			Class.forName("org.h2.Driver").newInstance();
@@ -310,7 +310,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 		
-		String query= "insert kriterienkatalog.auspraegungen  (idKrit,Auspr_Nr) values(?,?)";
+		String query= "insert into auspraegungen  (idKrit,Auspr_Nr) values(?,?)";
 		try {
 
 			Class.forName("org.h2.Driver").newInstance();
@@ -336,7 +336,7 @@ public class New_KatalogSQL {
 		Connection conn = null;
 		Statement stmt = null;
 
-		String query= "update kriterienkatalog.auspraegungen set Auspr_Beschreibung =? where idAuspr=?;";
+		String query= "update auspraegungen set Auspr_Beschreibung =? where idAuspr=?;";
 		try {
 
 			Class.forName("org.h2.Driver").newInstance();
