@@ -181,6 +181,8 @@ public class db_Tables {
 				+ "`Auspr_Nr` varchar(200) NOT NULL,"
 				+ "`Auspr_Beschreibung` varchar(200) DEFAULT NULL,"
 				+ "`idKrit` int(11) DEFAULT NULL,"
+				+ "`ratingFM` double DEFAULT NULL,"
+				+ "`ratingFR` double DEFAULT NULL,"
 				+ "PRIMARY KEY (`idAuspr`))";
 
 		String insert="INSERT INTO `auspraegungen` VALUES (1,'A11','Ja',1),"
@@ -235,7 +237,77 @@ public class db_Tables {
 				+ "Fügeposition, Fügeorientierung)',25),(67,'A212','nein',25),"
 				+ "(68,'A221','positioniert und orientiert bereitgestellt',26),"
 				+ "(69,'A222','einfach und prozesssicher automatisierbar',26),";
-
+		
+		String insert1 = "INSERT INTO `auspraegungen` VALUES "
+				+ "(1,'A11','Ja',1,1,0),(2,'A12','Nein',1,0,1),"
+				+ "(3,'A21','Nötig',2,1,0),(4,'A22','Nicht nötig',2,0,1),"
+				+ "(5,'A31','Nötig',3,1,0),(6,'A32','Nicht nötig',3,0,1),"
+				+ "(7,'A41','Einstellenkontakt',4,0.5,0.5),"
+				+ "(8,'A42','Mehrstellenkontakt: Ausrichten mehrerer "
+				+ "Einzelelemente erforderlich',4,1,0),"
+				+ "(9,'A43','Mehrstellenkontakt: System starr, "
+				+ "Fügepassung > Werkstücktoleranz',4,0,1),"
+				+ "(10,'A11','Ja',5,1,0),(11,'A12','Nein',5,0,1),"
+				+ "(12,'A21','Nötig',6,1,0),(13,'A22','Nicht nötig',6,0,1),"
+				+ "(14,'A31','Nötig',7,1,0),(15,'A32','Nicht nötig',7,0,1),"
+				+ "(16,'A41','Einstellenkontakt',8,0.5,0.5),"
+				+ "(17,'A42','Mehrstellenkontakt: Ausrichten mehrerer "
+				+ "Einzelelemente erforderlich',8,1,0),"
+				+ "(18,'A43','Mehrstellenkontakt: System starr, "
+				+ "Fügepassung > Werkstücktoleranz',8,0,1),"
+				+ "(19,'A51','nicht erforderlich',9,0,1),"
+				+ "(20,'A52','teilweise erforderlich',9,1,0),"
+				+ "(21,'A61','nicht nötig',10,0.5,0.5),"
+				+ "(22,'A62','von Mensch und Roboter durchführbar',"
+				+ "10,0.5,0.5),(23,'A63','vom Menschen durchführbar,"
+				+ " Robotersysteme benötigen Zusatzinvest',10,1,0),"
+				+ "(24,'A64','vom Roboter durchführbar, Mensch benötigt "
+				+ "Zusatzinvest',10,0,1),(25,'A71','kein Umrüstaufwand',11,0.5,0.5),"
+				+ "(26,'A72','Umrüstaufwand nur bei Automatisierung',11,1,0),"
+				+ "(27,'A73','Umrüstaufwand automatisiert < manuell',11,0,1),"
+				+ "(28,'A74','Umrüstaufwand automatisiert > manuell',11,1,0),"
+				+ "(29,'A75','Umrüstaufwand automatisiert = manuell',11,0.5,0.5),"
+				+ "(30,'A81','durch Bauteilgeometrie erzwungen',12,0,1),"
+				+ "(31,'A82','durch Führung Fügewerkzeug',12,1,0),"
+				+ "(32,'A91','Spielpassung',13,0.5,0.5),"
+				+ "(33,'A92','Grenzpassung',13,0.5,0.5),"
+				+ "(34,'A93','Übernaßpassung (ist jeweils nur durch "
+				+ "Einlegen in eine Pressvorrichtung möglich)',13,0.5,0.5),"
+				+ "(35,'A101','nicht nötig',14,0.5,0.5),"
+				+ "(36,'A102','visuelle Unterstützung nötig',14,0.5,0.5),"
+				+ "(37,'A103','taktile Unterstützung nötig',14,0.5,0.5),"
+				+ "(38,'A111','unschädlich',15,0.5,0.5),"
+				+ "(39,'A112','bei Berührung',15,0.5,0.5),"
+				+ "(40,'A113','bei Gegenwart',15,0.5,0.5),"
+				+ "(41,'A121','aktuelle zulässige MAK-Werte nicht "
+				+ "überschritten',16,0.5,0.5),(42,'A122','aktuelle"
+				+ " zulässige MAK-Werte  überschritten',16,0,1),"
+				+ "(43,'A131','T < 0 °C',17,0.5,0.5),"
+				+ "(44,'A132','0 °C <  T <  44 °C',17,0.5,0.5),"
+				+ "(45,'A133','T >= 44 °C',17,0.5,0.5),"
+				+ "(46,'A141','gering',18,1,0),"
+				+ "(47,'A142','mittel',18,0.5,0.5),"
+				+ "(48,'A143','hoch',18,0,1),"
+				+ "(49,'A151','LR < 85 dB(A)',19,0.5,0.5),"
+				+ "(50,'A152','85 dB(A) < LR < 90 dB(A)',19,0.5,0.5),"
+				+ "(51,'A153','LR > 90 dB(A)',19,0.5,0.5),"
+				+ "(52,'A161','Sichtkontrolle und Werkzeugfreiräume gegeben',20,1,0),"
+				+ "(53,'A162','keine Sichtkontrolle möglich, Werkzeugfreiräume gegeben',20,0,1),"
+				+ "(54,'A163','Sichtkontrolle gegeben, keine Werkzeugfreiräume vorhanden',20,1,0),"
+				+ "(55,'A164','keine Sichtkontrolle möglich, "
+				+ "keine Werkzeugfreiräume vorhanden',20,0.5,0.5),"
+				+ "(56,'A171','gegeben',21,0,1),(57,'A172','nicht gegeben',21,1,0),"
+				+ "(58,'A181','Material unempfindlich',22,0,1),"
+				+ "(59,'A182','Material kratz-, bruch-, formempfindlich',22,1,0),"
+				+ "(60,'A191','starr',23,0,1),(61,'A192','elastisch',23,0.5,0.5),"
+				+ "(62,'A193','biegeschlaff',23,1,0),(63,'A201','starr',24,0,1),"
+				+ "(64,'A202','elastisch',24,0.5,0.5),(65,'A203','biegeschlaff',24,1,0),"
+				+ "(66,'A211','ja ( Korrektur von Bauteilposition, Bauteilorientierung, "
+				+ "Fügeposition, Fügeorientierung)',25,1,0),(67,'A212','nein',25,0,1),"
+				+ "(68,'A221','positioniert und orientiert bereitgestellt',26,0,1),"
+				+ "(69,'A222','einfach und prozesssicher automatisierbar',26,0.5,0.5),";
+		
+		
 		boolean tabellevorhanden = false;
 		try {
 
@@ -251,7 +323,7 @@ public class db_Tables {
 
 			if (!tabellevorhanden)
 				try {
-					stmt.executeUpdate(insert);
+					stmt.executeUpdate(insert1);
 					stmt.close();
 					conn.close();
 

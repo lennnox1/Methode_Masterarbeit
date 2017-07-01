@@ -32,36 +32,7 @@ public class Ausp_SQL {
 }
 	
 	
-	/*public static  ArrayList<Auspraegungen> giveAuspraegungen() {
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		ArrayList<Auspraegungen> Ausparray= new ArrayList<Auspraegungen>();
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			conn = get_connection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM kriterienkatalog.auspraegungen ");
-			while (rs.next()) {
-				Auspraegungen Auspobj= new Auspraegungen();
-				Auspobj.idKrit = rs.getInt("idKrit");
-				Auspobj.idAuspr = rs.getInt("idAuspr");
-				Auspobj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
-				Auspobj.Auspr_Nr = rs.getString("Auspr_Nr");
-				Ausparray.add(Auspobj);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try { if (rs != null) rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-			try { if (stmt != null) stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-			try { if (conn != null) conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-
-		}
-		return Ausparray;
-
-	}*/
-
+	
 	
 	public static  Auspraegungen giveAusp(int r) {
 		Auspraegungen retAusp = null;
@@ -94,6 +65,9 @@ public class Ausp_SQL {
 
 	}
 
+	
+	
+	
 	public static  ArrayList<Auspraegungen> giveAuspraegungenZuKrit(int krit_nr) {
 		Connection conn = null;
 		Statement stmt = null;
@@ -110,6 +84,8 @@ public class Ausp_SQL {
 				Auspobj.idAuspr = rs.getInt("idAuspr");
 				Auspobj.Auspr_Beschreibung = rs.getString("Auspr_Beschreibung");
 				Auspobj.Auspr_Nr = rs.getString("Auspr_Nr");
+				Auspobj.ratingFM = rs.getDouble("ratingFM");
+				Auspobj.ratingFR = rs.getDouble("ratingFR");
 				Ausparray.add(Auspobj);
 			}
 		} catch (Exception e) {

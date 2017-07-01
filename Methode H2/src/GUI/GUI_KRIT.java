@@ -58,6 +58,7 @@ public class GUI_KRIT extends JFrame {
 	private int nMontOP =0;
 	private int anzMomtOp = 0;
 	private Mont_OP retMont_OP;
+	private ArrayList<Auspraegungen> Ausparray;
 	private final ButtonGroup bGroupAusp = new ButtonGroup();
 
 	private final ButtonGroup bGroupFR = new ButtonGroup();
@@ -225,7 +226,7 @@ public class GUI_KRIT extends JFrame {
 		scrollPane.setViewportView(txtArkrit_Besch);
 
 
-		ArrayList<Auspraegungen> Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(minKrit_id + n -1);
+		Ausparray=Ausp_SQL.giveAuspraegungenZuKrit(minKrit_id + n -1);
 
 
 		relevant = false;
@@ -236,8 +237,15 @@ public class GUI_KRIT extends JFrame {
 			rdbtnAuspBesch.setActionCommand(String.valueOf(retAus.idAuspr));
 			rdbtnAuspBesch.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-
-					//relevant=retUsed_auspr.relevant;
+					
+					rbtnFRBetter.setSelected(retAus.ratingFR == 1.0);
+					rbtnFREqual.setSelected(retAus.ratingFR == 0.5);
+					rbtnFRWorse.setSelected(retAus.ratingFR == 0);
+					
+					rbtnFMBetter.setSelected(retAus.ratingFM == 1.0);
+					rbtnFMEqual.setSelected(retAus.ratingFM == 0.5);
+					rbtnFMWorse.setSelected(retAus.ratingFM == 0);
+					
 					relevant=true;
 				}
 			});
@@ -297,10 +305,7 @@ public class GUI_KRIT extends JFrame {
 		rdbtnNotRelevant.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//System.out.println(e.getActionCommand());
-				//System.out.println("e.source " +e.getSource());
-				//System.out.println("Exc " +e );
-				//relevant=retUsed_auspr.relevant;
+			
 				relevant=false;
 			}
 		});
