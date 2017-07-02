@@ -19,6 +19,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -43,7 +45,7 @@ public class GUI_SOLUTION extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_SOLUTION frame = new GUI_SOLUTION(39);
+					GUI_SOLUTION frame = new GUI_SOLUTION(1);
 					frame.setVisible(true);
 					//frame.pack();
 				} catch (Exception e) {
@@ -65,7 +67,9 @@ public class GUI_SOLUTION extends JFrame {
 		setBounds(100, 100, 520, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
+		JScrollPane scroll = new JScrollPane(contentPane);
+		getContentPane().add(scroll);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{25, 150, 40, 40, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 30, 0, 0, 0};

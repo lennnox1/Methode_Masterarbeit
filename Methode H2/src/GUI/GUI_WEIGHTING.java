@@ -26,6 +26,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.ButtonGroup;
 
@@ -55,7 +56,7 @@ public class GUI_WEIGHTING extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_WEIGHTING frame = new GUI_WEIGHTING(11);
+					GUI_WEIGHTING frame = new GUI_WEIGHTING(1);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -76,10 +77,13 @@ public class GUI_WEIGHTING extends JFrame {
 	protected void initGUI() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 480, 300);
+		setBounds(100, 100, 520, 300);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		//setContentPane(contentPane);
+		JScrollPane scroll = new JScrollPane(contentPane);
+		getContentPane().add(scroll);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 0, 30, 0, 150, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{30, 35, 0, 0, 0};
@@ -327,7 +331,8 @@ public class GUI_WEIGHTING extends JFrame {
 				}
 				else{
 					--nMontOP;
-					contentPane.setVisible(false);
+					scroll.setVisible(false);
+					//contentPane.setVisible(false);
 					initGUI();
 				}
 			}
@@ -361,9 +366,11 @@ public class GUI_WEIGHTING extends JFrame {
 					guiSolution.setVisible(true);
 
 				}else{
-
-					contentPane.setVisible(false);	
+					scroll.setVisible(false);
+					//contentPane.setVisible(false);	
 					initGUI();
+					contentPane.repaint();
+						
 				}
 
 			}
