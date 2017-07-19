@@ -370,10 +370,6 @@ public class GUI_NEW_KATALOG extends JFrame {
 				lblAhg.setText(HochTiefSteller.stelleZiffernTief(("A"+(i)+(x+1))));
 				
 
-
-
-				System.out.println("k "+k);
-				System.out.println("x2 "+x);
 			}	
 		});
 		GridBagConstraints gbc_btnAauspBesch = new GridBagConstraints();

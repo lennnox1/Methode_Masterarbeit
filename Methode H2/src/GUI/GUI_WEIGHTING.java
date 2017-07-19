@@ -366,8 +366,7 @@ public class GUI_WEIGHTING extends JFrame {
 					guiSolution.setVisible(true);
 
 				}else{
-					scroll.setVisible(false);
-					//contentPane.setVisible(false);	
+					scroll.setVisible(false);	
 					initGUI();
 					contentPane.repaint();
 						

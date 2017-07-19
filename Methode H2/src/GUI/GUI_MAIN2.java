@@ -136,8 +136,7 @@ public class GUI_MAIN2 extends JFrame {
 		cBoxKatalog = new JComboBox(Katalog_data);
 		cBoxKatalog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(cBoxKatalog.getSelectedItem());
-				//System.out.println(Katalog_id[cBoxKatalog.getSelectedIndex()]);
+		
 			}
 		});
 		GridBagConstraints gbc_cBoxKatalog = new GridBagConstraints();
@@ -310,7 +309,6 @@ public class GUI_MAIN2 extends JFrame {
 		TablePanel.setLayout(gbl_TablePanel);
 		
 		
-		//System.out.println(Katalog_id[cBoxKatalog.getSelectedIndex()]);
 		
 		
 		katalog = new TableRendererPanel(katID);

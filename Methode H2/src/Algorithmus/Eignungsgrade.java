@@ -18,7 +18,7 @@ public class Eignungsgrade {
 	public BigDecimal[] RatingFR;
 
 	public Eignungsgrade(int projektID){
-		//Mont_OParray =sql_connector.Mont_OPSQL.get_lastMontOP();
+		
 		Mont_OParray=sql_connector.Mont_OPSQL.get_MontOPzuProjekt(projektID);
 		RatingFM = new BigDecimal[Mont_OParray.size()];
 		RatingFR = new BigDecimal[Mont_OParray.size()];
@@ -50,9 +50,7 @@ public class Eignungsgrade {
 		}
 	}
 	public static void main(String[] args) {
-		//Eignungsgrade test = new Eignungsgrade(2);
-
-
+	
 
 
 	}

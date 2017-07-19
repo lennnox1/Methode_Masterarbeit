@@ -73,34 +73,27 @@ public class TableRendererPanel extends JPanel
 		table.setBounds(100,50,300,300);
 		table.setPreferredScrollableViewportSize(table.getPreferredSize());
 		JScrollPane scroll = new JScrollPane(table);
-		//getContentPane().add(scroll);
 		this.add(scroll);
-	   //table.add(scroll);
+	 
 
 
 		table.setDefaultRenderer(Object.class, new ComponentInCellRenderer());
 		TableColumnModel tcm = table.getColumnModel();
 
 		tcm.getColumn(0).setCellRenderer(new ComponentInCellRenderer());
-		//tcm.getColumn(0).setCellEditor(new TextAreaEditor());
 		tcm.getColumn(1).setCellRenderer(new ComponentInCellRenderer());
-		//tcm.getColumn(1).setCellEditor(new TextAreaEditor());  
+	 
 
 		tcm.getColumn(0).setPreferredWidth(25);
-		//tcm.getColumn(0).setMaxWidth(25);
 		tcm.getColumn(1).setPreferredWidth(200);
-		// tcm.getColumn(1).setMaxWidth(200);
 		tcm.getColumn(2).setPreferredWidth(50);
-		// tcm.getColumn(2).setMaxWidth(30);
 		tcm.getColumn(3).setPreferredWidth(200);
-		// tcm.getColumn(3).setMaxWidth(200);
+	
 
 		
 		
 		this.setVisible(false);
-		//this.setDefaultCloseOperation( EXIT_ON_CLOSE );
-		//this.pack();
-		//this.setLocationRelativeTo( null );
+	
 	}
 
 	

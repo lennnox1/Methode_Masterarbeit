@@ -108,7 +108,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbl_contentPane1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 			contentPane1.setLayout(gbl_contentPane1);
 
-			JLabel lblFM = new JLabel("<html>F<sub>M</sub>=" +eigGrade.RatingFM[i]+"</html>");
+			JLabel lblFM = new JLabel("<html>E<sub>M</sub>=" +eigGrade.RatingFM[i]+"</html>");
 			GridBagConstraints gbc_lblFM = new GridBagConstraints();
 			gbc_lblFM.anchor = GridBagConstraints.WEST;
 			gbc_lblFM.insets = new Insets(0, 0, 5, 5);
@@ -116,7 +116,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_lblFM.gridy = 1;
 			contentPane1.add(lblFM, gbc_lblFM);
 
-			JLabel lblFR = new JLabel("<html>F<sub>R</sub>="+eigGrade.RatingFR[i]+"</html>");
+			JLabel lblFR = new JLabel("<html>E<sub>R</sub>="+eigGrade.RatingFR[i]+"</html>");
 			GridBagConstraints gbc_lblFR = new GridBagConstraints();
 			gbc_lblFR.anchor = GridBagConstraints.EAST;
 			gbc_lblFR.insets = new Insets(0, 0, 5, 0);
@@ -161,7 +161,7 @@ public class GUI_SOLUTION extends JFrame {
 			}
 		
 		}
-		//ArrayList<Mont_OP> Mont_OParray= Mont_OPSQL.get_lastMontOP();
+		
 		
 		for(int i=0; i< Mont_OParray.size();i++){
 			Mont_OP retMontOP=Mont_OParray.get(i);

@@ -121,8 +121,7 @@ public class GUI_KRIT extends JFrame {
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 	
-		
-		//setBounds(100, 100, 658, 438);
+	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
