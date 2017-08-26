@@ -332,11 +332,11 @@ public class New_KatalogSQL {
 
 		}
 	}
-	public static  void update_Ausp(String ausp_Beschreibug, int idAusp) {
+	public static  void update_Ausp(String ausp_Beschreibug, int idAusp, double ratingFM, double ratingFR) {
 		Connection conn = null;
 		Statement stmt = null;
 
-		String query= "update auspraegungen set Auspr_Beschreibung =? where idAuspr=?;";
+		String query= "update auspraegungen set Auspr_Beschreibung =?, ratingFM=?, ratingFR=? where idAuspr=?;";
 		try {
 
 			Class.forName("org.h2.Driver").newInstance();
@@ -345,7 +345,9 @@ public class New_KatalogSQL {
 			preStmt_kritKatalog = conn.prepareStatement(query);
 
 			preStmt_kritKatalog.setString(1, ausp_Beschreibug);
-			preStmt_kritKatalog.setInt(2,idAusp);
+			preStmt_kritKatalog.setDouble(2, ratingFM);
+			preStmt_kritKatalog.setDouble(3, ratingFR);
+			preStmt_kritKatalog.setInt(4,idAusp);
 			preStmt_kritKatalog.execute();
 
 

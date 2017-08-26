@@ -43,7 +43,7 @@ public class GUI_SOLUTION extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_SOLUTION frame = new GUI_SOLUTION(39);
+					GUI_SOLUTION frame = new GUI_SOLUTION(20);
 					frame.setVisible(true);
 					//frame.pack();
 				} catch (Exception e) {
@@ -62,7 +62,8 @@ public class GUI_SOLUTION extends JFrame {
 
 	protected void initGUI(int projektID) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 520, 300);
+		//setBounds(100, 100, 520, 300);
+		setBounds(100, 100, 480, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -104,7 +105,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbl_contentPane1.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 			contentPane1.setLayout(gbl_contentPane1);
 
-			JLabel lblFM = new JLabel("<html>F<sub>M</sub>=" +eigGrade.RatingFM[i]+"</html>");
+			JLabel lblFM = new JLabel("<html>E<sub>M</sub>=" +eigGrade.RatingFM[i]+"</html>");
 			GridBagConstraints gbc_lblFM = new GridBagConstraints();
 			gbc_lblFM.anchor = GridBagConstraints.WEST;
 			gbc_lblFM.insets = new Insets(0, 0, 5, 5);
@@ -112,7 +113,7 @@ public class GUI_SOLUTION extends JFrame {
 			gbc_lblFM.gridy = 1;
 			contentPane1.add(lblFM, gbc_lblFM);
 
-			JLabel lblFR = new JLabel("<html>F<sub>R</sub>="+eigGrade.RatingFR[i]+"</html>");
+			JLabel lblFR = new JLabel("<html>E<sub>R</sub>="+eigGrade.RatingFR[i]+"</html>");
 			GridBagConstraints gbc_lblFR = new GridBagConstraints();
 			gbc_lblFR.anchor = GridBagConstraints.EAST;
 			gbc_lblFR.insets = new Insets(0, 0, 5, 0);

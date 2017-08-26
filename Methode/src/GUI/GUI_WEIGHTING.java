@@ -55,7 +55,7 @@ public class GUI_WEIGHTING extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GUI_WEIGHTING frame = new GUI_WEIGHTING(39);
+					GUI_WEIGHTING frame = new GUI_WEIGHTING(17);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -319,9 +319,17 @@ public class GUI_WEIGHTING extends JFrame {
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				--nMontOP;
-				contentPane.setVisible(false);
-				initGUI();
+				
+				if(nMontOP==0){
+					dispose();
+					GUI_KRIT guiKrit = new GUI_KRIT(projektID);
+					guiKrit.setVisible(true);
+				}
+				else{
+					--nMontOP;
+					contentPane.setVisible(false);
+					initGUI();
+				}
 			}
 		});
 		GridBagConstraints gbc_btnPrevious = new GridBagConstraints();
@@ -349,8 +357,8 @@ public class GUI_WEIGHTING extends JFrame {
 				if(nMontOP==Mont_OParray.size()){
 
 					dispose();
-					GUI_SOLUTION test = new GUI_SOLUTION(projektID);
-					test.setVisible(true);
+					GUI_SOLUTION guiSolution = new GUI_SOLUTION(projektID);
+					guiSolution.setVisible(true);
 
 				}else{
 

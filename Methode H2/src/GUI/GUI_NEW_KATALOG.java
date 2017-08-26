@@ -30,6 +30,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.JRadioButton;
+import javax.swing.SwingConstants;
+import javax.swing.ButtonGroup;
 
 @SuppressWarnings("serial")
 public class GUI_NEW_KATALOG extends JFrame {
@@ -41,7 +44,6 @@ public class GUI_NEW_KATALOG extends JFrame {
 	private JTextArea txtAauspBesch;
 	private JLabel lblKVonKn;
 	private JLabel lblKn;
-	private JLabel lblAVonAhg;
 	private JLabel lblAhg;
 	private int anzKrit = 0;
 	private int i=0;
@@ -49,6 +51,20 @@ public class GUI_NEW_KATALOG extends JFrame {
 	private int k=0;
 	private int x=0;
 	private ArrayList<Kriterien> kritarray;
+	private final ButtonGroup bGroupFM = new ButtonGroup();
+	private final ButtonGroup bGroupFR = new ButtonGroup();
+	
+	private JRadioButton rbtnFMBetter;
+	private JRadioButton rbtnFMEqual;
+	private JRadioButton rbtnFMWorse;
+
+
+	private JRadioButton rbtnFRBetter;
+	private JRadioButton rbtnFREqual;
+	private JRadioButton rbtnFRWorse;
+
+	private double ratingFR;
+	private double ratingFM;
 	
 
 	/**
@@ -73,16 +89,16 @@ public class GUI_NEW_KATALOG extends JFrame {
 	 */
 	public GUI_NEW_KATALOG() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 654, 455);
 		contentPane = new JPanel();
 		contentPane.setToolTipText("Anzahl der Auspr\u00E4gungen");
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 168, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 20, 0, 0, 0, 16, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 20, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 		JLabel lblKatalogName = new JLabel("Name:");
@@ -294,7 +310,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
 		gbc_separator_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_separator_1.gridwidth = 4;
-		gbc_separator_1.insets = new Insets(0, 0, 5, 5);
+		gbc_separator_1.insets = new Insets(0, 0, 5, 0);
 		gbc_separator_1.gridx = 0;
 		gbc_separator_1.gridy = 6;
 		contentPane.add(separator_1, gbc_separator_1);
@@ -305,13 +321,6 @@ public class GUI_NEW_KATALOG extends JFrame {
 		gbc_lblBeschreibung_1.gridx = 1;
 		gbc_lblBeschreibung_1.gridy = 7;
 		contentPane.add(lblBeschreibung_1, gbc_lblBeschreibung_1);
-
-		lblAVonAhg = new JLabel("A11 von Ahg");
-		GridBagConstraints gbc_lblAVonAhg = new GridBagConstraints();
-		gbc_lblAVonAhg.insets = new Insets(0, 0, 5, 0);
-		gbc_lblAVonAhg.gridx = 3;
-		gbc_lblAVonAhg.gridy = 7;
-		contentPane.add(lblAVonAhg, gbc_lblAVonAhg);
 
 		lblAhg = new JLabel(HochTiefSteller.stelleZiffernTief(("A"+1+1+":")));
 		GridBagConstraints gbc_lblAhg = new GridBagConstraints();
@@ -334,13 +343,195 @@ public class GUI_NEW_KATALOG extends JFrame {
 		txtAauspBesch = new JTextArea();
 		scrollPaneAuspBesch.setViewportView(txtAauspBesch);
 		
-
-
-
+		JPanel panel = new JPanel();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
+		gbc_panel.fill = GridBagConstraints.VERTICAL;
+		gbc_panel.gridx = 1;
+		gbc_panel.gridy = 10;
+		contentPane.add(panel, gbc_panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
+		JLabel label = new JLabel("<html> F<sub>M</sub>: </html>");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.insets = new Insets(0, 0, 5, 5);
+		gbc_label.gridx = 1;
+		gbc_label.gridy = 0;
+		panel.add(label, gbc_label);
+		
+		JLabel label_1 = new JLabel("<html> F<sub>R</sub>: </html>");
+		GridBagConstraints gbc_label_1 = new GridBagConstraints();
+		gbc_label_1.insets = new Insets(0, 0, 5, 5);
+		gbc_label_1.gridx = 3;
+		gbc_label_1.gridy = 0;
+		panel.add(label_1, gbc_label_1);
+		
+		JLabel label_2 = new JLabel("1,0");
+		GridBagConstraints gbc_label_2 = new GridBagConstraints();
+		gbc_label_2.insets = new Insets(0, 0, 5, 5);
+		gbc_label_2.gridx = 0;
+		gbc_label_2.gridy = 1;
+		panel.add(label_2, gbc_label_2);
+		
+		rbtnFMBetter = new JRadioButton("+");
+		rbtnFMBetter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				rbtnFRWorse.setSelected(true);
+			}
+		});
+		bGroupFM.add(rbtnFMBetter);
+		rbtnFMBetter.setSelected(false);
+		GridBagConstraints gbc_rbtnFMBetter = new GridBagConstraints();
+		gbc_rbtnFMBetter.anchor = GridBagConstraints.WEST;
+		gbc_rbtnFMBetter.insets = new Insets(0, 0, 5, 5);
+		gbc_rbtnFMBetter.gridx = 1;
+		gbc_rbtnFMBetter.gridy = 1;
+		panel.add(rbtnFMBetter, gbc_rbtnFMBetter);
+		
+		JLabel label_3 = new JLabel("besser");
+		GridBagConstraints gbc_label_3 = new GridBagConstraints();
+		gbc_label_3.insets = new Insets(0, 0, 5, 5);
+		gbc_label_3.gridx = 2;
+		gbc_label_3.gridy = 1;
+		panel.add(label_3, gbc_label_3);
+		
+		rbtnFRBetter = new JRadioButton("+");
+		rbtnFRBetter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rbtnFMWorse.setSelected(true);
+			}
+		});
+		bGroupFR.add(rbtnFRBetter);
+		rbtnFRBetter.setSelected(false);
+		GridBagConstraints gbc_rbtnFRBetter = new GridBagConstraints();
+		gbc_rbtnFRBetter.anchor = GridBagConstraints.WEST;
+		gbc_rbtnFRBetter.insets = new Insets(0, 0, 5, 5);
+		gbc_rbtnFRBetter.gridx = 3;
+		gbc_rbtnFRBetter.gridy = 1;
+		panel.add(rbtnFRBetter, gbc_rbtnFRBetter);
+		
+		JLabel label_4 = new JLabel("1,0");
+		GridBagConstraints gbc_label_4 = new GridBagConstraints();
+		gbc_label_4.insets = new Insets(0, 0, 5, 0);
+		gbc_label_4.gridx = 4;
+		gbc_label_4.gridy = 1;
+		panel.add(label_4, gbc_label_4);
+		
+		JLabel label_5 = new JLabel("0,5");
+		GridBagConstraints gbc_label_5 = new GridBagConstraints();
+		gbc_label_5.insets = new Insets(0, 0, 5, 5);
+		gbc_label_5.gridx = 0;
+		gbc_label_5.gridy = 2;
+		panel.add(label_5, gbc_label_5);
+		
+		rbtnFMEqual = new JRadioButton("=");
+		rbtnFMEqual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rbtnFREqual.setSelected(true);
+			}
+		});
+		bGroupFM.add(rbtnFMEqual);
+		rbtnFMEqual.setVerticalAlignment(SwingConstants.TOP);
+		rbtnFMEqual.setSelected(true);
+		rbtnFMEqual.setHorizontalAlignment(SwingConstants.LEFT);
+		rbtnFMEqual.setActionCommand("0.5");
+		GridBagConstraints gbc_rbtnFMEqual = new GridBagConstraints();
+		gbc_rbtnFMEqual.anchor = GridBagConstraints.WEST;
+		gbc_rbtnFMEqual.insets = new Insets(0, 0, 5, 5);
+		gbc_rbtnFMEqual.gridx = 1;
+		gbc_rbtnFMEqual.gridy = 2;
+		panel.add(rbtnFMEqual, gbc_rbtnFMEqual);
+		
+		JLabel label_6 = new JLabel("gleich");
+		GridBagConstraints gbc_label_6 = new GridBagConstraints();
+		gbc_label_6.insets = new Insets(0, 0, 5, 5);
+		gbc_label_6.gridx = 2;
+		gbc_label_6.gridy = 2;
+		panel.add(label_6, gbc_label_6);
+		
+		rbtnFREqual = new JRadioButton("=");
+		rbtnFREqual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rbtnFMEqual.setSelected(true);
+			}
+		});
+		bGroupFR.add(rbtnFREqual);
+		rbtnFREqual.setSelected(true);
+		GridBagConstraints gbc_rbtnFREqual = new GridBagConstraints();
+		gbc_rbtnFREqual.anchor = GridBagConstraints.WEST;
+		gbc_rbtnFREqual.insets = new Insets(0, 0, 5, 5);
+		gbc_rbtnFREqual.gridx = 3;
+		gbc_rbtnFREqual.gridy = 2;
+		panel.add(rbtnFREqual, gbc_rbtnFREqual);
+		
+		JLabel label_7 = new JLabel("0,5");
+		GridBagConstraints gbc_label_7 = new GridBagConstraints();
+		gbc_label_7.insets = new Insets(0, 0, 5, 0);
+		gbc_label_7.gridx = 4;
+		gbc_label_7.gridy = 2;
+		panel.add(label_7, gbc_label_7);
+		
+		JLabel label_8 = new JLabel("0,0");
+		GridBagConstraints gbc_label_8 = new GridBagConstraints();
+		gbc_label_8.insets = new Insets(0, 0, 0, 5);
+		gbc_label_8.gridx = 0;
+		gbc_label_8.gridy = 3;
+		panel.add(label_8, gbc_label_8);
+		
+		rbtnFMWorse = new JRadioButton("-");
+		rbtnFMWorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rbtnFRBetter.setSelected(true);
+			}
+		});
+		bGroupFM.add(rbtnFMWorse);
+		rbtnFMWorse.setSelected(false);
+		GridBagConstraints gbc_rbtnFMWorse = new GridBagConstraints();
+		gbc_rbtnFMWorse.anchor = GridBagConstraints.WEST;
+		gbc_rbtnFMWorse.insets = new Insets(0, 0, 0, 5);
+		gbc_rbtnFMWorse.gridx = 1;
+		gbc_rbtnFMWorse.gridy = 3;
+		panel.add(rbtnFMWorse, gbc_rbtnFMWorse);
+		
+		JLabel label_9 = new JLabel("schlechter");
+		GridBagConstraints gbc_label_9 = new GridBagConstraints();
+		gbc_label_9.insets = new Insets(0, 0, 0, 5);
+		gbc_label_9.gridx = 2;
+		gbc_label_9.gridy = 3;
+		panel.add(label_9, gbc_label_9);
+		
+		rbtnFRWorse = new JRadioButton("-");
+		rbtnFRWorse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rbtnFMBetter.setSelected(true);
+			}
+		});
+		bGroupFR.add(rbtnFRWorse);
+		rbtnFRWorse.setSelected(false);
+		GridBagConstraints gbc_rbtnFRWorse = new GridBagConstraints();
+		gbc_rbtnFRWorse.anchor = GridBagConstraints.WEST;
+		gbc_rbtnFRWorse.insets = new Insets(0, 0, 0, 5);
+		gbc_rbtnFRWorse.gridx = 3;
+		gbc_rbtnFRWorse.gridy = 3;
+		panel.add(rbtnFRWorse, gbc_rbtnFRWorse);
+		
+		JLabel label_10 = new JLabel("0,0");
+		GridBagConstraints gbc_label_10 = new GridBagConstraints();
+		gbc_label_10.gridx = 4;
+		gbc_label_10.gridy = 3;
+		panel.add(label_10, gbc_label_10);
+		
 		JButton btnAauspBesch = new JButton("OK");
 		btnAauspBesch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("x1 "+x);
+				
+				getSelectedBtnF();
+			
 				kritarray=New_KatalogSQL.get_KritsofKatID(New_KatalogSQL.get_lastKatalogID());
 				Kriterien retKrit= kritarray.get(k);
 
@@ -349,7 +540,7 @@ public class GUI_NEW_KATALOG extends JFrame {
 
 			
 
-				New_KatalogSQL.update_Ausp(txtAauspBesch.getText(), retAusp.idAuspr);
+				New_KatalogSQL.update_Ausp(txtAauspBesch.getText(), retAusp.idAuspr, ratingFM, ratingFR);
 				x++;
 
 				if(x==ausp_LPS_array.size()){
@@ -370,26 +561,34 @@ public class GUI_NEW_KATALOG extends JFrame {
 				lblAhg.setText(HochTiefSteller.stelleZiffernTief(("A"+(i)+(x+1))));
 				
 
-			}	
+			
+			
+			
+			}
 		});
 		GridBagConstraints gbc_btnAauspBesch = new GridBagConstraints();
-		gbc_btnAauspBesch.anchor = GridBagConstraints.NORTH;
 		gbc_btnAauspBesch.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAauspBesch.gridx = 2;
-		gbc_btnAauspBesch.gridy = 8;
+		gbc_btnAauspBesch.gridy = 11;
 		contentPane.add(btnAauspBesch, gbc_btnAauspBesch);
-
-		JButton btnHauptmen = new JButton("Hauptmenü");
+		
+		
+		
+		
+		
+		
+		JButton btnHauptmen = new JButton("Hauptmen\u00FC");
 		btnHauptmen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUI_MAIN2 guiMain = new GUI_MAIN2();
 				dispose();
 				guiMain.setVisible(true);
+			
 			}
 		});
 		GridBagConstraints gbc_btnHauptmen = new GridBagConstraints();
 		gbc_btnHauptmen.gridx = 3;
-		gbc_btnHauptmen.gridy = 9;
+		gbc_btnHauptmen.gridy = 12;
 		contentPane.add(btnHauptmen, gbc_btnHauptmen);
 
 	}
@@ -412,5 +611,33 @@ public class GUI_NEW_KATALOG extends JFrame {
 			
 
 		}
+		
+	}
+
+	protected void getSelectedBtnF() {
+		if(rbtnFMBetter.isSelected()){
+			ratingFM=1.0;
+		}
+		if(rbtnFRBetter.isSelected()){
+			ratingFR=1.0;
+		}
+	
+	
+	
+		if(rbtnFMEqual.isSelected()){
+			ratingFM=0.5;
+		}
+	
+		if(rbtnFREqual.isSelected()){
+			ratingFR=0.5;
+		}
+	
+		if(rbtnFMWorse.isSelected()){
+			ratingFM=0.0;
+		}
+		if(rbtnFRWorse.isSelected()){
+			ratingFR=0.0;
+		}
+		
 	}
 }

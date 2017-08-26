@@ -43,7 +43,7 @@ public class TableRendererPanel extends JPanel
 			data_Krit[i][0]=kr.Krit_Nr;
 			data_Krit[i][1]=kr.Krit_Beschreibung;
 
-			ArrayList<Auspraegungen> Ausparray=New_KatalogSQL.get_AuspofKatID(i+1);
+			ArrayList<Auspraegungen> Ausparray=New_KatalogSQL.get_AuspofKatID(kr.idKrit);
 			Object[][] data_Ausp1= new Object[Ausparray.size()][1];
 			Object[][] data_Ausp2= new Object[Ausparray.size()][1];
 			int n =  0;
